@@ -295,4 +295,61 @@ final class LiturgicalCalendarTests: XCTestCase {
         XCTAssertEqual(content.subtitle, "Solemnity of the Immaculate Conception of the Blessed Virgin Mary")
         XCTAssertEqual(content.body, "“Hail, full of grace! The Lord is with you.” — Luke 1:28")
     }
+
+    // MARK: - 9. Gospel Acclamation Backfill & Verse of the Day Alignment
+
+    @MainActor
+    func testBackfillMissingGospelAcclamationForNAB() async {
+        let sampleDate = Calendar.current.date(from: DateComponents(year: 2026, month: 11, day: 14))!
+        let day = LiturgicalCalendar.shared.liturgicalDay(for: sampleDate)
+
+        let incompleteReadings: [Reading] = [
+            Reading(
+                type: .firstReading,
+                citation: ReadingCitation(book: "3 John", chapter: 1, verses: "5-8"),
+                text: "Beloved, you are faithful in all you do...",
+                translation: "NAB"
+            ),
+            Reading(
+                type: .responsorialPsalm,
+                citation: ReadingCitation(book: "Psalms", chapter: 112, verses: "1-6"),
+                text: "Blessed the man who fears the Lord...",
+                response: "Blessed the man who fears the Lord.",
+                translation: "NAB"
+            ),
+            Reading(
+                type: .gospel,
+                citation: ReadingCitation(book: "Luke", chapter: 18, verses: "1-8"),
+                text: "Jesus told his disciples a parable about the necessity for them to pray always...",
+                translation: "NAB"
+            )
+        ]
+
+        let repository = ReadingsRepository()
+        let completeReadings = await repository.backfillMissingLectionaryReadings(
+            incompleteReadings,
+            for: day,
+            translation: "NAB"
+        )
+
+        let acclamation = completeReadings.first(where: { $0.type == .gospelAcclamation })
+        XCTAssertNotNil(acclamation, "Gospel Acclamation must be backfilled when remote service omits it")
+        XCTAssertFalse(acclamation?.text.isEmpty ?? true)
+        XCTAssertEqual(acclamation?.citation.book, "2 Thessalonians")
+        XCTAssertEqual(acclamation?.citation.chapter, 2)
+        XCTAssertEqual(acclamation?.citation.verses, "14")
+
+        let order = completeReadings.map(\.type)
+        XCTAssertEqual(order, [.firstReading, .responsorialPsalm, .gospelAcclamation, .gospel])
+
+        let daily = DailyReadings(
+            date: sampleDate,
+            liturgicalTitle: day.title,
+            readings: completeReadings,
+            translation: "NAB"
+        )
+        let verse = VerseOfTheDayProvider.verse(from: daily, date: sampleDate)
+        XCTAssertEqual(verse.theme, "Gospel Acclamation")
+        XCTAssertTrue(verse.citation.contains("2 Thessalonians 2:14"))
+    }
 }

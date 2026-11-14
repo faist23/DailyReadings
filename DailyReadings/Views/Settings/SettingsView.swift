@@ -100,6 +100,12 @@ public struct SettingsView: View {
                 readingsRepository.cachedNABDaysCount = readingsRepository.countCachedNABDays(daysAhead: 30)
                 readingsRepository.triggerBackgroundPrefetchIfNeeded()
             }
+            if reminderEnabled {
+                let targetTime = reminderTime.wrappedValue
+                Task {
+                    await notificationManager.scheduleDailyReminders(at: targetTime)
+                }
+            }
         }
     }
     

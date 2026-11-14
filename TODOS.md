@@ -1,7 +1,7 @@
 # DailyReadings — Project Status & TODOS
 
-**Last Updated:** 2026-11-13  
-**Current Version:** 1.0.0 (Build 18)  
+**Last Updated:** 2026-11-14  
+**Current Version:** 1.0.0 (Build 19)  
 **Bundle Identifier:** `com.ridepro.DailyReadings`  
 **Team ID:** `DT58WA8N32`  
 **Target Platform:** iOS 17.0+ | Swift 6.0 (`SWIFT_STRICT_CONCURRENCY = complete`) | SwiftUI | SwiftData  
@@ -15,6 +15,21 @@ DailyReadings is a contemplative Catholic daily Mass readings and liturgical cal
 - **Aesthetic:** Missal-inspired typography, New York serif, subtle gold liturgical accents, warm scripture paper backgrounds, and distraction-free layout.
 - **Offline Reliability:** Guaranteed offline liturgical Computus calendar algorithm and bundled Douay-Rheims Bible SQLite database, with seamless online New American Bible (NAB) lectionary fetching and SwiftData caching.
 - **Audio Experience:** Reverent, contemplative audio recitation designed for personal prayer, morning commutes, and hands-free devotion.
+
+---
+
+## Build 19 (14 November 2026)
+
+### Gospel Acclamation backfill & Verse of the Day translation alignment
+- **Reported:** When the app was set to NAB, the Verse of the Day in the notification (which came from today's Gospel Acclamation in WEB-C) did not match the Verse of the Day in the app, and there was no Gospel Acclamation card displayed in the NAB readings list.
+- **Root Cause:** The Evangelizo online API feed omits the Gospel Acclamation (`alleluia` / `verse_before_gospel`) from its daily payload. Because the NAB readings list lacked the `.gospelAcclamation` entry, `VerseOfTheDayProvider` fell back to extracting a sentence from the Gospel of Luke for the in-app hero card, while `NotificationManager` had queried offline WEB-C which included the Gospel Acclamation.
+- **Lectionary Backfill Pipeline:**
+  - Added `backfillMissingLectionaryReadings` in `ReadingsRepository.swift`. Whenever NAB readings are fetched from Evangelizo or loaded from SwiftData cache, the official Roman Lectionary index is checked. If the remote service omitted `.gospelAcclamation` (or any canonical reading), the scripture text is queried from the local Catholic Bible database and inserted in proper liturgical sequence (Order 5, right before the Gospel).
+  - Background prefetch (`prefetchNABReadings`) automatically upgrades existing cached days with the backfilled Gospel Acclamation.
+- **Notification Translation Awareness:**
+  - Added `getReadingsForNotification(for:preferredTranslation:)` in `ReadingsRepository.swift` and wired it into `NotificationManager.swift`. Notifications now respect the user's selected translation preference (using cached NAB with backfilled Acclamation, or offline DRB/WEB-C).
+  - Wired `SettingsView` translation changes to re-schedule reminders dynamically.
+- **Automated test suite expanded to 55 unit tests:** Added `testBackfillMissingGospelAcclamationForNAB` in `LiturgicalCalendarTests.swift` verifying complete liturgical ordering, Gospel Acclamation insertion, and `VerseOfTheDayProvider` alignment. All 55 tests pass (`** TEST SUCCEEDED **`).
 
 ---
 
@@ -311,7 +326,7 @@ The order of prayers, the prayer texts and the mysteries were reviewed and are a
 - [x] **Ascension Thursday provinces** are not supported. Implemented full support for ecclesiastical provinces of Boston, Hartford, New York, Newark, Omaha, and Philadelphia. Added user toggle in `SettingsView` under *Liturgical Calendar*, wired `LiturgicalCalendar` with dynamic `ascensionOnThursday` evaluation, seeded Seventh Sunday of Easter (`easter_sun_7_A`, `easter_sun_7_B`, `easter_sun_7_C`) in `lectionary_seeds.json`, rebuilt `lectionary.json` (980 keys), and added unit test coverage in `LiturgicalCalendarTests`.
 
 ### P1 — App Store Submission & TestFlight Monitoring
-- [x] **Bump build version to 1.0.0 (Build 18)** for TestFlight beta testing.
+- [x] **Bump build version to 1.0.0 (Build 19)** for TestFlight beta testing.
 - [x] **App Store Connect Store Listing**:
   - Prepared `APP_STORE_LISTING.md` with verified App Name (29 chars), Subtitle (28 chars), Promotional text (154 chars), complete marketing description, keyword string (92 chars), review notes, and 6-slide screenshot specifications.
   - Added dedicated zero-tracking privacy policy document in `PRIVACY.md`.

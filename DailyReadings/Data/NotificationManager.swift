@@ -125,6 +125,7 @@ public final class NotificationManager {
         let targetMinute = calendar.component(.minute, from: time)
         
         // Pre-schedule the next 30 days with individualized liturgical titles and Verse of the Day
+        let translationPref = UserDefaults.standard.string(forKey: "bibleTranslation") ?? "World English Bible (WEB-C)"
         let now = Date.now
         for dayOffset in 0..<30 {
             guard let targetDate = calendar.date(byAdding: .day, value: dayOffset, to: now) else { continue }
@@ -139,7 +140,7 @@ public final class NotificationManager {
             }
             
             let liturgicalDay = LiturgicalCalendar.shared.liturgicalDay(for: targetDate)
-            let readings = await ReadingsRepository.shared.getOfflineReadings(for: targetDate)
+            let readings = await ReadingsRepository.shared.getReadingsForNotification(for: targetDate, preferredTranslation: translationPref)
             let verseOfTheDay = VerseOfTheDayProvider.verse(from: readings, date: targetDate)
             
             let content = Self.makeDailyReminderContent(for: liturgicalDay, verse: verseOfTheDay)

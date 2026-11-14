@@ -104,7 +104,7 @@
 
 ## Testing
 
-The project includes an automated test target with 54 unit tests covering calendar edge cases, Computus calculations, citation parsing, verse-numbering maps, SQLite queries, psalm stanza formatting, liturgical audio recitation, daily reminder notifications, the Rosary's weekly schedule, and a walk of every lectionary citation through 2028 in both bundled Bibles:
+The project includes an automated test target with 55 unit tests covering calendar edge cases, Computus calculations, citation parsing, verse-numbering maps, SQLite queries, psalm stanza formatting, liturgical audio recitation, daily reminder notifications, Gospel Acclamation backfill, the Rosary's weekly schedule, and a walk of every lectionary citation through 2028 in both bundled Bibles:
 
 ```bash
 xcodebuild test -scheme DailyReadings -destination "platform=iOS Simulator,name=iPhone 17"
@@ -141,4 +141,4 @@ The Xcode project is generated from `project.yml`; run `xcodegen generate` after
 
 ## Status
 
-Not released. Current build: 1.0.0 (18). What was done and what is still open is in `TODOS.md` ("Build 18" and "Active & Upcoming TODOS") and `ARCHITECTURE.md` sections 7 and 8.
+Not released. Current build: 1.0.0 (19). What was done and what is still open is in `TODOS.md` ("Build 19" and "Active & Upcoming TODOS") and `ARCHITECTURE.md` sections 7 and 8.

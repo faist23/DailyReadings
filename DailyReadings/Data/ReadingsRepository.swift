@@ -102,12 +102,29 @@ public final class ReadingsRepository {
         // 1. If user prefers NAB, attempt Cache -> Online -> Offline WEB-C Fallback
         if preferredTranslation.uppercased() == "NAB" {
             // Step 1A: Check SwiftData cache
-            if !forceRefresh, let readings = fetchFromCache(dateKey: dateKey, translation: "NAB") {
-                let hasMissingCitations = readings.readings.contains { $0.citation.book.trimmingCharacters(in: .whitespaces).isEmpty }
+            if !forceRefresh, let cached = fetchFromCache(dateKey: dateKey, translation: "NAB") {
+                let hasMissingCitations = cached.readings.contains { $0.citation.book.trimmingCharacters(in: .whitespaces).isEmpty }
                 if !hasMissingCitations {
-                    self.currentReadings = readings
+                    let liturgicalDay = liturgicalCalendar.liturgicalDay(for: date)
+                    let completeReadings = await backfillMissingLectionaryReadings(
+                        cached.readings,
+                        for: liturgicalDay,
+                        translation: "NAB"
+                    )
+                    let final = DailyReadings(
+                        id: cached.id,
+                        date: cached.date,
+                        liturgicalTitle: cached.liturgicalTitle,
+                        readings: completeReadings,
+                        translation: "NAB",
+                        copyright: cached.copyright
+                    )
+                    if completeReadings.count != cached.readings.count {
+                        saveToCache(readings: final, translation: "NAB")
+                    }
+                    self.currentReadings = final
                     self.activeTranslation = "NAB"
-                    return readings
+                    return final
                 }
             }
 
@@ -165,11 +182,17 @@ public final class ReadingsRepository {
             )
         }
         
+        let completeReadings = await backfillMissingLectionaryReadings(
+            verifiedReadings,
+            for: liturgicalDay,
+            translation: "NAB"
+        )
+        
         let finalDailyReadings = DailyReadings(
             id: onlineReadings.id,
             date: onlineReadings.date,
             liturgicalTitle: onlineReadings.liturgicalTitle,
-            readings: verifiedReadings,
+            readings: completeReadings,
             translation: "NAB"
         )
 
@@ -236,9 +259,26 @@ public final class ReadingsRepository {
             prefetchCurrent = offset + 1
             prefetchProgress = Double(offset + 1) / Double(daysAhead)
 
-            // If already cached and valid, skip network fetch
+            // If already cached and valid, backfill if missing lectionary readings and skip network fetch
             if let cachedReadings = fetchFromCache(dateKey: key, translation: "NAB") {
                 let hasMissing = cachedReadings.readings.contains { $0.citation.book.trimmingCharacters(in: .whitespaces).isEmpty }
+                let liturgicalDay = liturgicalCalendar.liturgicalDay(for: targetDate)
+                let completeReadings = await backfillMissingLectionaryReadings(
+                    cachedReadings.readings,
+                    for: liturgicalDay,
+                    translation: "NAB"
+                )
+                if completeReadings.count != cachedReadings.readings.count {
+                    let updated = DailyReadings(
+                        id: cachedReadings.id,
+                        date: cachedReadings.date,
+                        liturgicalTitle: cachedReadings.liturgicalTitle,
+                        readings: completeReadings,
+                        translation: "NAB",
+                        copyright: cachedReadings.copyright
+                    )
+                    saveToCache(readings: updated, translation: "NAB")
+                }
                 if !hasMissing {
                     continue
                 }
@@ -285,12 +325,80 @@ public final class ReadingsRepository {
         }
     }
 
+    /// Returns readings suitable for notification scheduling, checking cache for NAB or generating offline text.
+    public func getReadingsForNotification(for date: Date, preferredTranslation: String) async -> DailyReadings {
+        let normalized = preferredTranslation.uppercased()
+        let liturgicalDay = liturgicalCalendar.liturgicalDay(for: date)
+        
+        if normalized.contains("NAB") {
+            let dateKey = CachedReading.makeDateKey(from: date)
+            if let cached = fetchFromCache(dateKey: dateKey, translation: "NAB") {
+                let completeReadings = await backfillMissingLectionaryReadings(
+                    cached.readings,
+                    for: liturgicalDay,
+                    translation: "NAB"
+                )
+                return DailyReadings(
+                    id: cached.id,
+                    date: cached.date,
+                    liturgicalTitle: cached.liturgicalTitle,
+                    readings: completeReadings,
+                    translation: "NAB",
+                    copyright: cached.copyright
+                )
+            }
+            return await generateOfflineReadings(for: date, translation: "WEBC")
+        } else if normalized.contains("DOUAY") || normalized.contains("DRB") {
+            return await generateOfflineReadings(for: date, translation: "DRB")
+        } else {
+            return await generateOfflineReadings(for: date, translation: "WEBC")
+        }
+    }
+
     /// Directly generates offline Catholic Mass readings without performing any network requests.
     public func getOfflineReadings(for date: Date, translation: String = "WEBC") async -> DailyReadings {
         return await generateOfflineReadings(for: date, translation: translation)
     }
 
     // MARK: - Offline Generation Pipeline
+
+    /// Ensures that all canonical Lectionary reading types (such as Gospel Acclamation or Sequence)
+    /// assigned to the day are present in the readings list, backfilling any that the remote service omitted.
+    public func backfillMissingLectionaryReadings(
+        _ readings: [Reading],
+        for liturgicalDay: LiturgicalDay,
+        translation: String
+    ) async -> [Reading] {
+        let entries = await lectionaryEntries(for: liturgicalDay)
+        var result = readings
+        let db = translation.uppercased() == "DRB" ? BibleDatabase.drb : BibleDatabase.webc
+        
+        for entry in entries {
+            if !result.contains(where: { $0.type == entry.type }) {
+                let formattedText: String
+                if entry.type == .responsorialPsalm {
+                    formattedText = await db.formattedPsalmText(citation: entry.citation)
+                } else {
+                    let verses = await db.queryVerses(citation: entry.citation)
+                    formattedText = await db.formattedText(for: verses)
+                }
+                
+                if !formattedText.isEmpty {
+                    let reading = Reading(
+                        type: entry.type,
+                        citation: entry.citation,
+                        text: formattedText,
+                        response: entry.response,
+                        translation: translation
+                    )
+                    result.append(reading)
+                }
+            }
+        }
+        
+        result.sort { $0.type.liturgicalOrder < $1.type.liturgicalOrder }
+        return result
+    }
 
     /// Looks up the day's lectionary entries off the main actor. The first call parses the
     /// bundled lectionary files, which is too slow to do on the main thread.
