@@ -17,7 +17,7 @@
     - **World English Bible (Catholic Edition, WEB-C)**: Default modern English translation (public domain, complete 73-book Catholic canon, offline SQLite).
     - **Douay-Rheims Bible (DRB)**: Traditional English translation (Challoner revision 1752, Latin Vulgate, offline SQLite).
     - Lectionary verse numbers are mapped to each Bible's own numbering, so both show the verses the Lectionary cites.
-    - **New American Bible (NAB/NABRE)**: Optional, for personal testing only, via the Evangelizo online feed with 30-day SwiftData caching. **Not licensed for release**; see `NAB_COPYRIGHT.md`.
+    - **New American Bible (NAB/NABRE)**: Optional, for personal testing only, via the Evangelizo online feed with 30-day SwiftData caching and automatic canonical Lectionary backfill for the Gospel Acclamation. **Not licensed for release**; see `NAB_COPYRIGHT.md`.
 - **Liturgical Verse of the Day**:
   - Morning focus hero card anchored directly in the day's Mass readings (Gospel Acclamation, Gospel, or Psalm antiphon).
   - One-tap clipboard copy and native share actions.

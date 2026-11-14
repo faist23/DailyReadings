@@ -59,6 +59,7 @@ Never lose access to scripture in church basements, airplanes, or rural retreats
 - Reflects canonical vestment colors: White/Gold, Violet, Green, Red, and Rose.
 - Universal Norms for the Liturgical Year (UNLY §59) collision resolution and transferred solemnities.
 - Holy Days of Obligation notifications and vigil banners with Canon Law abrogation rules.
+- Unified morning prayer reminder featuring the Saint or Feast of the day and Verse of the Day.
 - Support for Ascension Thursday provinces (Boston, Hartford, New York, Newark, Omaha, Philadelphia).
 
 • HOLY ROSARY & NOVICE COMPANION
