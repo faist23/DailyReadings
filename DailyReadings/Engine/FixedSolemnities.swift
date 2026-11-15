@@ -280,6 +280,7 @@ public struct FixedSolemnities: Sendable {
     public static let saintsBasilAndGregory = FixedCelebration(month: 1, day: 2, title: "Saints Basil the Great and Gregory Nazianzen, Bishops and Doctors", rank: .obligatoryMemorial, color: .white)
     public static let saintAnthonyAbbot = FixedCelebration(month: 1, day: 17, title: "Saint Anthony, Abbot", rank: .obligatoryMemorial, color: .white)
     public static let saintAgnes = FixedCelebration(month: 1, day: 21, title: "Saint Agnes, Virgin and Martyr", rank: .obligatoryMemorial, color: .red)
+    public static let saintFrancisDeSales = FixedCelebration(month: 1, day: 24, title: "Saint Francis de Sales, Bishop and Doctor of the Church", rank: .obligatoryMemorial, color: .white)
     public static let saintsTimothyAndTitus = FixedCelebration(month: 1, day: 26, title: "Saints Timothy and Titus, Bishops", rank: .obligatoryMemorial, color: .white)
     public static let saintThomasAquinas = FixedCelebration(month: 1, day: 28, title: "Saint Thomas Aquinas, Priest and Doctor of the Church", rank: .obligatoryMemorial, color: .white)
     public static let saintJohnBosco = FixedCelebration(month: 1, day: 31, title: "Saint John Bosco, Priest", rank: .obligatoryMemorial, color: .white)
@@ -385,7 +386,7 @@ public struct FixedSolemnities: Sendable {
             saintKatharineDrexel, saintDamienDeVeuster, saintJuniperoSerra, saintKateriTekakwitha,
             saintPeterClaver, saintsJeanDeBrebeufAndIsaacJogues, saintFrancesXavierCabrini, saintRosePhilippineDuchesne, blessedMiguelPro,
             saintJuanDiego, ourLadyOfGuadalupe,
-            saintsBasilAndGregory, saintAnthonyAbbot, saintAgnes, saintsTimothyAndTitus, saintThomasAquinas, saintJohnBosco, saintAgatha,
+            saintsBasilAndGregory, saintAnthonyAbbot, saintAgnes, saintFrancisDeSales, saintsTimothyAndTitus, saintThomasAquinas, saintJohnBosco, saintAgatha,
             saintPaulMiki, saintScholastica, saintsCyrilAndMethodius, saintPolycarp, saintsPerpetuaAndFelicity, saintJohnBaptistDeLaSalle,
             saintStanislaus, saintCatherineOfSiena,
             saintAthanasius, saintPhilipNeri, saintJustinMartyr, saintCharlesLwanga, saintBoniface,

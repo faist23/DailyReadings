@@ -59,6 +59,9 @@ public struct CalendarView: View {
                 .padding(.top, AppTheme.Spacing.compact)
             }
         }
+        .onAppear {
+            viewModel.reloadIfCalendarSettingChanged()
+        }
         .navigationTitle("Liturgical Calendar")
         .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(item: $dateNavigatingTo) { date in

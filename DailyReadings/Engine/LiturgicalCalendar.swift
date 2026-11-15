@@ -389,10 +389,8 @@ public struct LiturgicalCalendar: Sendable {
                 )
             } else if month == 12 && day >= 17 && day <= 24 {
                 // Privileged Weekdays of Advent (December 17–24)
-                let monthDayFormatter = DateFormatter()
-                monthDayFormatter.dateFormat = "MMMM d"
-                monthDayFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-                let dateStr = monthDayFormatter.string(from: date)
+                // Always December; written out so the title does not depend on the device language.
+                let dateStr = "December \(day)"
                 return TemporalDayComputation(
                     season: .advent,
                     seasonWeek: weekNumber,

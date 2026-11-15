@@ -19,6 +19,8 @@ public struct ReadingCard: View {
     
     public let reading: Reading
     public var liturgicalColor: LiturgicalColor = .green
+    /// The day's season, so a Gospel Acclamation is spoken with or without its Alleluia.
+    public var liturgicalSeason: LiturgicalSeason?
     public var onSelect: (() -> Void)?
     
     @AppStorage("scriptureFontSize") private var scriptureFontSize: Double = 18.0
@@ -39,10 +41,12 @@ public struct ReadingCard: View {
     public init(
         reading: Reading,
         liturgicalColor: LiturgicalColor = .green,
+        liturgicalSeason: LiturgicalSeason? = nil,
         onSelect: (() -> Void)? = nil
     ) {
         self.reading = reading
         self.liturgicalColor = liturgicalColor
+        self.liturgicalSeason = liturgicalSeason
         self.onSelect = onSelect
     }
     
@@ -166,7 +170,7 @@ public struct ReadingCard: View {
                 } else if isSpeaking && audioPlayer.isPaused {
                     audioPlayer.resume()
                 } else {
-                    audioPlayer.start(readings: [reading], liturgicalTitle: reading.type.displayTitle)
+                    audioPlayer.start(readings: [reading], liturgicalTitle: reading.type.displayTitle, liturgicalSeason: liturgicalSeason)
                 }
             } label: {
                 HStack(spacing: 5) {

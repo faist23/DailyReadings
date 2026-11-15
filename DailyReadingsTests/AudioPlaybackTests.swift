@@ -102,4 +102,37 @@ final class AudioPlaybackTests: XCTestCase {
         XCTAssertEqual(gospelParts.first, "The Holy Gospel according to Mark.")
         XCTAssertFalse(gospelParts.first!.contains("1:1-8"))
     }
+
+    func testGospelAcclamationIsFramedByAlleluiaOutsideLent() {
+        let acclamation = reading(.gospelAcclamation, "John", "I am the light of the world, says the Lord.")
+        let ordinary = AudioReadingPlayer.liturgicalSpeechParts(for: acclamation, season: .ordinaryTime)
+        XCTAssertEqual(ordinary, ["Gospel Acclamation.", "Alleluia, alleluia.", "I am the light of the world, says the Lord.", "Alleluia, alleluia."])
+        for season: LiturgicalSeason? in [.lent, .paschalTriduum, nil] {
+            let parts = AudioReadingPlayer.liturgicalSpeechParts(for: acclamation, season: season)
+            XCTAssertFalse(parts.contains { $0.contains("Alleluia") }, "No Alleluia in \(String(describing: season))")
+        }
+    }
+
+    func testSpeedSetInSettingsAppliesWhilePlayingAndAfterAPause() async throws {
+        let player = AudioReadingPlayer.shared
+        let original = player.speed
+        defer { player.stop(); player.speed = original }
+        let readings = [
+            reading(.firstReading, "Isaiah", "Comfort my people. Speak tenderly to Jerusalem."),
+            reading(.gospel, "Mark", "Prepare the way of the Lord.")
+        ]
+        let (first, second) = (PlaybackSpeed.allCases[0], PlaybackSpeed.allCases[1])
+        player.speed = first
+        player.start(readings: readings, liturgicalTitle: "Test", liturgicalColor: .green)
+
+        // Settings sets the property directly, not through the mini player's button.
+        player.speed = second
+        XCTAssertEqual(player.queuedSpeechRates, [second.rawValue], "Applies at once while playing")
+
+        player.pause()
+        player.speed = first
+        player.resume()
+        XCTAssertTrue(player.isPlaying)
+        XCTAssertEqual(player.queuedSpeechRates, [first.rawValue], "A change made while paused applies on resume")
+    }
 }

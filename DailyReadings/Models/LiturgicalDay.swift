@@ -76,11 +76,16 @@ public struct LiturgicalDay: Identifiable, Hashable, Codable, Sendable, CustomSt
 
     /// Unique identifier based on the formatted date `yyyy-MM-dd`.
     public var id: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        return formatter.string(from: date)
+        // Built from date components: a DateFormatter per call was a hot spot (calendar grid, lookups).
+        let parts = Self.utcCalendar.dateComponents([.year, .month, .day], from: date)
+        return String(format: "%04d-%02d-%02d", parts.year ?? 0, parts.month ?? 0, parts.day ?? 0)
     }
+
+    private static let utcCalendar: Calendar = {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        return calendar
+    }()
 
     // MARK: - Initializer
 

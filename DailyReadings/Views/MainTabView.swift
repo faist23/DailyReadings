@@ -20,6 +20,7 @@ public struct MainTabView: View {
     /// Read so the tab content is rebuilt when the user changes their text size; `Font.scaled`
     /// computes its size when a view body runs.
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.scenePhase) private var scenePhase
     @State private var todayViewModel: TodayViewModel
     @State private var calendarViewModel = CalendarViewModel()
     
@@ -89,18 +90,19 @@ public struct MainTabView: View {
         .id(dynamicTypeSize)
         .tint(tabBarTintColor)
         .task {
-            if todayViewModel.liturgicalDay == nil {
-                await todayViewModel.loadReadings()
-            }
-            // Refresh upcoming liturgical reminders if enabled
-            if UserDefaults.standard.bool(forKey: "reminderEnabled") {
-                let interval = UserDefaults.standard.double(forKey: "reminderTimeInterval")
-                let timeInterval = interval > 0 ? interval : 25200 // Default 7:00 AM
-                let calendar = Calendar.current
-                let hours = Int(timeInterval) / 3600
-                let minutes = (Int(timeInterval) % 3600) / 60
-                if let targetDate = calendar.date(bySettingHour: hours, minute: minutes, second: 0, of: .now) {
-                    await NotificationManager.shared.scheduleDailyReminders(at: targetDate)
+            // Today's readings are loaded by TodayView itself, the first tab shown.
+            // Reminders and vigil alerts are scheduled 30 days ahead; extend them on every launch.
+            await NotificationManager.shared.refreshScheduledNotifications().value
+        }
+        .onChange(of: scenePhase) { _, phase in
+            guard phase == .active else { return }
+            // Permission may have been granted or withdrawn in iOS Settings while the app was away.
+            Task {
+                let manager = NotificationManager.shared
+                let wasAuthorized = manager.isAuthorized
+                await manager.checkAuthorization()
+                if manager.isAuthorized != wasAuthorized {
+                    manager.refreshScheduledNotifications()
                 }
             }
         }

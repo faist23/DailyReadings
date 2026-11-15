@@ -68,7 +68,8 @@ public struct DateReadingsView: View {
                             audioPlayer.start(
                                 readings: readings,
                                 liturgicalTitle: title,
-                                liturgicalColor: viewModel.liturgicalDay?.color
+                                liturgicalColor: viewModel.liturgicalDay?.color,
+                                liturgicalSeason: viewModel.liturgicalDay?.season
                             )
                         }
                     } label: {
@@ -118,6 +119,10 @@ public struct DateReadingsView: View {
         .task(id: date) {
             await viewModel.loadReadings(for: date)
         }
+        .onAppear {
+            // Back from the Settings tab with a different translation or Ascension setting.
+            Task { await viewModel.reloadIfSettingsChanged() }
+        }
     }
     
     // MARK: - Content Scroll View
@@ -128,6 +133,13 @@ public struct DateReadingsView: View {
                 // Header Information
                 liturgicalHeaderSection
                 
+                // NAB chosen but not available
+                if let notice = viewModel.translationNotice {
+                    NoticeBanner(message: notice, accentColor: currentColor.uiAccentColor) {
+                        await viewModel.refresh()
+                    }
+                }
+
                 // Mass Readings
                 if let readings = viewModel.dailyReadings?.readings, !readings.isEmpty {
                     readingsList(readings: readings)
@@ -212,6 +224,7 @@ public struct DateReadingsView: View {
                     ReadingCard(
                         reading: reading,
                         liturgicalColor: currentColor,
+                        liturgicalSeason: viewModel.liturgicalDay?.season,
                         onSelect: {
                             readingToPresent = reading
                         }

@@ -17,7 +17,7 @@
     - **World English Bible (Catholic Edition, WEB-C)**: Default modern English translation (public domain, complete 73-book Catholic canon, offline SQLite).
     - **Douay-Rheims Bible (DRB)**: Traditional English translation (Challoner revision 1752, Latin Vulgate, offline SQLite).
     - Lectionary verse numbers are mapped to each Bible's own numbering, so both show the verses the Lectionary cites.
-    - **New American Bible (NAB/NABRE)**: Optional, for personal testing only, via the Evangelizo online feed with 30-day SwiftData caching and automatic canonical Lectionary backfill for the Gospel Acclamation. **Not licensed for release**; see `NAB_COPYRIGHT.md`.
+    - **New American Bible (NAB/NABRE)**: Optional, for personal testing only, via the Evangelizo online feed with 30-day SwiftData caching. The feed has no Gospel Acclamation, so the Lectionary's is added from WEB-C (and labelled WEB-C) when the feed's Gospel matches the day's. **Not licensed for release**; see `NAB_COPYRIGHT.md`.
 - **Liturgical Verse of the Day**:
   - Morning focus hero card anchored directly in the day's Mass readings (Gospel Acclamation, Gospel, or Psalm antiphon).
   - One-tap clipboard copy and native share actions.
@@ -33,7 +33,7 @@
   - Dedicated Bookmarks collection screen in Settings with full-screen reading access.
 - **Holy Days of Obligation Vigil Alerts & Daily Reminders**:
   - Canon Law and USCCB abrogation rule evaluation for non-Sunday obligations.
-  - 7:00 PM evening vigil push notifications and prominent banners on Today's view.
+  - 7:00 PM evening vigil push notifications (on by default, independent of the morning reminder) and prominent banners on Today's view.
   - Unified morning prayer reminder pre-scheduled 30 days ahead, featuring the Saint or Feast of the day and the Verse of the Day.
 - **Comprehensive Liturgical Engine**:
   - Full implementation of Meeus/Jones/Butcher Computus algorithm for movable feasts.
@@ -44,15 +44,16 @@
 - **Interactive Liturgical Calendar**:
   - Month-by-month calendar view with liturgical color dots and feast rankings.
   - Browse past and future daily readings with swipe gestures.
+  - Changing the translation or the Ascension setting updates Today, the calendar and the date view when you return to them.
 - **Saint of the Day**:
   - Daily saint commemorations with historical era, patronages, and biography (expanded view with liturgical context by default).
 - **Reverent Audio Recitation**:
-  - Continuous, sequential text-to-speech recitation of all Mass readings with proper liturgical announcements, responses, and acclamations.
+  - Continuous, sequential text-to-speech recitation of all Mass readings with proper liturgical announcements, responses, and acclamations (the Gospel Acclamation with its Alleluia, except in Lent).
   - Background audio playback using `AVAudioSession` (`.playback` / `.spokenAudio`) and `UIBackgroundModes` audio capability.
   - Lock Screen & Control Center Now Playing integration (`MPNowPlayingInfoCenter`, `MPRemoteCommandCenter`) with dynamic illuminated liturgical missal artwork matching vestment seasons.
   - Floating mini-player bar for uninterrupted devotional listening.
   - Natural, modern voice engine (Daniel British lectionary voice, Samantha, Ava, Moira, Karen) with support for Apple's high-definition Enhanced and Premium Studio neural voices.
-  - In-app Voice Selector and Pacing control in Settings with live preview auditions.
+  - In-app Voice Selector and Pacing control in Settings with live preview auditions; a new pace applies at once, even mid-reading.
 - **Contemplative Reading Experience**:
   - New York serif typography on scripture paper tone.
   - Pinch-to-zoom and font sizing controls.
@@ -104,7 +105,7 @@
 
 ## Testing
 
-The project includes an automated test target with 55 unit tests covering calendar edge cases, Computus calculations, citation parsing, verse-numbering maps, SQLite queries, psalm stanza formatting, liturgical audio recitation, daily reminder notifications, Gospel Acclamation backfill, the Rosary's weekly schedule, and a walk of every lectionary citation through 2028 in both bundled Bibles:
+The project includes an automated test target with 82 unit tests covering calendar edge cases, Computus calculations, citation parsing (including "and" within psalm stanzas), verse-numbering maps, SQLite queries, psalm stanza formatting, liturgical audio recitation, daily reminder content and scheduling (against a fake notification center), Gospel Acclamation backfill and translation labels, reloading after a settings change, the NAB offline fallback, the Rosary's weekly schedule, memorial reading overrides, and a walk of every lectionary citation through 2028 in both bundled Bibles:
 
 ```bash
 xcodebuild test -scheme DailyReadings -destination "platform=iOS Simulator,name=iPhone 17"
@@ -127,7 +128,7 @@ swiftc -O -o /tmp/build-lectionary Scripts/BuildLectionaryIndex/main.swift \
 /tmp/build-lectionary DailyReadings/Resources Scripts/lectionary_seeds.json
 ```
 
-Add `--holdout 2026-01-01` to test the index against later dates without writing anything.
+Add `--holdout 2026-01-01` to test the index against later dates without writing anything. The build is deterministic, so a rebuild with unchanged inputs reproduces the committed file.
 
 **`versification.json`** (Lectionary to Bible verse numbering). Download `eng.json`, `org.json` and `vul.json` from the [Copenhagen Alliance versification specification](https://github.com/Copenhagen-Alliance/versification-specification) (`versification-mappings/standard-mappings`), and unzip [the WEB-C USFM](https://ebible.org/Scriptures/eng-web-c_usfm.zip) into a `usfm` folder beside them:
 
@@ -141,4 +142,4 @@ The Xcode project is generated from `project.yml`; run `xcodegen generate` after
 
 ## Status
 
-Not released. Current build: 1.0.0 (19). What was done and what is still open is in `TODOS.md` ("Build 19" and "Active & Upcoming TODOS") and `ARCHITECTURE.md` sections 7 and 8.
+Not released. Current build: 1.0.0 (20), which resolves every finding of the third audit round. What was done and what is still open is in `TODOS.md` ("Build 20" and "Active & Upcoming TODOS") and `ARCHITECTURE.md` sections 7 and 8.

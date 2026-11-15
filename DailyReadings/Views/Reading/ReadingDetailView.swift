@@ -21,8 +21,7 @@ public struct ReadingDetailView: View {
     public var liturgicalColor: LiturgicalColor = .green
     
     @Environment(\.dismiss) private var dismiss
-    @AppStorage("scriptureFontSize") private var scriptureFontSize: Double = 20.0
-    @AppStorage("bibleTranslation") private var selectedTranslation: String = "Douay-Rheims"
+    @AppStorage("scriptureFontSize") private var scriptureFontSize: Double = 18.0
     
     @State private var bookmarkManager = BookmarkManager.shared
     @State private var currentMagnification: CGFloat = 1.0
@@ -114,7 +113,7 @@ public struct ReadingDetailView: View {
                         }
                         .onEnded { _ in
                             // Persist adjusted size clamped to reasonable range
-                            let newSize = (scriptureFontSize * Double(currentMagnification)).clamped(to: 14...34)
+                            let newSize = (scriptureFontSize * Double(currentMagnification)).clamped(to: 14...32)
                             scriptureFontSize = newSize
                             currentMagnification = 1.0
                         }
@@ -182,8 +181,8 @@ public struct ReadingDetailView: View {
             
             Spacer()
             
-            // Translation Badge
-            Text(selectedTranslation)
+            // Translation Badge: the translation of this reading's text, not the current setting
+            Text(reading.translationDisplayName)
                 .font(.scaled(size: 12, weight: .semibold))
                 .foregroundStyle(liturgicalColor.swiftUIColor)
                 .padding(.horizontal, 10)

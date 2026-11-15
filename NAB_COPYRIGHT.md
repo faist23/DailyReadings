@@ -1,6 +1,6 @@
 # NAB Copyright and Translation Options
 
-**Researched:** 2026-11-12
+**Researched:** 2026-11-12 (codebase status updated 2026-11-14, Build 20)
 **Status:** research notes, not legal advice. Only a written answer from the rights holder settles this.
 
 ## Summary
@@ -48,11 +48,28 @@ From the USCCB New American Bible permissions page, read 2026-11-12:
 | Online NAB fetch and display | `Data/EvangelizioService.swift` | Displays NAB text with no license |
 | 30-day prefetch and cache | `Data/ReadingsRepository.swift`, `Models/CachedReading.swift` | Stores NAB text on device |
 | Audio recitation of NAB readings | `Data/AudioReadingPlayer.swift` | Close to the podcast restriction |
-| Bundled psalm refrains | `Data/PsalmResponseProvider.swift`, seed entries in `Data/PericoreIndex.swift` | Lectionary text shipped in the binary |
-| Missing attribution | all reading views | The CCD notice in the API payload is never shown |
-| Architecture claim | `ARCHITECTURE.md` §4.2 | States the online tier is the legal route |
+| Bundled psalm refrains | `Data/PsalmResponseProvider.swift`, responses in `Resources/lectionary.json` and `Scripts/lectionary_seeds.json` | Lectionary text shipped in the binary |
+| Missing attribution | `Data/ReadingsRepository.swift`, reading views | The CCD notice in the API payload is not carried into the cached day, so it is never shown |
+| Architecture claim | `ARCHITECTURE.md` §4.2 | Corrected: now describes the tier as personal testing only |
 
 Scripture citations (book, chapter, verse lists) are references rather than translated text and carry much lower risk than the readings themselves. This has not been confirmed with the rights holder.
+
+## Status in Build 20
+
+Kept as is by decision while the app has a single tester (12 Nov 2026): the Evangelizo fetch, the 30-day prefetch and cache, and NAB audio.
+
+| Recommendation below | Status |
+| :--- | :--- |
+| 1. Public-domain text as the default | Done: WEB-C is the default, Douay-Rheims the traditional option. NAB remains selectable for testing. |
+| 2. Per-day link to usccb.org | Partly: shown on the empty state of Today and the calendar's date view. |
+| 3. Remove the Evangelizo fetch, prefetch and NAB audio | Not done, by decision. |
+| 4. Replace or clear the Lectionary refrains | Not done. |
+| 5. Write to `nabperm@usccb.org`, join the CAB waitlist | `ARCHITECTURE.md` §4.2 records the app as on the waitlist. |
+| 6. Correct `ARCHITECTURE.md` §4.2 | Done. |
+
+Related changes since the research:
+- The feed has no Gospel Acclamation. In NAB mode the app adds the Lectionary's acclamation from WEB-C and labels it WEB-C, only when the feed's Gospel matches the day's (Build 20). Earlier builds filled in any missing reading with WEB-C text labelled NAB.
+- Each reading is labelled with the translation its text is in, so WEB-C shown while NAB is offline is no longer labelled NAB.
 
 ## Recommended path for 1.0
 

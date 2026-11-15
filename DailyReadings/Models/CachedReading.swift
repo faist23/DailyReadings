@@ -44,11 +44,11 @@ public final class CachedReading {
     
     /// Generates a standardized "YYYY-MM-DD" date key from a Date.
     public static func makeDateKey(from date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone.current
-        return formatter.string(from: date)
+        // The device's current calendar day, from date components rather than a new DateFormatter per call.
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = .current
+        let parts = calendar.dateComponents([.year, .month, .day], from: date)
+        return String(format: "%04d-%02d-%02d", parts.year ?? 0, parts.month ?? 0, parts.day ?? 0)
     }
     
     /// Decodes the underlying DailyReadings payload.

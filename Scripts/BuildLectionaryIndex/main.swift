@@ -48,7 +48,7 @@ struct Observation {
     let dateKey: String
     let day: LiturgicalDay
     let base: String            // fixed_MM_DD or the season key
-    let proper: String?         // proper_MM_DD when the day is a memorial or plain weekday
+    let proper: String?         // proper_MM_DD when the day is an obligatory memorial
     let suffix: String
     let byType: [ReadingType: [LectionaryEntry]]
 
@@ -97,8 +97,14 @@ for (proper, group) in Dictionary(grouping: observations.filter { $0.proper != n
     var entries: [LectionaryEntry] = []
     for type in [ReadingType.firstReading, .responsorialPsalm, .gospel] {
         let sameReading = Dictionary(grouping: group.filter { $0.byType[type] != nil }, by: { $0.identity(of: type)! })
-        guard let (id, matches) = sameReading.max(by: { $0.value.count < $1.value.count }),
+        // Ties go to the lower identity, so the output does not depend on dictionary order.
+        guard let (id, matches) = sameReading.max(by: { a, b in
+            a.value.count != b.value.count ? a.value.count < b.value.count : a.key > b.key
+        }),
               Set(matches.map(\.base)).count >= 2 else { continue }
+        // A memorial's own psalm always comes with its own First Reading. A psalm that repeats on
+        // its own is a coincidence of the weekday cycle (Psalm 110 runs through the Hebrews weeks).
+        if type == .responsorialPsalm, properIdentity[proper]?[.firstReading] == nil { continue }
         let latest = matches.max { $0.dateKey < $1.dateKey }!
         entries += latest.byType[type]!
         properIdentity[proper, default: [:]][type] = id
@@ -144,7 +150,11 @@ for (base, group) in Dictionary(grouping: observations, by: \.base) {
 }
 
 // 3. Hand-entered readings for days the dated data never carries (days with several Masses).
-//    A derived key always wins over a seed.
+//    For a key the data already derived:
+//    - a reading type the data lacks is taken from the seed;
+//    - where the seed and the data cite the same reading, the seed's details (verse letters,
+//      response) win, because the data's psalm responses are sometimes a guess by citation;
+//    - where they cite different readings, the data wins.
 //    The exception is a day where the dated data carries the wrong Mass for this app's calendar:
 //    - Ascension Sunday: the data has the Seventh Sunday of Easter (for provinces keeping Thursday);
 //    - Pentecost: the data has the Vigil;
@@ -160,10 +170,15 @@ var seedsUsed: [String] = []
 for (key, entries) in seeds {
     if let existing = index[key] {
         let existingTypes = Set(existing.map(\.type))
-        let seedTypes = Set(entries.map(\.type))
-        if !seedTypes.isSubset(of: existingTypes) {
-            var merged = existing.filter { !seedTypes.contains($0.type) }
-            merged += entries
+        let missingTypes = Set(entries.map(\.type)).subtracting(existingTypes)
+        var merged = existing.filter { !missingTypes.contains($0.type) }
+        for seed in entries where !missingTypes.contains(seed.type) {
+            if let i = merged.firstIndex(where: { $0.type == seed.type && readingIdentity($0) == readingIdentity(seed) }) {
+                merged[i] = seed
+            }
+        }
+        merged += entries.filter { missingTypes.contains($0.type) }
+        if merged != existing {
             index[key] = ReadingType.allCases.sorted { $0.liturgicalOrder < $1.liturgicalOrder }.flatMap { t in merged.filter { $0.type == t } }
             seedsUsed.append(key)
         }

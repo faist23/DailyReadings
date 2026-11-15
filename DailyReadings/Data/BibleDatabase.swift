@@ -586,6 +586,7 @@ public actor BibleDatabase {
     /// Handles ranges: "1-5", "1–5"
     /// Handles lists: "1, 3-4, 6"
     /// Handles sub-verse liturgical notations: "1-3a, 3b-4" -> [1, 2, 3, 4]
+    /// Handles "and", which the Lectionary uses to join verses within a psalm stanza: "6 and 8" -> [6, 8]
     public static func parseVerseNumbers(from verseString: String) -> [Int] {
         let trimmed = verseString.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return [] }
@@ -596,6 +597,7 @@ public actor BibleDatabase {
             .replacingOccurrences(of: "–", with: "-")
             .replacingOccurrences(of: "—", with: "-")
             .replacingOccurrences(of: ";", with: ",")
+            .replacingOccurrences(of: " and ", with: ",", options: .caseInsensitive)
 
         // Split comma-delimited segments
         let segments = normalized.split(separator: ",")

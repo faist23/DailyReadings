@@ -190,4 +190,40 @@ final class ScriptureEngineTests: XCTestCase {
         XCTAssertTrue(stanzas[2].contains("table") || stanzas[2].contains("oil"))
         XCTAssertTrue(stanzas[3].contains("mercy") || stanzas[3].contains("house of the Lord"))
     }
+
+    // MARK: - "and" within a psalm stanza
+
+    func testAndListsVersesLikeAComma() {
+        // "6 and 8" was read as verse 6 only, dropping every verse after an "and".
+        XCTAssertEqual(BibleDatabase.parseVerseNumbers(from: "2-3, 5, 6 and 8"), [2, 3, 5, 6, 8])
+        XCTAssertEqual(BibleDatabase.parseVerseNumbers(from: "9AB AND 10, 11-12"), [9, 10, 11, 12])
+        XCTAssertEqual(BibleDatabase.parseVerseNumbers(from: "29 and 22-23"), [22, 23, 29])
+    }
+
+    func testVersesAfterAndAreRead() async {
+        let citation = ReadingCitation.parse(from: "Psalm 67:2-3, 5, 6 and 8")!
+        let text = await BibleDatabase.webc.formattedPsalmText(citation: citation)
+        // WEB-C 67:7 (Lectionary 67:8), the verse after "and".
+        XCTAssertTrue(text.contains("ends of the earth"), text)
+    }
+
+    func testAndKeepsVersesInOneStanza() async {
+        // Pentecost: three stanzas, 1 with 24, 29-30, and 31 with 34.
+        let citation = ReadingCitation.parse(from: "Psalm 104:1ab and 24ac, 29bc-30, 31 and 34")!
+        let stanzas = await BibleDatabase.webc.formattedPsalmText(citation: citation).components(separatedBy: "\n\n")
+        XCTAssertEqual(stanzas.count, 3)
+        XCTAssertTrue(stanzas.first?.localizedCaseInsensitiveContains("how many are your works") ?? false, stanzas.first ?? "")
+    }
+
+    func testIndexUsesTheSpellingThatMarksStanzas() {
+        let lossy = LectionaryEntry(type: .responsorialPsalm, citation: ReadingCitation(book: "Psalm", chapter: 85, verses: "8, 10, 11-12, 13-14"), response: "R")
+        let marked = LectionaryEntry(type: .responsorialPsalm, citation: ReadingCitation(book: "Ps", chapter: 85, verses: "8 and 10, 11-12, 13-14"))
+        let other = LectionaryEntry(type: .gospel, citation: ReadingCitation(book: "Luke", chapter: 1, verses: "8, 10"))
+        let spellings = PericoreIndex.stanzaSpellings(in: [["a": [lossy, other]], ["b": [marked]]])
+        let applied = PericoreIndex.applying(spellings, to: [lossy, other])
+
+        XCTAssertEqual(applied[0].citation.verses, "8 and 10, 11-12, 13-14")
+        XCTAssertEqual(applied[0].response, "R", "The entry keeps its own response")
+        XCTAssertEqual(applied[1], other, "Only psalms are respelled")
+    }
 }

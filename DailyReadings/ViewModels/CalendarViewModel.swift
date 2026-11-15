@@ -61,6 +61,19 @@ public final class CalendarViewModel {
     
     // MARK: - Public Methods
     
+    /// The "Ascension on Thursday" setting the cached days were computed with.
+    @ObservationIgnored private var loadedAscensionOnThursday = UserDefaults.standard.bool(forKey: "ascensionOnThursday")
+
+    /// Recomputes the cached days if "Ascension on Thursday" changed since they were computed, which
+    /// moves the Ascension and the Holy Day it brings. Called when the calendar reappears.
+    public func reloadIfCalendarSettingChanged() {
+        let current = UserDefaults.standard.bool(forKey: "ascensionOnThursday")
+        guard current != loadedAscensionOnThursday else { return }
+        loadedAscensionOnThursday = current
+        liturgicalDays = [:]
+        loadMonth()
+    }
+
     /// Loads liturgical day information for all days in the currently viewed month.
     public func loadMonth() {
         isLoading = true

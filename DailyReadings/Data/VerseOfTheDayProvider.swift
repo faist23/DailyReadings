@@ -11,6 +11,9 @@ import Foundation
 /// Intelligently derives the daily liturgical Verse of the Day from Mass readings
 /// or canonical liturgical seasonal anchors.
 public struct VerseOfTheDayProvider: Sendable {
+
+    /// The theme of a verse taken from the Gospel Acclamation.
+    public static let acclamationTheme = "Gospel Acclamation"
     
     // MARK: - Public Provider API
     
@@ -29,7 +32,7 @@ public struct VerseOfTheDayProvider: Sendable {
                     return VerseOfTheDay(
                         text: clean,
                         citation: cit,
-                        theme: "Gospel Acclamation",
+                        theme: acclamationTheme,
                         sourceNote: "Today's Liturgy"
                     )
                 }

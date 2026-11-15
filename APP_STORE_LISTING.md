@@ -2,6 +2,10 @@
 
 This document contains all verified text, metadata, keywords, URLs, and guidelines required for creating and submitting the App Store listing in App Store Connect.
 
+**Current build:** 1.0.0 (20).
+
+**Before submission:** the New American Bible line under "Trusted Catholic Translations" and the "Content Rights" answer both depend on the open P0 items in `TODOS.md` (NAB licensing, Lectionary psalm refrains). The NAB tier is for personal testing only and is not licensed for release; see `NAB_COPYRIGHT.md`.
+
 ---
 
 ## 1. App Information
@@ -47,7 +51,7 @@ Receive the complete readings for daily and Sunday Mass:
 Listen hands-free to daily Mass readings recited in a reverent, dignified cadence. Supports uninterrupted background recitation, Apple Studio and neural voices, pace adjustments, lock screen controls, and dynamically illuminated missal artwork.
 
 • 100% OFFLINE CAPABLE
-Never lose access to scripture in church basements, airplanes, or rural retreats. DailyReadings includes a complete offline Computus liturgical calendar engine through 2031 and bundled Catholic Bible translations.
+Never lose access to scripture in church basements, airplanes, or rural retreats. DailyReadings includes an offline liturgical calendar engine for any year, complete daily readings through 2031, and two bundled Catholic Bible translations.
 
 • TRUSTED CATHOLIC TRANSLATIONS
 - World English Bible (Catholic Edition, WEB-C): Modern, clear public domain translation containing all 73 Catholic canonical books.
@@ -103,9 +107,10 @@ Over 25 traditional prayers categorized by Daily Rhythm, Foundational, Marian, a
 - **Notes for App Reviewer:**
   > DailyReadings is a Catholic daily Mass readings and liturgical calendar application.
   >
-  > 1. Offline Mode: The app includes a bundled local SQLite Catholic Bible database (Douay-Rheims) and an algorithmic Computus liturgical calendar, allowing 100% functionality without an active network connection.
+  > 1. Offline Mode: The app includes two bundled SQLite Catholic Bibles (World English Bible, Catholic edition, the default; and Douay-Rheims) and an algorithmic Computus liturgical calendar, allowing 100% functionality without an active network connection.
   > 2. Audio Playback: The app uses `AVSpeechSynthesizer` and `AVAudioSession` (`.playback`, mode: `.spokenAudio`) to recite Mass readings hands-free. Background audio capability is declared in `Info.plist` under `UIBackgroundModes = ["audio"]` and integrates with `MPNowPlayingInfoCenter` and remote lock screen commands.
-  > 3. Privacy Manifest: The application includes `PrivacyInfo.xcprivacy` declaring `NSPrivacyAccessedAPICategoryUserDefaults` under justification reason `CA92.1` for persisting user preferences (such as scripture font size, translation choice, and reminder alarms) locally on device. No tracking or third-party analytics SDKs are used.
+  > 3. Notifications: The optional morning reminder and Holy Day vigil alerts are local notifications scheduled on the device 30 days ahead. Permission is asked only when the user turns one on in Settings.
+  > 4. Privacy Manifest: The application includes `PrivacyInfo.xcprivacy` declaring `NSPrivacyAccessedAPICategoryUserDefaults` under justification reason `CA92.1` for persisting user preferences (such as scripture font size, translation choice, and reminder alarms) locally on device. No tracking or third-party analytics SDKs are used.
 
 ---
 

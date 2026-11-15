@@ -17,9 +17,9 @@ public struct SettingsView: View {
     @AppStorage("bibleTranslation") private var selectedTranslation: String = "World English Bible (WEB-C)"
     @AppStorage("scriptureFontSize") private var scriptureFontSize: Double = 18.0
     @AppStorage("readingLineSpacing") private var readingLineSpacing: Double = 7.0
-    @AppStorage("reminderEnabled") private var reminderEnabled: Bool = false
-    @AppStorage("reminderTimeInterval") private var reminderTimeInterval: Double = 25200 // 7:00 AM (7 * 3600)
-    @AppStorage("holyDayAlertsEnabled") private var holyDayAlertsEnabled: Bool = true
+    @AppStorage(NotificationManager.Preference.reminderEnabled) private var reminderEnabled: Bool = false
+    @AppStorage(NotificationManager.Preference.reminderTimeInterval) private var reminderTimeInterval: Double = NotificationManager.Preference.defaultReminderTimeInterval
+    @AppStorage(NotificationManager.Preference.holyDayAlertsEnabled) private var holyDayAlertsEnabled: Bool = NotificationManager.Preference.defaultHolyDayAlertsEnabled
     @AppStorage("selectedAudioVoiceId") private var selectedVoiceId: String = ""
     @AppStorage("ascensionOnThursday") private var ascensionOnThursday: Bool = false
     
@@ -84,7 +84,7 @@ public struct SettingsView: View {
             }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("Please enable notifications for DailyReadings in iOS Settings to receive daily prayer reminders.")
+            Text("Please enable notifications for DailyReadings in iOS Settings to receive prayer reminders and Holy Day alerts.")
         }
         .task {
             await notificationManager.checkAuthorization()
@@ -100,12 +100,12 @@ public struct SettingsView: View {
                 readingsRepository.cachedNABDaysCount = readingsRepository.countCachedNABDays(daysAhead: 30)
                 readingsRepository.triggerBackgroundPrefetchIfNeeded()
             }
-            if reminderEnabled {
-                let targetTime = reminderTime.wrappedValue
-                Task {
-                    await notificationManager.scheduleDailyReminders(at: targetTime)
-                }
-            }
+            // The reminders quote the day's verse in the chosen translation.
+            notificationManager.refreshScheduledNotifications()
+        }
+        .onChange(of: ascensionOnThursday) { _, _ in
+            // Moves the Ascension, its vigil alert and the reminder titles for those days.
+            notificationManager.refreshScheduledNotifications()
         }
     }
     
@@ -124,40 +124,42 @@ public struct SettingsView: View {
                 let hours = calendar.component(.hour, from: newDate)
                 let minutes = calendar.component(.minute, from: newDate)
                 reminderTimeInterval = Double(hours * 3600 + minutes * 60)
-                if reminderEnabled {
-                    Task {
-                        await notificationManager.scheduleDailyReminders(at: newDate)
+                notificationManager.refreshScheduledNotifications()
+            }
+        )
+    }
+    
+    // MARK: - Daily Reminder Section
+
+    /// A toggle shows on only when its alerts can actually arrive: turned on here and allowed in
+    /// iOS Settings. Turning one on asks for permission; it stays off if permission is refused.
+    private func notificationToggle(_ setting: Binding<Bool>) -> Binding<Bool> {
+        Binding(
+            get: { setting.wrappedValue && notificationManager.isAuthorized },
+            set: { newValue in
+                guard newValue else {
+                    setting.wrappedValue = false
+                    notificationManager.refreshScheduledNotifications()
+                    return
+                }
+                Task {
+                    if await notificationManager.requestAuthorization() {
+                        setting.wrappedValue = true
+                        notificationManager.refreshScheduledNotifications()
+                    } else {
+                        setting.wrappedValue = false
+                        showSettingsAlert = true
                     }
                 }
             }
         )
     }
     
-    // MARK: - Daily Reminder Section
-    
     private var reminderSection: some View {
         Section {
-            Toggle("Daily Prayer Reminder", isOn: Binding(
-                get: { reminderEnabled },
-                set: { newValue in
-                    reminderEnabled = newValue
-                    Task {
-                        if newValue {
-                            let granted = await notificationManager.requestAuthorization()
-                            if granted {
-                                await notificationManager.scheduleDailyReminders(at: reminderTime.wrappedValue)
-                            } else {
-                                reminderEnabled = false
-                                showSettingsAlert = true
-                            }
-                        } else {
-                            await notificationManager.cancelReminders()
-                        }
-                    }
-                }
-            ))
+            Toggle("Daily Prayer Reminder", isOn: notificationToggle($reminderEnabled))
             
-            if reminderEnabled {
+            if reminderEnabled && notificationManager.isAuthorized {
                 DatePicker(
                     "Reminder Time",
                     selection: reminderTime,
@@ -166,25 +168,7 @@ public struct SettingsView: View {
                 .transition(.opacity.combined(with: .move(edge: .top)))
             }
             
-            Toggle("Holy Day Vigil Alerts", isOn: Binding(
-                get: { holyDayAlertsEnabled },
-                set: { newValue in
-                    holyDayAlertsEnabled = newValue
-                    Task {
-                        if newValue {
-                            let granted = await notificationManager.requestAuthorization()
-                            if granted {
-                                await notificationManager.scheduleHolyDayVigilAlerts()
-                            } else {
-                                holyDayAlertsEnabled = false
-                                showSettingsAlert = true
-                            }
-                        } else {
-                            await notificationManager.cancelHolyDayAlerts()
-                        }
-                    }
-                }
-            ))
+            Toggle("Holy Day Vigil Alerts", isOn: notificationToggle($holyDayAlertsEnabled))
         } header: {
             Text("Prayer Reminders & Alerts")
         } footer: {

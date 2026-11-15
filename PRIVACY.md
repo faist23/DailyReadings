@@ -18,7 +18,8 @@ DailyReadings ("we", "our", or "the app") is committed to protecting your privac
 
 All app settings, preferences, and personal prayer progress are stored strictly on your local device:
 - **`UserDefaults`:** Used solely to persist your local reading preferences (such as your chosen scripture translation, font size, line spacing, selected lector voice, and prayer notification times) in full compliance with Apple's `NSPrivacyAccessedAPICategoryUserDefaults` (justification reason `CA92.1`).
-- **Devotional Bookmarks:** Passages you bookmark are saved locally on your device via SwiftData and are never transmitted to any external server.
+- **Devotional Bookmarks:** Passages you bookmark are saved locally on your device in `UserDefaults` and are never transmitted to any external server.
+- **Readings Cache:** When the New American Bible is selected, downloaded readings are stored on your device with SwiftData (see section 3).
 
 ---
 
@@ -30,19 +31,25 @@ DailyReadings is designed to function 100% offline using bundled Catholic script
 
 ---
 
-## 4. Background Audio & Now Playing
+## 4. Notifications
+
+The daily prayer reminder and the Holy Day of Obligation vigil alerts are local notifications, scheduled on your device by iOS. No push server is involved and nothing about them leaves your device. The app asks for notification permission only when you turn one of them on in Settings.
+
+---
+
+## 5. Background Audio & Now Playing
 
 The app utilizes Apple's standard system `AVAudioSession` and `MPNowPlayingInfoCenter` to recite Mass readings hands-free during prayer, commutes, or devotion. Audio playback is processed entirely on-device by iOS speech synthesis and system media controls.
 
 ---
 
-## 5. Children's Privacy
+## 6. Children's Privacy
 
 DailyReadings does not collect personal information from anyone, including children under the age of 13. The app is rated 4+ and contains no objectionable content.
 
 ---
 
-## 6. Open Source & Transparency
+## 7. Open Source & Transparency
 
 Our code and privacy disclosures are open and transparent. If you have questions regarding this policy or the application, you can reach out via our GitHub repository:  
 [https://github.com/faist23/DailyReadings](https://github.com/faist23/DailyReadings)

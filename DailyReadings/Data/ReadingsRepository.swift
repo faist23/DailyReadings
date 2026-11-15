@@ -73,6 +73,7 @@ public final class ReadingsRepository {
     public func configure(modelContainer: ModelContainer) {
         self.modelContainer = modelContainer
         purgeExpiredCache()
+        clearNABCacheFromBuild19Backfill()
         Task { @MainActor in
             self.cachedNABDaysCount = self.countCachedNABDays(daysAhead: 30)
         }
@@ -85,7 +86,8 @@ public final class ReadingsRepository {
     /// - Parameters:
     ///   - date: The target calendar date.
     ///   - preferredTranslation: "NAB" (online preferred) or "DRB" (offline Douay-Rheims).
-    ///   - forceRefresh: If true, ignores cached copies and attempts a fresh network fetch.
+    ///   - forceRefresh: NAB only: download again even if the day is cached. If the download fails,
+    ///     the cached copy is still used before falling back to WEB-C.
     /// - Returns: A complete `DailyReadings` instance, guaranteed to return readings even if offline.
     @MainActor
     public func getReadings(
@@ -99,36 +101,15 @@ public final class ReadingsRepository {
 
         let dateKey = CachedReading.makeDateKey(from: date)
 
-        // 1. If user prefers NAB, attempt Cache -> Online -> Offline WEB-C Fallback
+        // 1. If user prefers NAB: cache, then online, then the cache again (a forced refresh that
+        //    failed), then offline WEB-C.
         if preferredTranslation.uppercased() == "NAB" {
-            // Step 1A: Check SwiftData cache
-            if !forceRefresh, let cached = fetchFromCache(dateKey: dateKey, translation: "NAB") {
-                let hasMissingCitations = cached.readings.contains { $0.citation.book.trimmingCharacters(in: .whitespaces).isEmpty }
-                if !hasMissingCitations {
-                    let liturgicalDay = liturgicalCalendar.liturgicalDay(for: date)
-                    let completeReadings = await backfillMissingLectionaryReadings(
-                        cached.readings,
-                        for: liturgicalDay,
-                        translation: "NAB"
-                    )
-                    let final = DailyReadings(
-                        id: cached.id,
-                        date: cached.date,
-                        liturgicalTitle: cached.liturgicalTitle,
-                        readings: completeReadings,
-                        translation: "NAB",
-                        copyright: cached.copyright
-                    )
-                    if completeReadings.count != cached.readings.count {
-                        saveToCache(readings: final, translation: "NAB")
-                    }
-                    self.currentReadings = final
-                    self.activeTranslation = "NAB"
-                    return final
-                }
+            if !forceRefresh, let cached = await cachedNABReadings(for: date, dateKey: dateKey) {
+                self.currentReadings = cached
+                self.activeTranslation = "NAB"
+                return cached
             }
 
-            // Step 1B: Fetch from Evangelizo API
             do {
                 let onlineReadings = try await fetchAndVerifyOnlineReadings(for: date)
                 self.currentReadings = onlineReadings
@@ -138,8 +119,14 @@ public final class ReadingsRepository {
             } catch {
                 self.lastError = "Online fetch unavailable: \(error.localizedDescription). Using World English Bible."
             }
-            
-            // Guaranteed fallback when NAB network fails: offline WEB-C
+
+            // A refresh that could not reach the server keeps the NAB copy already stored.
+            if forceRefresh, let cached = await cachedNABReadings(for: date, dateKey: dateKey) {
+                self.currentReadings = cached
+                self.activeTranslation = "NAB"
+                return cached
+            }
+
             let fallbackReadings = await generateOfflineReadings(for: date, translation: "WEBC")
             self.currentReadings = fallbackReadings
             self.activeTranslation = "WEBC"
@@ -154,8 +141,31 @@ public final class ReadingsRepository {
         return offlineReadings
     }
 
-    /// Fetches and verifies NAB readings from the Evangelizo API, backfilling any missing citations
-    /// from the official liturgical calendar/pericope index and saving them directly into SwiftData cache.
+    /// The cached NAB readings for a day, with the Gospel Acclamation added if it is missing, or nil
+    /// when nothing usable is cached.
+    private func cachedNABReadings(for date: Date, dateKey: String) async -> DailyReadings? {
+        guard let cached = fetchFromCache(dateKey: dateKey, translation: "NAB"),
+              !cached.readings.contains(where: { $0.citation.book.trimmingCharacters(in: .whitespaces).isEmpty }) else {
+            return nil
+        }
+        let liturgicalDay = liturgicalCalendar.liturgicalDay(for: date)
+        let completeReadings = await backfillGospelAcclamation(cached.readings, for: liturgicalDay)
+        let complete = DailyReadings(
+            id: cached.id,
+            date: cached.date,
+            liturgicalTitle: cached.liturgicalTitle,
+            readings: completeReadings,
+            translation: "NAB",
+            copyright: cached.copyright
+        )
+        if completeReadings.count != cached.readings.count {
+            saveToCache(readings: complete, translation: "NAB")
+        }
+        return complete
+    }
+
+    /// Fetches NAB readings from the Evangelizo API, fills in a missing citation or psalm response from
+    /// the lectionary index, adds the Gospel Acclamation (see `backfillGospelAcclamation`), and caches the day.
     @discardableResult
     public func fetchAndVerifyOnlineReadings(for date: Date) async throws -> DailyReadings {
         let onlineReadings = try await evangelizioService.fetchReadings(for: date)
@@ -182,11 +192,7 @@ public final class ReadingsRepository {
             )
         }
         
-        let completeReadings = await backfillMissingLectionaryReadings(
-            verifiedReadings,
-            for: liturgicalDay,
-            translation: "NAB"
-        )
+        let completeReadings = await backfillGospelAcclamation(verifiedReadings, for: liturgicalDay)
         
         let finalDailyReadings = DailyReadings(
             id: onlineReadings.id,
@@ -259,15 +265,11 @@ public final class ReadingsRepository {
             prefetchCurrent = offset + 1
             prefetchProgress = Double(offset + 1) / Double(daysAhead)
 
-            // If already cached and valid, backfill if missing lectionary readings and skip network fetch
+            // If already cached and valid, add the Gospel Acclamation if it is missing and skip the network fetch
             if let cachedReadings = fetchFromCache(dateKey: key, translation: "NAB") {
                 let hasMissing = cachedReadings.readings.contains { $0.citation.book.trimmingCharacters(in: .whitespaces).isEmpty }
                 let liturgicalDay = liturgicalCalendar.liturgicalDay(for: targetDate)
-                let completeReadings = await backfillMissingLectionaryReadings(
-                    cachedReadings.readings,
-                    for: liturgicalDay,
-                    translation: "NAB"
-                )
+                let completeReadings = await backfillGospelAcclamation(cachedReadings.readings, for: liturgicalDay)
                 if completeReadings.count != cachedReadings.readings.count {
                     let updated = DailyReadings(
                         id: cachedReadings.id,
@@ -325,34 +327,32 @@ public final class ReadingsRepository {
         }
     }
 
-    /// Returns readings suitable for notification scheduling, checking cache for NAB or generating offline text.
-    public func getReadingsForNotification(for date: Date, preferredTranslation: String) async -> DailyReadings {
+    /// The Verse of the Day for a reminder, the same verse the Today screen shows for that day.
+    ///
+    /// `VerseOfTheDayProvider` takes the Gospel Acclamation whenever it has one of a usable length, so
+    /// only that reading is read here; the whole Mass is built only when the verse comes from elsewhere
+    /// (no acclamation, or one too short or long). NAB readers get the cached NAB day when there is one,
+    /// and the World English Bible otherwise.
+    public func verseOfTheDay(for date: Date, preferredTranslation: String) async -> VerseOfTheDay {
         let normalized = preferredTranslation.uppercased()
-        let liturgicalDay = liturgicalCalendar.liturgicalDay(for: date)
-        
-        if normalized.contains("NAB") {
-            let dateKey = CachedReading.makeDateKey(from: date)
-            if let cached = fetchFromCache(dateKey: dateKey, translation: "NAB") {
-                let completeReadings = await backfillMissingLectionaryReadings(
-                    cached.readings,
-                    for: liturgicalDay,
-                    translation: "NAB"
-                )
-                return DailyReadings(
-                    id: cached.id,
-                    date: cached.date,
-                    liturgicalTitle: cached.liturgicalTitle,
-                    readings: completeReadings,
-                    translation: "NAB",
-                    copyright: cached.copyright
-                )
-            }
-            return await generateOfflineReadings(for: date, translation: "WEBC")
-        } else if normalized.contains("DOUAY") || normalized.contains("DRB") {
-            return await generateOfflineReadings(for: date, translation: "DRB")
-        } else {
-            return await generateOfflineReadings(for: date, translation: "WEBC")
+        if normalized.contains("NAB"),
+           let cached = await cachedNABReadings(for: date, dateKey: CachedReading.makeDateKey(from: date)) {
+            return VerseOfTheDayProvider.verse(from: cached, date: date)
         }
+        let translation = normalized.contains("DOUAY") || normalized.contains("DRB") ? "DRB" : "WEBC"
+        let liturgicalDay = liturgicalCalendar.liturgicalDay(for: date)
+
+        if let acclamation = await lectionaryEntries(for: liturgicalDay).first(where: { $0.type == .gospelAcclamation }) {
+            let db = translation == "DRB" ? BibleDatabase.drb : BibleDatabase.webc
+            let text = await db.formattedText(for: await db.queryVerses(citation: acclamation.citation))
+            let reading = Reading(type: .gospelAcclamation, citation: acclamation.citation, text: text, response: acclamation.response, translation: translation)
+            let partial = DailyReadings(date: date, liturgicalTitle: liturgicalDay.title, readings: [reading], translation: translation)
+            let verse = VerseOfTheDayProvider.verse(from: partial, date: date)
+            if verse.theme == VerseOfTheDayProvider.acclamationTheme {
+                return verse
+            }
+        }
+        return VerseOfTheDayProvider.verse(from: await generateOfflineReadings(for: date, translation: translation), date: date)
     }
 
     /// Directly generates offline Catholic Mass readings without performing any network requests.
@@ -362,42 +362,49 @@ public final class ReadingsRepository {
 
     // MARK: - Offline Generation Pipeline
 
-    /// Ensures that all canonical Lectionary reading types (such as Gospel Acclamation or Sequence)
-    /// assigned to the day are present in the readings list, backfilling any that the remote service omitted.
-    public func backfillMissingLectionaryReadings(
-        _ readings: [Reading],
-        for liturgicalDay: LiturgicalDay,
-        translation: String
-    ) async -> [Reading] {
+    /// Adds the day's Gospel Acclamation to NAB readings from the online feed, which never carries one.
+    ///
+    /// Only the acclamation is added, and only when the feed's Gospel is the Lectionary's Gospel for
+    /// this day. When they differ the feed carries a different Mass (a weekday where the app keeps a
+    /// solemnity, a vigil), and anything taken from the index would not belong to it. The acclamation
+    /// is read from the bundled World English Bible and labelled WEB-C, because it is not NAB text.
+    public func backfillGospelAcclamation(_ readings: [Reading], for liturgicalDay: LiturgicalDay) async -> [Reading] {
+        guard !readings.contains(where: { $0.type == .gospelAcclamation }),
+              let gospelIndex = readings.firstIndex(where: { $0.type == .gospel }) else { return readings }
+
         let entries = await lectionaryEntries(for: liturgicalDay)
+        let feedGospel = readings[gospelIndex].citation
+        guard entries.contains(where: { $0.type == .gospel && Self.citesSameReading($0.citation, feedGospel) }),
+              let acclamation = entries.first(where: { $0.type == .gospelAcclamation }) else { return readings }
+
+        let verses = await BibleDatabase.webc.queryVerses(citation: acclamation.citation)
+        let text = await BibleDatabase.webc.formattedText(for: verses)
+        guard !text.isEmpty else { return readings }
+
         var result = readings
-        let db = translation.uppercased() == "DRB" ? BibleDatabase.drb : BibleDatabase.webc
-        
-        for entry in entries {
-            if !result.contains(where: { $0.type == entry.type }) {
-                let formattedText: String
-                if entry.type == .responsorialPsalm {
-                    formattedText = await db.formattedPsalmText(citation: entry.citation)
-                } else {
-                    let verses = await db.queryVerses(citation: entry.citation)
-                    formattedText = await db.formattedText(for: verses)
-                }
-                
-                if !formattedText.isEmpty {
-                    let reading = Reading(
-                        type: entry.type,
-                        citation: entry.citation,
-                        text: formattedText,
-                        response: entry.response,
-                        translation: translation
-                    )
-                    result.append(reading)
-                }
-            }
-        }
-        
-        result.sort { $0.type.liturgicalOrder < $1.type.liturgicalOrder }
+        result.insert(
+            Reading(
+                type: .gospelAcclamation,
+                citation: acclamation.citation,
+                text: text,
+                response: acclamation.response,
+                translation: "WEBC"
+            ),
+            at: gospelIndex
+        )
         return result
+    }
+
+    /// Whether two citations are the same reading: same book, chapter and first verse. Looser than the
+    /// citation text on purpose, because sources spell the same reading differently ("Lk 18:1-8",
+    /// "Luke 18:1-8", a long form "4:12-23 or 4:12-17").
+    nonisolated static func citesSameReading(_ a: ReadingCitation, _ b: ReadingCitation) -> Bool {
+        func identity(_ citation: ReadingCitation) -> String {
+            let book = BibleBook.find(named: citation.book).map { "\($0.rawValue)" } ?? citation.book.lowercased()
+            let firstVerse = citation.verses.drop { !$0.isNumber }.prefix { $0.isNumber }
+            return "\(book):\(citation.chapter ?? 0):\(firstVerse)"
+        }
+        return identity(a) == identity(b)
     }
 
     /// Looks up the day's lectionary entries off the main actor. The first call parses the
@@ -498,6 +505,23 @@ public final class ReadingsRepository {
             try context.save()
         } catch {
             // Non-critical caching error: ignore and proceed
+        }
+    }
+
+    /// Build 19 filled in any reading type the NAB feed lacked, from WEB-C text labelled NAB, even when
+    /// the feed carried a different Mass. Those days are cached; drop them once so they download again.
+    static let nabCacheClearedKey = "nabCacheClearedAfterBuild19Backfill"
+
+    private func clearNABCacheFromBuild19Backfill() {
+        let key = Self.nabCacheClearedKey
+        guard let container = modelContainer, !UserDefaults.standard.bool(forKey: key) else { return }
+        let context = ModelContext(container)
+        do {
+            try context.delete(model: CachedReading.self, where: #Predicate { $0.translation == "NAB" })
+            try context.save()
+            UserDefaults.standard.set(true, forKey: key)
+        } catch {
+            // Try again at the next launch.
         }
     }
 

@@ -77,11 +77,29 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
     private var cachedArtwork: (key: String, image: UIImage)?
     /// Speaking pace. Defaults to the slowest setting ("0.8x"), which suits prayer; a pace the
     /// listener has chosen in Settings is remembered and takes precedence.
+    ///
+    /// A change applies at once, from the current passage, whether it comes from the mini player or
+    /// Settings. While paused it applies when playback resumes.
     public var speed: PlaybackSpeed = .reverent {
         didSet {
             UserDefaults.standard.set(speed.rawValue, forKey: "audioReadingSpeed")
+            guard speed != oldValue else { return }
+            if isPlaying {
+                enqueue(fromReading: currentReadingIndex, passage: currentPassageIndex)
+            } else if isPaused && !queuedPassages.isEmpty {
+                requeueOnResume = true
+            }
         }
     }
+
+    /// Set when the speed changed while paused: the queued passages still carry the old rate.
+    private var requeueOnResume = false
+
+    /// The season of the readings being played, if the caller gave it.
+    private var currentSeason: LiturgicalSeason?
+
+    /// The speaking rate of the passages waiting in the synthesizer (for tests).
+    var queuedSpeechRates: Set<Float> { Set(queuedPassages.values.map(\.utterance.rate)) }
     
     /// User-selected speech voice identifier.
     public var selectedVoiceIdentifier: String {
@@ -428,11 +446,15 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
     // MARK: - Playback APIs
     
     /// Starts recitation of the provided readings.
+    ///
+    /// - Parameter liturgicalSeason: Decides whether the Gospel Acclamation is spoken with its
+    ///   Alleluia (not in Lent or the Triduum). Without it the verse is read on its own.
     public func start(
         readings: [Reading],
         liturgicalTitle: String,
         startIndex: Int = 0,
-        liturgicalColor: LiturgicalColor? = nil
+        liturgicalColor: LiturgicalColor? = nil,
+        liturgicalSeason: LiturgicalSeason? = nil
     ) {
         guard !readings.isEmpty else { return }
         
@@ -441,6 +463,7 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
         self.activeReadings = readings
         self.liturgicalTitle = liturgicalTitle
         self.currentLiturgicalColor = liturgicalColor ?? LiturgicalCalendar.shared.liturgicalDay(for: Date()).color
+        self.currentSeason = liturgicalSeason
         self.currentReadingIndex = min(max(0, startIndex), readings.count - 1)
         self.currentReading = readings[self.currentReadingIndex]
         
@@ -451,11 +474,11 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
     }
     
     /// Plays or resumes recitation.
-    public func play(readings: [Reading], liturgicalTitle: String, liturgicalColor: LiturgicalColor? = nil) {
+    public func play(readings: [Reading], liturgicalTitle: String, liturgicalColor: LiturgicalColor? = nil, liturgicalSeason: LiturgicalSeason? = nil) {
         if isPaused && activeReadings == readings {
             resume()
         } else {
-            start(readings: readings, liturgicalTitle: liturgicalTitle, startIndex: 0, liturgicalColor: liturgicalColor)
+            start(readings: readings, liturgicalTitle: liturgicalTitle, startIndex: 0, liturgicalColor: liturgicalColor, liturgicalSeason: liturgicalSeason)
         }
     }
     
@@ -464,10 +487,11 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
         _ reading: Reading,
         in readings: [Reading],
         liturgicalTitle: String,
-        liturgicalColor: LiturgicalColor? = nil
+        liturgicalColor: LiturgicalColor? = nil,
+        liturgicalSeason: LiturgicalSeason? = nil
     ) {
         let index = readings.firstIndex(where: { $0.id == reading.id }) ?? 0
-        start(readings: readings, liturgicalTitle: liturgicalTitle, startIndex: index, liturgicalColor: liturgicalColor)
+        start(readings: readings, liturgicalTitle: liturgicalTitle, startIndex: index, liturgicalColor: liturgicalColor, liturgicalSeason: liturgicalSeason)
     }
     
     /// Pauses current speech playback.
@@ -483,6 +507,11 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
     public func resume() {
         guard isPaused else { return }
         activateAudioSession()
+        if requeueOnResume {
+            // The speed changed while paused; speak the rest at the new speed from the same passage.
+            enqueue(fromReading: currentReadingIndex, passage: currentPassageIndex)
+            return
+        }
         synthesizer.continueSpeaking()
         isPlaying = true
         isPaused = false
@@ -493,6 +522,7 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
     public func stop(deactivateSession: Bool = true) {
         // Forget the queue first, so the cancel callbacks for it are ignored.
         queuedPassages.removeAll()
+        requeueOnResume = false
         if synthesizer.isSpeaking || synthesizer.isPaused {
             synthesizer.stopSpeaking(at: .immediate)
         }
@@ -525,12 +555,9 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
         enqueue(fromReading: max(0, currentReadingIndex - 1), passage: 0)
     }
     
-    /// Changes playback speed. If currently playing, resumes from the current passage at the new speed.
+    /// Moves to the next playback speed (see `speed` for when it applies).
     public func cycleSpeed() {
         speed = speed.next
-        if isPlaying {
-            enqueue(fromReading: currentReadingIndex, passage: currentPassageIndex)
-        }
     }
     
     // MARK: - Speech Synthesis
@@ -576,6 +603,7 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
 
         // Forget the old queue first, so its cancel callbacks are ignored.
         queuedPassages.removeAll()
+        requeueOnResume = false
         if synthesizer.isSpeaking || synthesizer.isPaused {
             synthesizer.stopSpeaking(at: .immediate)
         }
@@ -589,7 +617,7 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
 
         let voice = selectNaturalVoice()
         for index in readingIndex..<activeReadings.count {
-            let passages = Self.passages(forParts: Self.liturgicalSpeechParts(for: activeReadings[index]))
+            let passages = Self.passages(forParts: Self.liturgicalSpeechParts(for: activeReadings[index], season: currentSeason))
             let firstPassage = index == readingIndex ? min(passageIndex, max(0, passages.count - 1)) : 0
             for (offset, passage) in passages.enumerated() where offset >= firstPassage {
                 let utterance = AVSpeechUtterance(string: passage.text)
@@ -708,7 +736,8 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
     }
     
     /// The reading as it is proclaimed: announcement, text, acclamation. One element per part.
-    public static func liturgicalSpeechParts(for reading: Reading) -> [String] {
+    /// `season` decides whether the Gospel Acclamation is framed by its Alleluia.
+    public static func liturgicalSpeechParts(for reading: Reading, season: LiturgicalSeason? = nil) -> [String] {
         var parts: [String] = []
         
         switch reading.type {
@@ -764,7 +793,14 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
             
         case .gospelAcclamation:
             parts.append("Gospel Acclamation.")
-            parts.append(cleanScriptureForSpeech(reading.text))
+            let verse = cleanScriptureForSpeech(reading.text)
+            switch season {
+            case .lent?, .paschalTriduum?, nil:
+                // No Alleluia in Lent or the Triduum; without the season, the verse alone.
+                parts.append(verse)
+            default:
+                parts += ["Alleluia, alleluia.", verse, "Alleluia, alleluia."]
+            }
             
         case .sequence:
             parts.append("Sequence.")

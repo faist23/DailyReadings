@@ -1,7 +1,7 @@
 # DailyReadings — Project Status & TODOS
 
 **Last Updated:** 2026-11-14  
-**Current Version:** 1.0.0 (Build 19)  
+**Current Version:** 1.0.0 (Build 20)  
 **Bundle Identifier:** `com.ridepro.DailyReadings`  
 **Team ID:** `DT58WA8N32`  
 **Target Platform:** iOS 17.0+ | Swift 6.0 (`SWIFT_STRICT_CONCURRENCY = complete`) | SwiftUI | SwiftData  
@@ -13,8 +13,71 @@
 
 DailyReadings is a contemplative Catholic daily Mass readings and liturgical calendar app.
 - **Aesthetic:** Missal-inspired typography, New York serif, subtle gold liturgical accents, warm scripture paper backgrounds, and distraction-free layout.
-- **Offline Reliability:** Guaranteed offline liturgical Computus calendar algorithm and bundled Douay-Rheims Bible SQLite database, with seamless online New American Bible (NAB) lectionary fetching and SwiftData caching.
+- **Offline Reliability:** Guaranteed offline liturgical Computus calendar algorithm and bundled WEB-C (default) and Douay-Rheims Bible SQLite databases, plus an online New American Bible (NAB) tier with SwiftData caching for personal testing only (not licensed for release; see `NAB_COPYRIGHT.md`).
 - **Audio Experience:** Reverent, contemplative audio recitation designed for personal prayer, morning commutes, and hands-free devotion.
+
+---
+
+## Build 20 (14 November 2026)
+
+Third audit round: every finding is resolved. Findings and status are in `ARCHITECTURE.md` section 7.
+
+### Weekday readings from mid-2027 (audit #1)
+- **Reported by the audit:** some weekdays after the dated data ends read another day's readings. Oct 31, 2028 gave Luke 14:1, 7-11 instead of Luke 13:18-21; Jan 18 gave Psalm 110 in 2028 and 2029; Aug 26, 2028 gave Psalm 128.
+- **Cause:** `PericoreIndex.baseKeys` added a `proper_MM_DD` key on every weekday, and `BuildLectionaryIndex` turned dates that repeated in the dated years into 14 false memorial overrides. The builder also broke ties by dictionary order, so two builds of the same data could differ and the committed `lectionary.json` could not be reproduced.
+- **Fix:** `proper_` keys only on obligatory memorials; a psalm only counts as a memorial's own together with its own First Reading; deterministic tie-breaks; a seed's details win where it cites the same reading as the data. All Saints seed psalm corrected to `24:1bc-2, 3-4ab, 5-6`.
+- **Result:** 14 false keys removed; the 6 real ones kept (Timothy and Titus, Barnabas, Martha, Passion of John the Baptist, Our Lady of Sorrows, Guardian Angels). Two weekdays regain their psalm. St. Joseph and the Nativity of John the Baptist get their correct psalm responses. Holdout: 469 of 512 right (was 466), 13 wrong (was 15). No gaps through 2031.
+
+### Notifications (audit #3 and #4)
+- **Vigil alerts never fired for a new user.** Settings showed them on by default, but the scheduler read the unsaved setting as off. Turning off the daily reminder also removed vigil alerts, and vigil alerts were only refreshed along with the daily reminder.
+- **Turning the reminder off during scheduling did not stick.** Building 30 days of reminders takes a while; a pass already under way kept adding reminders after the reminder was turned off, and translation changes could leave a mix of translations.
+- **Fix:** one entry point, `NotificationManager.refreshScheduledNotifications()`, which makes the pending notifications match the saved settings. Refreshes run one at a time and stop adding as soon as a newer one starts. It runs at launch, when permission changes while the app was away, and after any change to the reminder toggles or time, the translation, or "Ascension on Thursday" (which previously did not reschedule). It never asks for permission.
+- The two Settings toggles show on only when the alerts can arrive (on in the app and allowed in iOS Settings).
+
+### NAB Gospel Acclamation backfill (audit #2)
+- **Problem:** Build 19's backfill added *any* reading type the NAB feed lacked. On a day where the feed carries a different Mass from the app's calendar (for example a weekday while the app keeps Ascension Thursday), the day got readings from both Masses. The added text was WEB-C but labelled NAB.
+- **Fix:** `backfillGospelAcclamation` replaces `backfillMissingLectionaryReadings`. It adds only the Gospel Acclamation, only when the feed's Gospel is the Lectionary's Gospel for the day, inserted just before the Gospel and labelled WEB-C.
+- **Cache:** NAB days cached by Build 19 may hold mixed or mislabelled readings. They are deleted once at launch (`nabCacheClearedAfterBuild19Backfill`) and the prefetch downloads them again.
+
+### Reading detail translation badge (audit #6)
+- The badge in `ReadingDetailView` showed the translation *setting*, so WEB-C text read "NAB" when NAB was offline, and old bookmarks took the current setting's name. It now shows the reading's own translation (`Reading.translationDisplayName`).
+
+### Screens reload after a settings change (audit #5)
+- Changing the translation or "Ascension on Thursday" in Settings left Today, the calendar's date view and the calendar grid showing the old readings and feasts until the next day or a pull to refresh.
+- Each screen now remembers the settings it loaded with and reloads when it reappears with different ones (`TodayViewModel.reloadIfSettingsChanged`). The calendar grid recomputes its days when the Ascension setting changed (`CalendarViewModel.reloadIfCalendarSettingChanged`; it previously cached every day it had computed for good).
+
+### NAB fallback and pull to refresh (audit #7)
+- Pull-to-refresh and Retry now download NAB again (`forceRefresh`); before, they always reused the cache. They keep the readings on screen while they work.
+- A refresh that cannot reach the server keeps the cached NAB copy instead of replacing it with WEB-C.
+- When NAB is chosen but the readings shown are the World English Bible (offline, nothing cached), Today and the calendar's date view say so, with a Retry button (`NoticeBanner`, shared with Today's error message).
+
+### Verses after "and" were never read (found while fixing #8)
+- `BibleDatabase.parseVerseNumbers` read "6 and 8" as verse 6 only, so every citation with "and" lost the verses after it: Psalm 67 lost verse 8, Psalm 102 lost 22-23, Psalm 51 lost 17. 409 of the 1,874 days through 2031 had such a citation, 404 of them in the psalm. The coverage tests only checked that some verses came back, so they passed.
+- "and" now lists verses like a comma.
+
+### Psalm stanzas (audit #8)
+- The Lectionary joins the verses of one stanza with "and" and separates stanzas with commas. The dated data sometimes drops the "and" ("Psalm 85:8, 10, …" for "8 and 10, …"), which split one stanza into two, each followed by the response.
+- `PericoreIndex` now uses the "and" spelling of a psalm wherever the dated data has one (20 psalms, 36 dated days), choosing deterministically.
+- The Pentecost seed now reads `Psalm 104:1ab and 24ac, 29bc-30, 31 and 34` (three stanzas).
+- Limit: a psalm the data only ever spells with commas is still split at every comma.
+
+### Saint Francis de Sales (audit #9)
+- Added on January 24 (obligatory memorial). A new test checks every obligatory memorial and feast of the General Roman and US calendars; this was the only one missing.
+
+### Reminder verse (audit #10)
+- Reminders built 30 complete Masses to quote one verse each. `ReadingsRepository.verseOfTheDay` reads only the Gospel Acclamation when that gives the verse (it usually does) and builds the Mass otherwise. Same verse as the Today screen, checked over 120 days in three translations; about twice as fast.
+
+### Smaller audit items
+- Today is loaded once at launch (two launch tasks both loaded it).
+- A pace chosen in Settings applies at once while playing, and a pace changed while paused applies on resume; before, only the mini player's button re-queued, and only while playing.
+- The Gospel Acclamation is spoken between "Alleluia, alleluia." except in Lent and the Triduum.
+- The reading view's default text size is 18, like the rest of the app (it was 20); pinch zoom stops at 32, like its buttons.
+- The unused-variable compiler warning in `PrayerDetailView` is gone.
+- No `DateFormatter` per call in `LiturgicalDay.id`, `CachedReading.makeDateKey`, the calendar cells or the USCCB link. The December 17–24 Advent titles no longer depend on the device language.
+- Checked, no change: Lent Sundays 3 to 5 in 2027 list both the Year A and the Year B readings, as USCCB does.
+
+### Tests
+- 82 unit tests (was 55). New in this build: `ScriptureEngineTests` +4 ("and" in citations, stanzas, spelling choice), `LiturgicalCalendarTests` +1 (every obligatory memorial), `NotificationSchedulingTests` +1 (reminder verse matches Today), `AudioPlaybackTests` +2 (Alleluia by season, pace from Settings and while paused). New `ReadingsReloadTests` (7) for #5 and #7. `LectionaryCoverageTests` +3 (weekdays beyond the dated data, real memorials, no stray overrides). New `NotificationSchedulingTests` (5) with a fake notification center. `LiturgicalCalendarTests` +4 (no acclamation for a different Mass, only the acclamation is added, translation labels, one-time NAB cache clean-up through an in-memory SwiftData store). Each new test was checked to fail against the old code.
 
 ---
 
@@ -302,6 +365,11 @@ Second audit round. There was no Build 15.
 - [ ] **Check the bundled psalm refrains** (`PsalmResponseProvider`) for Lectionary copyright.
 
 ### P0 — Needs a device
+- [ ] **Build 20 audio**: on an ordinary weekday the Gospel Acclamation is spoken between "Alleluia, alleluia"; change the pace in Settings while a reading plays and hear it change; pause, change the pace, resume.
+- [ ] **Settings changes reach the screens**: change the translation in Settings and go back to Today (and to an open calendar date); the readings should change without pulling to refresh. Turn on "Ascension on Thursday" and check May 6, 2027 in the calendar.
+- [ ] **NAB offline**: with NAB chosen, turn on Airplane Mode and pull to refresh on a cached day; the NAB text should stay. On a day not cached, the banner should say the World English Bible is shown.
+- [ ] **NAB after the update**: on first launch the cached NAB days are cleared and download again. Check that a normal weekday shows the Gospel Acclamation card, and that its detail view is labelled World English Bible (WEB-C) while the other readings say NAB.
+- [ ] **Notifications on a fresh install**: turn on the daily reminder, allow notifications, and check that both the reminder and (when one is within 30 days) the Holy Day vigil alert are pending. Turn the reminder off and confirm the vigil alert stays.
 - [ ] **Listen to a full day's readings**: does it continue past the First Reading (screen on, and screen locked); is the pace right; speed and voice changes mid-reading; a phone-call interruption. If it still stops, note whether the screen was locked and whether headphones or CarPlay were connected.
 - [ ] **Listen to a prayer and a Rosary decade**: the Stop button should reset when speech ends, and music from another app should resume.
 - [ ] **View every screen at the largest text sizes** (fonts now scale to 1.5x): calendar grid, category pills, mini player, Rosary bead row.
@@ -314,6 +382,21 @@ Second audit round. There was no Build 15.
 - [x] **Esther additions** other than C are not mapped (verified: Addition C is the only Greek Esther addition in the Roman Lectionary).
 - [x] **Link the empty state** to the USCCB page for the date. Implemented in `DateReadingsView` and `TodayView`.
 
+### P1 — Third audit round (14 Nov 2026)
+Details in `ARCHITECTURE.md` section 7.
+- [x] **#1 Weekday readings from mid-2027 replaced by false memorial overrides.**
+- [x] **#2 NAB backfill** added any missing reading type and labelled WEB-C text NAB. Now only the acclamation, only when the Gospel matches, labelled WEB-C.
+- [x] **#3 Holy Day vigil alerts** never scheduled for a new user; removed with the daily reminder.
+- [x] **#4 Scheduling race** when the reminder is turned off mid-schedule.
+- [x] **#5 Today does not reload** after a translation or "Ascension on Thursday" change. Today, the date view and the calendar grid now reload when they reappear.
+- [x] **#6 Reading detail badge** showed the setting, not `reading.translation`.
+- [x] **#7 Silent NAB fallback**; pull-to-refresh never passed `forceRefresh`. Now it does, keeps the cached NAB if the download fails, and the screen says when WEB-C is shown instead.
+- [x] **#8 Psalm stanzas** split at every comma. Fixed where the data has an "and" spelling, and for Pentecost; found and fixed the dropped verses after "and".
+- [x] **#9 Saint Francis de Sales** (Jan 24, obligatory memorial) added; whole calendar checked by test.
+- [x] **#10 Notification refresh** reads only the Gospel Acclamation when that gives the verse.
+- [x] Smaller: duplicate first load; speed from Settings and while paused; Alleluia; text size default; compiler warning; date formatters.
+- [ ] **Psalms the data only spells with commas** are still split at every comma. Needs the Lectionary's stanza layout (licensed text) to fix fully.
+
 ### P2 — Rosary guide
 The order of prayers, the prayer texts and the mysteries were reviewed and are accurate. Optional refinements:
 - [ ] **Fatima Prayer after the opening Glory Be**: the guide says it before the first decade. The usual practice says it only after each decade. Decide whether to keep it.
@@ -323,10 +406,10 @@ The order of prayers, the prayer texts and the mysteries were reviewed and are a
 ### P1 — Calendar
 - [x] **Confirm the December 9 obligation rule** (Immaculate Conception transferred to Monday). Confirmed with Vatican Dicastery for Legislative Texts formal ruling (Prot. N. 16827/2024 to USCCB) that transferred solemnity retains the obligation; implementation in `LiturgicalCalendar.swift` aligns.
 - [x] **Memorials list is partial** in `FixedSolemnities`. Completed the General Roman Calendar and US National Calendar obligatory memorials (e.g. St. Pio of Pietrelcina on Sep 23, Sts. Timothy and Titus on Jan 26, St. John Bosco on Jan 31, Sts. Perpetua and Felicity on Mar 7, St. Stanislaus on Apr 11, St. John Baptist de la Salle on Apr 7, North American Martyrs on Oct 19) and popular optional memorials (St. Patrick, St. Josephine Bakhita, Our Lady of Lourdes, Our Lady of Fatima, St. Thomas More, Our Lady of Mount Carmel, St. John Paul II, St. Nicholas). Precedence rule refined so optional memorials do not displace Ordinary Time weekday readings while populating `optionalMemorials` and subtitles.
-- [x] **Ascension Thursday provinces** are not supported. Implemented full support for ecclesiastical provinces of Boston, Hartford, New York, Newark, Omaha, and Philadelphia. Added user toggle in `SettingsView` under *Liturgical Calendar*, wired `LiturgicalCalendar` with dynamic `ascensionOnThursday` evaluation, seeded Seventh Sunday of Easter (`easter_sun_7_A`, `easter_sun_7_B`, `easter_sun_7_C`) in `lectionary_seeds.json`, rebuilt `lectionary.json` (980 keys), and added unit test coverage in `LiturgicalCalendarTests`.
+- [x] **Ascension Thursday provinces** are not supported. Implemented full support for ecclesiastical provinces of Boston, Hartford, New York, Newark, Omaha, and Philadelphia. Added user toggle in `SettingsView` under *Liturgical Calendar*, wired `LiturgicalCalendar` with dynamic `ascensionOnThursday` evaluation, seeded Seventh Sunday of Easter (`easter_sun_7_A`, `easter_sun_7_B`, `easter_sun_7_C`) in `lectionary_seeds.json`, rebuilt `lectionary.json` (980 keys at the time; 966 after the Build 20 clean-up), and added unit test coverage in `LiturgicalCalendarTests`.
 
 ### P1 — App Store Submission & TestFlight Monitoring
-- [x] **Bump build version to 1.0.0 (Build 19)** for TestFlight beta testing.
+- [x] **Bump build version to 1.0.0 (Build 20)** for TestFlight beta testing.
 - [x] **App Store Connect Store Listing**:
   - Prepared `APP_STORE_LISTING.md` with verified App Name (29 chars), Subtitle (28 chars), Promotional text (154 chars), complete marketing description, keyword string (92 chars), review notes, and 6-slide screenshot specifications.
   - Added dedicated zero-tracking privacy policy document in `PRIVACY.md`.
@@ -348,6 +431,8 @@ The order of prayers, the prayer texts and the mysteries were reviewed and are a
 - **Treasury of Prayers & Holy Rosary**: [`DailyReadings/Data/PrayersRepository.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/Data/PrayersRepository.swift) | [`DailyReadings/Views/Prayers/PrayersView.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/Views/Prayers/PrayersView.swift)
 - **Guided Rosary & Beginner Tutorial**: [`DailyReadings/Views/Prayers/GuidedRosaryView.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/Views/Prayers/GuidedRosaryView.swift) | [`DailyReadings/Views/Prayers/HowToPrayRosaryView.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/Views/Prayers/HowToPrayRosaryView.swift) | [`DailyReadings/Data/GuidedRosaryBuilder.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/Data/GuidedRosaryBuilder.swift) | [`DailyReadings/Views/Prayers/RosaryDetailView.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/Views/Prayers/RosaryDetailView.swift)
 - **Psalm Response Provider**: [`DailyReadings/Data/PsalmResponseProvider.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/Data/PsalmResponseProvider.swift)
+- **Notifications (reminders & vigil alerts)**: [`DailyReadings/Data/NotificationManager.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/Data/NotificationManager.swift)
+- **Lectionary Index & Builder**: [`DailyReadings/Data/PericoreIndex.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/Data/PericoreIndex.swift) | [`Scripts/BuildLectionaryIndex/main.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/Scripts/BuildLectionaryIndex/main.swift) | [`Scripts/lectionary_seeds.json`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/Scripts/lectionary_seeds.json)
 - **Readings Repository & Offline Cache**: [`DailyReadings/Data/ReadingsRepository.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/Data/ReadingsRepository.swift)
 - **Settings View**: [`DailyReadings/Views/Settings/SettingsView.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/Views/Settings/SettingsView.swift)
 - **Today Readings View**: [`DailyReadings/Views/Today/TodayView.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/Views/Today/TodayView.swift)
@@ -355,4 +440,4 @@ The order of prayers, the prayer texts and the mysteries were reviewed and are a
 - **Mini Player Bar**: [`DailyReadings/Views/Today/AudioMiniPlayerBar.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/Views/Today/AudioMiniPlayerBar.swift)
 - **Liturgical Engine & Colors**: [`DailyReadings/Engine/LiturgicalCalendar.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/Engine/LiturgicalCalendar.swift) | [`DailyReadings/Theme/LiturgicalColors.swift`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/Theme/LiturgicalColors.swift)
 - **Privacy Manifest**: [`DailyReadings/PrivacyInfo.xcprivacy`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/DailyReadings/PrivacyInfo.xcprivacy)
-- **XcodeGen Specification**: [`DailyReadings/project.yml`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/project.yml)
+- **XcodeGen Specification**: [`project.yml`](file:///Users/craigfaist/desktop/weatherapp/DailyReadings/project.yml)

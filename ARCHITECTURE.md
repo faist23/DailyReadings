@@ -26,7 +26,7 @@ This document provides a comprehensive technical overview of **DailyReadings**, 
 | **Persistence** | SwiftData (`@Model CachedReading`) + SQLite (`bible_webc.sqlite` default modern + `bible_drb.sqlite` traditional) + `UserDefaults` |
 | **Audio** | `AVFoundation` (`AVSpeechSynthesizer`, `AVAudioSession`), `MediaPlayer` (`MPNowPlayingInfoCenter`) |
 | **Project Spec** | [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`project.yml`) generating `DailyReadings.xcodeproj` |
-| **Test Suite** | `DailyReadingsTests` (48 unit tests: `LiturgicalCalendarTests`, `ScriptureEngineTests`, `LectionaryCoverageTests`, `AudioPlaybackTests`) |
+| **Test Suite** | `DailyReadingsTests` (82 unit tests: `LiturgicalCalendarTests`, `ScriptureEngineTests`, `LectionaryCoverageTests`, `AudioPlaybackTests`, `NotificationSchedulingTests`, `ReadingsReloadTests`) |
 | **Bundle ID** | `com.ridepro.DailyReadings` |
 | **Team ID** | `DT58WA8N32` |
 | **Privacy** | Apple Privacy Manifest compliant (`DailyReadings/PrivacyInfo.xcprivacy`) |
@@ -93,6 +93,9 @@ A core design requirement is transparent scripture attribution and zero-compromi
 3. **Tier 3: Online NAB Testing Tier (`EvangelizioService`) & USCCB Links**:
    - The New American Bible (NAB/NABRE) is the liturgical translation for US dioceses. Digital permissions are administered by the Confraternity of Christian Doctrine (CCD) via the USCCB.
    - Supported for personal developer testing via Evangelizo feed with polite 30-day SwiftData pre-fetching (`CachedReading`), full CCD copyright attribution, and direct links to official daily readings at `bible.usccb.org`.
+   - The feed has no Gospel Acclamation. `ReadingsRepository.backfillGospelAcclamation` adds the Lectionary's, read from WEB-C and labelled WEB-C, only when the feed's Gospel is the Lectionary's Gospel for the day; otherwise the feed carries a different Mass and nothing is added. No other reading type is ever filled in from the index.
+   - When NAB is chosen but the readings shown are WEB-C (offline with nothing cached), `TodayViewModel.translationNotice` is set and the screen shows it with a Retry button. Pull-to-refresh and Retry pass `forceRefresh`; if the download fails, the cached NAB copy is used before WEB-C.
+   - Each reading carries the translation its text is in. Labels use `Reading.translationDisplayName`, never the translation setting: the text can differ from the setting (WEB-C when NAB is offline, the WEB-C acclamation, an old bookmark).
    - **Catholic American Bible (CAB) Roadmap**: The USCCB permissions office has placed digital licensing on hold pending the 2027 release of the Catholic American Bible. DailyReadings is registered on the digital permissions waitlist (`nabperm@usccb.org`).
 #### 4.2.1. Verse numbering (`VersificationMap`, `versification.json`)
 The Lectionary cites Scripture in Hebrew verse numbering. Neither bundled Bible uses it throughout, so `BibleDatabase.queryVerses(citation:)` works in three steps:
@@ -106,22 +109,23 @@ Citation parsing rules worth knowing:
 - "4:12-23 or 4:12-17" is a long and a short form. The long form is read.
 - An open-ended range that starts past the end of a chapter cites nothing in that chapter. It never becomes "the whole chapter".
 - "II Corinthians" and a book glued to its chapter ("Psalm103:1-2") are accepted.
+- "and" lists verses like a comma ("6 and 8" is verses 6 and 8). Before Build 20 the verses after an "and" were dropped, which cut verses from the psalm on about one day in five.
 
 #### 4.2.2. Lectionary index (`PericoreIndex`, `lectionary_dates.json`, `lectionary.json`)
 `PericoreIndex.entries(for:)` answers "which readings belong to this liturgical day":
 1. **Dated index** (`lectionary_dates.json`): readings by calendar date. It has usable data from 2023-01-01 to 2027-05-31; later entries are placeholders.
-2. **Cycle index** (`lectionary.json`, about 950 keys): the same readings keyed by what the day *is*, so any year resolves. Keys:
+2. **Cycle index** (`lectionary.json`, 966 keys): the same readings keyed by what the day *is*, so any year resolves. Keys:
    - a fixed-date solemnity or feast: `fixed_08_15`
-   - a memorial's own readings, laid over the weekday's: `proper_10_02`
+   - an obligatory memorial's own readings, laid over the weekday's: `proper_10_02`. Only days the calendar names as an obligatory memorial get this key, and a psalm counts as the memorial's own only together with its own First Reading; otherwise a reading that fell on the same date in two dated years would replace the weekday's in every year.
    - a place in the season: `ot_23_tuesday`, `lent_sun_3`, `advent_dec_18`, `christmas_after_epiphany_monday`, `triduum_friday`
    - a base key holds what every cycle shares; a suffixed key holds what is particular to one cycle (`ot_23_tuesday_I` holds Year I's First Reading and Psalm, `ot_23_tuesday` the shared Gospel; `lent_sun_3_A` is Year A).
 3. **Nothing.** If neither index has the day, the result is empty and the UI shows its empty state. The app never invents readings.
 
 For Ascension Sunday, Pentecost and Holy Thursday the cycle index is used even when a dated entry exists, because the dated data carries a different Mass for those days (the Seventh Sunday of Easter, the Pentecost Vigil, the Chrism Mass).
 
-`lectionary.json` is generated by `Scripts/BuildLectionaryIndex` from the dated data plus `Scripts/lectionary_seeds.json`, a small set of hand-entered readings for days the dated data cannot supply. Run it with `--holdout 2026-01-01` to build from earlier dates only and report how well the index predicts later ones.
+`lectionary.json` is generated by `Scripts/BuildLectionaryIndex` from the dated data plus `Scripts/lectionary_seeds.json`, a small set of hand-entered readings for days the dated data cannot supply. Where a seed and the dated data cite the same reading, the seed's verse letters and response win (the data's psalm responses are sometimes a guess by citation); where they cite different readings, the data wins. The build is deterministic: ties are broken by reading, not by dictionary order, so the same inputs always give the same file. Run it with `--holdout 2026-01-01` to build from earlier dates only and report how well the index predicts later ones.
 
-4. **Responsorial Psalm Enhancements (`PsalmResponseProvider`, `BibleDatabase.formattedPsalmText`)**: Provides canonical lectionary responses for all 150 Psalms and Biblical Canticles (Exodus 15, Daniel 3, Luke 1, etc.), guaranteeing the red rubric **℟.** banner and stanza cues even if third-party APIs truncate them. Responsorial Psalms are formatted into distinct stanzas separated by `\n\n`, and shared verses across adjacent stanzas (e.g., Psalm 146: 8-9a and 9bc-10) are cleanly split along clause and sentence boundaries without duplicate text.
+4. **Responsorial Psalm Enhancements (`PsalmResponseProvider`, `BibleDatabase.formattedPsalmText`)**: Provides canonical lectionary responses for all 150 Psalms and Biblical Canticles (Exodus 15, Daniel 3, Luke 1, etc.), guaranteeing the red rubric **℟.** banner and stanza cues even if third-party APIs truncate them. Responsorial Psalms are formatted into distinct stanzas separated by `\n\n`, and shared verses across adjacent stanzas (e.g., Psalm 146: 8-9a and 9bc-10) are cleanly split along clause and sentence boundaries without duplicate text. Stanzas break at commas; the Lectionary joins the verses of one stanza with "and" ("Psalm 85:8 and 10, 11-12, 13-14" is three stanzas). Where the dated data spells a psalm both ways, `PericoreIndex` uses the spelling with "and" for every day (`stanzaSpellings`), so a day whose data dropped the "and" still gets the right stanzas. A citation that never carries the "and" in the data is still split at every comma.
 
 ### 4.3. Reverent Audio Recitation Engine (`AudioReadingPlayer.swift`)
 * **Background Audio Capability**: Enabled via `UIBackgroundModes = ["audio"]` and `AVAudioSession(category: .playback, mode: .spokenAudio)`.
@@ -131,8 +135,9 @@ For Ascension Sunday, Pentecost and Holy Thursday the cycle index is used even w
 * **Natural Voice Engine**: Automatically filters out legacy 1980s robotic voices and unentitled Siri identifiers. Prioritizes natural lectionary voices (e.g. Daniel UK, Samantha US, Ava, Moira) and Apple Studio/Enhanced neural voices.
 * **Phonetic Pronunciation Dictionary**: Automatically cleanses difficult biblical names and places before speech synthesis (*Thessalonians, Colossians, Ecclesiastes, Gethsemane, Golgotha, Caiaphas, Barabbas*).
 * **Liturgical Announcements**: At Mass, lectors proclaim books without reciting chapter and verse numbers aloud. The player uses `BibleBook.liturgicalAnnouncement` covering all 73 canonical Catholic books according to Roman Lectionary liturgical norms (e.g. *"A reading from the Letter of Saint Paul to Philemon"*, *"The Holy Gospel according to Mark"*, *"Responsorial Psalm. Psalm 146."*). Chapters and verses remain visible in the UI text while omitted from spoken audio.
-* **Passage-by-passage speech, queued up front**: Each reading is split into its parts (announcement, text, acclamation) and long text into passages of a few sentences (`speechChunks`). Each passage is one utterance. When playback starts, every passage of every remaining reading is handed to the synthesizer's own queue (`enqueue(fromReading:passage:)`), so moving from one reading to the next does not depend on app code running in between. The delegate only tracks the current position and detects the end. A skip, or a change of speed or voice, clears the queue and re-queues from the current passage.
+* **Passage-by-passage speech, queued up front**: Each reading is split into its parts (announcement, text, acclamation) and long text into passages of a few sentences (`speechChunks`). Each passage is one utterance. When playback starts, every passage of every remaining reading is handed to the synthesizer's own queue (`enqueue(fromReading:passage:)`), so moving from one reading to the next does not depend on app code running in between. The delegate only tracks the current position and detects the end. A skip, or a change of speed or voice, clears the queue and re-queues from the current passage. A speed change applies wherever it is made (mini player or Settings); made while paused, it applies on resume.
 * **Pacing**: the speaking rate is `PlaybackSpeed` (0.44, 0.49, 0.54). The default is 0.44 ("0.8x"), chosen for prayer; a pace picked in Settings is saved and wins. The silences are `SpeechPause`: 0.35 s between passages, 0.9 s between parts and psalm stanzas, 1.6 s after a reading.
+* **Gospel Acclamation**: spoken between "Alleluia, alleluia." except in Lent and the Triduum. The screens pass the day's season to `start(...liturgicalSeason:)`; without it the verse is read alone.
 * **One synthesizer for everything**: Prayers and Rosary beads recite through `speakStandalone(_:rate:voice:)`. Views hold the returned identifier and compare it with `standaloneSpeechID` to know whether they are the one speaking. The audio session is released when a prayer or a voice preview ends.
 * **Utterance identity**: Every delegate callback is matched against the utterance it belongs to (reading, preview or standalone). An utterance that was replaced cannot change the play state of its replacement.
 
@@ -143,6 +148,12 @@ For Ascension Sunday, Pentecost and Holy Thursday the cycle index is used even w
   * Dual-mode view: "Mysteries" (today's mystery detection, fruits, scripture) and "How to Pray" (6-step tutorial, bead anatomy, beginner advice).
   * Interactive bead-by-bead prayer companion with visual 10-bead decade track, haptic taps (`UIImpactFeedbackGenerator`), scripture context, and completion blessing.
 * **Daily Prayer Reminders & Vigil Alerts (`NotificationManager`)**: Pre-schedules single daily morning prayer reminders featuring the Saint or Feast of the day and the Verse of the Day, as well as 7:00 PM vigil push notifications the evening before a Holy Day of Obligation.
+  * Each reminder carries the Verse of the Day from `ReadingsRepository.verseOfTheDay(for:preferredTranslation:)`, which reads only the Gospel Acclamation and builds the whole Mass only when the verse would come from somewhere else. It gives the same verse as the Today screen (pinned over 120 days in three translations) in about half the time.
+  * One entry point, `refreshScheduledNotifications()`, reads the saved settings and makes the pending notifications match: it schedules what is on and removes what is off. It runs at launch, when the app returns from the background with a changed permission, and after any change to the reminder toggles or time, the translation, or "Ascension on Thursday". It never asks for permission; only the Settings toggles do.
+  * The two kinds are independent: turning off the daily reminder leaves the vigil alerts alone.
+  * Vigil alerts are on by default. The setting is read as on when it has never been saved (`NotificationManager.Preference`), matching what Settings shows.
+  * A Settings toggle shows on only when its alerts can arrive: turned on in the app and allowed in iOS Settings.
+  * `NotificationCenterClient` wraps `UNUserNotificationCenter` so `NotificationSchedulingTests` can drive the manager with a fake center and a fixed date.
 
 ---
 
@@ -211,7 +222,8 @@ DailyReadings/
     │   │   ├── ReadingCard.swift     # Single Mass reading card
     │   │   ├── PsalmView.swift       # Responsorial Psalm with antiphon & stanza cues
     │   │   ├── SaintOfDayCard.swift  # Commemorated saint card
-    │   │   └── AudioMiniPlayerBar.swift # Persistent floating audio playback bar
+    │   │   ├── AudioMiniPlayerBar.swift # Persistent floating audio playback bar
+    │   │   └── NoticeBanner.swift    # Message + Retry above the readings (load error, NAB unavailable)
     │   ├── Calendar/                 # Calendar tab
     │   │   ├── CalendarView.swift    # Monthly grid with liturgical dots
     │   │   ├── CalendarDayCell.swift # Individual date cell with selection highlight
@@ -234,11 +246,13 @@ DailyReadings/
         ├── lectionary_dates.json     # Readings by calendar date, 2023-01-01 to 2027-05-31
         ├── versification.json        # Lectionary → Bible verse numbering (generated; see Scripts/)
         └── saints.json               # Catholic hagiography database
-DailyReadingsTests/                   # Automated Unit Test Target (48 passing tests)
-├── LiturgicalCalendarTests.swift     # 9 tests for calendar edge cases, Advent bounds, Computus
-├── ScriptureEngineTests.swift        # 18 tests: citation parsing, Hebrew-Vulgate mapping (including Sirach 50), psalm stanza formatting & SQLite queries
-├── LectionaryCoverageTests.swift     # 17 tests: the real lectionary through both Bibles, 100% cycle coverage, audio passages, Rosary schedule
-└── AudioPlaybackTests.swift          # 4 tests: real playback across readings, pacing, skip, speed, and liturgical announcements
+DailyReadingsTests/                   # Automated Unit Test Target (82 passing tests)
+├── LiturgicalCalendarTests.swift     # 21 tests: calendar edge cases, Advent bounds, Computus, Ascension, memorials, reminder content, Gospel Acclamation backfill (and when not to), translation labels, NAB cache clean-up, every obligatory memorial present
+├── ScriptureEngineTests.swift        # 22 tests: citation parsing (including "and"), Hebrew-Vulgate mapping (including Sirach 50), psalm stanza formatting & SQLite queries
+├── LectionaryCoverageTests.swift     # 20 tests: the real lectionary through both Bibles, cycle coverage, memorial overrides, audio passages, Rosary schedule
+├── AudioPlaybackTests.swift          # 6 tests: real playback across readings, pacing, skip, speed (including from Settings and while paused), liturgical announcements, Alleluia by season
+├── NotificationSchedulingTests.swift # 6 tests: which reminders and vigil alerts are pending after each settings change; a refresh in progress cannot outlive a later one; the reminder verse matches the Today screen
+└── ReadingsReloadTests.swift        # 7 tests: reload after a translation or Ascension change, failed NAB refresh keeps the cache, the NAB-unavailable notice
 Scripts/                              # Data generators (not part of the app target)
 ├── build_versification.py            # Builds Resources/versification.json
 ├── BuildLectionaryIndex/main.swift   # Builds Resources/lectionary.json from the dated data
@@ -255,6 +269,7 @@ DailyReadings compiles under **Swift 6 complete concurrency checking** (`SWIFT_S
 * **`BibleDatabase` Actor**: Isolated as a Swift `actor` to serialize SQLite connection access and avoid C-level thread conflicts on SQLite handles.
 * **Audio Artwork Boundary**: `MPMediaItemArtwork(boundsSize:requestHandler:)` invokes its handler on background thread pools. To avoid actor isolation violations and runtime crashes (`_dispatch_assert_queue_fail`), artwork rendering logic is extracted into a `nonisolated` static helper.
 * **`ReadingsRepository`**: `@MainActor`. Lectionary lookups run in a detached task, because the first lookup parses the bundled lectionary files.
+* **`NotificationManager`**: `@MainActor`. Refreshes run one at a time: a new refresh cancels the one in progress and waits for it to finish before reading what is pending. The scheduling loops check for cancellation right before each `add`, so a pass that was preparing a day's readings when the reminder was turned off adds nothing more.
 * **Speech delegate**: `AudioReadingPlayer` conforms with `@preconcurrency AVSpeechSynthesizerDelegate` and main-actor delegate methods. This traps if the system ever delivers a callback off the main thread. Callbacks arrived on the main thread in a macOS check; it has not been confirmed on an iOS device.
 * **Value Types & `Sendable`**: All data exchange structs (`Reading`, `LiturgicalDay`, `GuidedRosaryStep`, `Prayer`) strictly conform to `Sendable`.
 
@@ -313,6 +328,26 @@ A second audit ran every lectionary citation through both bundled Bibles and fou
 
 ---
 
+### Third audit round (14 November 2026, resolved in Build 20)
+
+| # | Finding | Status |
+| :--- | :--- | :--- |
+| 1 | From mid-2027, some weekdays read another day's Gospel or psalm (Oct 31, 2028: Luke 14 instead of Luke 13; Jan 18: Psalm 110; Aug 26, 2028: Psalm 128). `PericoreIndex` added a `proper_MM_DD` key on every weekday, and the index builder derived 14 such keys from dates that happened to repeat in the dated years. The builder was also nondeterministic, so the committed `lectionary.json` could not be reproduced. | **Resolved**: `proper_` only on obligatory memorials; a psalm only with its own First Reading; deterministic build; seeds win where they cite the same reading. 14 false keys removed, 6 real ones kept. Holdout: 469 of 512 right (was 466), 13 wrong (was 15). Pinned in `LectionaryCoverageTests`. |
+| 2 | The NAB Gospel Acclamation backfill adds any missing reading type, so a feed carrying a different Mass from the app's calendar gets readings from both; backfilled WEB-C text is labelled NAB. | **Resolved**: `backfillGospelAcclamation` adds only the acclamation, only when the feed's Gospel is the Lectionary's Gospel for the day, labelled WEB-C. NAB days cached by Build 19 are cleared once at launch and download again. Pinned in `LiturgicalCalendarTests`. |
+| 3 | Holy Day vigil alerts never fired for a new user: Settings showed them on, but the scheduler read the unsaved setting as off. Turning off the daily reminder also removed the vigil alerts, and vigil alerts were only refreshed with the daily reminder. | **Resolved**: `refreshScheduledNotifications()`; pinned in `NotificationSchedulingTests`. |
+| 4 | Turning the reminder off (or changing translation) while a 30-day schedule was being built let the earlier pass keep adding reminders. | **Resolved**: refreshes are serialized and cancellable; pinned in `NotificationSchedulingTests`. |
+| 5 | Changing the translation or "Ascension on Thursday" does not reload the Today screen. | **Resolved**: each screen remembers the settings it loaded with and reloads when it reappears with different ones (`TodayViewModel.reloadIfSettingsChanged`, also used by the calendar's date view); the calendar grid recomputes its days when the Ascension setting changed (`CalendarViewModel.reloadIfCalendarSettingChanged`). Pinned in `ReadingsReloadTests`. |
+| 6 | The reading detail badge shows the setting, not `reading.translation` (wrong after the NAB fallback and for old bookmarks). | **Resolved**: the badge shows `Reading.translationDisplayName`. |
+| 7 | The NAB-to-WEB-C fallback is silent; pull-to-refresh never re-downloads NAB. | **Resolved**: pull-to-refresh and Retry download NAB again; a download that fails keeps the cached NAB before falling back to WEB-C; when NAB was chosen but WEB-C is shown, Today and the date view say so with a Retry button. Pinned in `ReadingsReloadTests`. |
+| 8 | Psalm stanzas split at every comma (Pentecost's Psalm 104 becomes 5 stanzas, not 3). | **Resolved where the data allows**: `PericoreIndex` uses the "and" spelling of a psalm wherever the dated data has one (20 psalms, 36 dated days); the Pentecost seed now reads `104:1ab and 24ac, 29bc-30, 31 and 34`. A citation the data never spells with "and" is still split at every comma. |
+| 9 | Saint Francis de Sales (Jan 24) missing from `FixedSolemnities`. | **Resolved**; a test now checks every obligatory memorial and feast of the General Roman and US calendars. |
+| 10 | Each refresh builds 30 complete Masses for one verse per day. | **Resolved**: `verseOfTheDay` reads only the Gospel Acclamation when that gives the verse; about twice as fast, same verse. |
+| — | Found while fixing #8: citations with "and" lost every verse after it ("Psalm 67:… 6 and 8" read verse 6 only). 409 of 1,874 days through 2031 had such a citation, 404 of them in the psalm. The coverage tests only checked that some verses came back. | **Resolved**: `parseVerseNumbers` reads "and" as a comma; pinned in `ScriptureEngineTests`. |
+| — | Smaller: two launch tasks both loaded Today; a pace set in Settings, or while paused, was not applied; the spoken Gospel Acclamation had no Alleluia; text size defaulted to 20 in the reading view and 18 elsewhere; an unused-variable warning; date formatters created per call in `LiturgicalDay.id`, `CachedReading.makeDateKey`, the calendar cells and the USCCB link; the Advent December 17–24 titles depended on the device language. | **Resolved**. |
+| — | Lent Sundays 3 to 5 in 2027 seemed to show only the Year A readings. | **Checked, no change**: the 2027 dated data lists both the Year A and Year B readings, as USCCB does. |
+
+---
+
 ## 8. Open Items
 
 Listed in the order they matter. `TODOS.md` carries the same list as checkboxes.
@@ -342,6 +377,9 @@ Listed in the order they matter. `TODOS.md` carries the same list as checkboxes.
 - **Gospel Acclamation backfill for NAB:** Remote service omission backfilled from canonical Lectionary index, displaying the Acclamation card and aligning the Verse of the Day across all translations.
 - **App Store listing & privacy policy:** Documented in `APP_STORE_LISTING.md` and `PRIVACY.md`.
 
+**Psalm stanzas** (section 4.2, item 4)
+- A psalm citation the data only spells with commas is still split at every comma. Correct stanza breaks for those need the Lectionary's own text.
+
 **Rosary guide (optional)**
 - The guide says the Fatima Prayer after the opening Glory Be; the usual practice says it only after each decade.
 - Sundays always give the Glorious Mysteries. A setting could offer the seasonal custom (Joyful in Advent and Christmas, Sorrowful in Lent).
@@ -349,7 +387,7 @@ Listed in the order they matter. `TODOS.md` carries the same list as checkboxes.
 
 **Smaller**
 7. Speed and voice changes restart the current passage, not the exact word.
-8. `DateFormatter` instances are still created per call in a few hot paths (`LiturgicalDay.id`, `CachedReading.makeDateKey`).
+8. For freshly downloaded NAB days the copyright line under the readings is empty (the feed's notice is not carried into the cached day). Left as is while the NAB tier stays unchanged by decision; see item 1.
 
 ---
 
@@ -366,5 +404,5 @@ When reviewing DailyReadings at this stage, Claude AI should focus on:
 3. **Audio Utterance Pacing**:
    * Fine-tuning speech synthesizer boundary pauses between readings, liturgical announcements, and psalm antiphons for maximum reverence.
 4. **Codebase Cleanliness & Invariant Verification**:
-   * Verify all 55 unit tests in `DailyReadingsTests` remain green under Swift 6 strict concurrency.
+   * Verify all 82 unit tests in `DailyReadingsTests` remain green under Swift 6 strict concurrency.
    * After any change to `lectionary_dates.json` or the seeds, rebuild `lectionary.json` and re-run `LectionaryCoverageTests`.

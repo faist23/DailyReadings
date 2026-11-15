@@ -165,8 +165,25 @@ public struct Reading: Identifiable, Codable, Hashable, Sendable {
         return PsalmResponseProvider.response(for: citation, text: text)
     }
     
-    /// Translation identifier: "DRB" (Douay-Rheims) or "NAB" (New American Bible).
+    /// Translation identifier: "WEBC" (World English Bible, Catholic edition), "DRB" (Douay-Rheims)
+    /// or "NAB" (New American Bible).
     public let translation: String
+
+    /// The name of the translation this reading's text is in, as Settings names it. Use this, not
+    /// the translation setting, to label a reading: the text may come from another translation
+    /// (the WEB-C fallback when NAB is offline, a WEB-C Gospel Acclamation in NAB readings, an old bookmark).
+    public var translationDisplayName: String {
+        Self.translationDisplayName(for: translation)
+    }
+
+    public static func translationDisplayName(for code: String) -> String {
+        switch code.uppercased() {
+        case "WEBC": return "World English Bible (WEB-C)"
+        case "DRB": return "Douay-Rheims"
+        case "NAB": return "New American Bible (NAB)"
+        default: return code
+        }
+    }
     
     /// Sanitizes and formats scripture text:
     /// - Strips Evangelizo inline verse reference brackets like `[[Jn 2,13]]` or `[[...]]`.

@@ -172,7 +172,7 @@ public struct PrayerDetailView: View {
                         .fixedSize(horizontal: false, vertical: true)
                     
                     // Rubric or Source Card
-                    if let note = prayer.rubricNote ?? prayer.source {
+                    if prayer.rubricNote != nil || prayer.source != nil {
                         VStack(alignment: .leading, spacing: 6) {
                             if let source = prayer.source {
                                 HStack(spacing: 4) {

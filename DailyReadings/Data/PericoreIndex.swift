@@ -65,11 +65,10 @@ public final class PericoreIndex: Sendable {
     /// Designated initializer. Loads the cycle index from `lectionary.json` and the dated index from `lectionary_dates.json`.
     public init(customURL: URL? = nil, customDatesURL: URL? = nil) {
         let url = customURL ?? Bundle.main.url(forResource: "lectionary", withExtension: "json")
+        var loadedIndex: [String: [LectionaryEntry]] = [:]
         if let url, let data = try? Data(contentsOf: url),
            let decoded = try? JSONDecoder().decode([String: [LectionaryEntry]].self, from: data) {
-            self.index = decoded
-        } else {
-            self.index = [:]
+            loadedIndex = decoded
         }
 
         var loadedDates: [String: [LectionaryEntry]] = [:]
@@ -151,7 +150,60 @@ public final class PericoreIndex: Sendable {
                 }
             }
         }
-        self.dateIndex = loadedDates
+        let spellings = Self.stanzaSpellings(in: [loadedIndex, loadedDates])
+        self.index = loadedIndex.mapValues { Self.applying(spellings, to: $0) }
+        self.dateIndex = loadedDates.mapValues { Self.applying(spellings, to: $0) }
+    }
+
+    // MARK: - Psalm Stanza Spelling
+
+    /// The Lectionary joins the verses of one psalm stanza with "and" and separates stanzas with
+    /// commas ("Psalm 85:8 and 10, 11-12, 13-14"). The dated data sometimes spells the same psalm
+    /// with commas only, which `BibleDatabase.formattedPsalmText` would read as extra stanzas, each
+    /// followed by the response. For every psalm citation that appears in both spellings, this picks
+    /// the one with the most "and"s.
+    static func stanzaSpellings(in tables: [[String: [LectionaryEntry]]]) -> [String: ReadingCitation] {
+        var best: [String: ReadingCitation] = [:]
+        for table in tables {
+            for entry in table.values.joined() where entry.type == .responsorialPsalm {
+                let key = stanzaKey(entry.citation)
+                if let current = best[key], !isPreferred(entry.citation, over: current) { continue }
+                best[key] = entry.citation
+            }
+        }
+        return best
+    }
+
+    static func applying(_ spellings: [String: ReadingCitation], to entries: [LectionaryEntry]) -> [LectionaryEntry] {
+        entries.map { entry in
+            guard entry.type == .responsorialPsalm,
+                  let spelling = spellings[stanzaKey(entry.citation)],
+                  andCount(spelling) > andCount(entry.citation) else { return entry }
+            return LectionaryEntry(type: entry.type, citation: spelling, response: entry.response)
+        }
+    }
+
+    /// Book, chapter and verses with "and" read as a comma, so both spellings of a psalm share a key.
+    private static func stanzaKey(_ citation: ReadingCitation) -> String {
+        let book = BibleBook.find(named: citation.book).map { "\($0.rawValue)" } ?? citation.book.lowercased()
+        let verses = citation.verses.lowercased()
+            .replacingOccurrences(of: " and ", with: ",")
+            .filter { !$0.isWhitespace }
+        return "\(book):\(citation.chapter ?? 0):\(verses)"
+    }
+
+    /// More "and"s wins; then lowercase verse letters ("9ab", not "9AB"); then the alphabetically
+    /// first spelling, so the choice never depends on dictionary order.
+    private static func isPreferred(_ a: ReadingCitation, over b: ReadingCitation) -> Bool {
+        let (countA, countB) = (andCount(a), andCount(b))
+        if countA != countB { return countA > countB }
+        let (lowerA, lowerB) = (a.verses == a.verses.lowercased(), b.verses == b.verses.lowercased())
+        if lowerA != lowerB { return lowerA }
+        return "\(a.book) \(a.chapter ?? 0):\(a.verses)" < "\(b.book) \(b.chapter ?? 0):\(b.verses)"
+    }
+
+    private static func andCount(_ citation: ReadingCitation) -> Int {
+        citation.verses.lowercased().components(separatedBy: " and ").count - 1
     }
 
     // MARK: - Query APIs
@@ -269,8 +321,10 @@ public final class PericoreIndex: Sendable {
             keys.append(String(format: "fixed_%02d_%02d", fixedMonth, fixedDay))
         }
 
-        // 2. A memorial (or a weekday the calendar does not list a memorial for) with readings of its own.
-        if day.rank.rawValue >= LiturgicalRank.obligatoryMemorial.rawValue {
+        // 2. An obligatory memorial, which may have readings of its own. Only days the calendar names
+        //    as a memorial: on a plain weekday a `proper_` key would replace the weekday's readings in
+        //    every year with whatever happened to fall on that date in the years the dated data covers.
+        if day.rank == .obligatoryMemorial {
             keys.append(String(format: "proper_%02d_%02d", month, dayOfMonth))
         }
 

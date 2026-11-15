@@ -142,9 +142,7 @@ public struct CalendarDayCell: View {
     // MARK: - Accessibility
     
     private var accessibilityDescription: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        let dateString = formatter.string(from: date)
+        let dateString = date.formatted(date: .abbreviated, time: .omitted)
         let dayTitle = liturgicalDay?.title ?? ""
         let colorName = liturgicalDay?.color.displayName ?? ""
         return "\(dateString). \(dayTitle). Liturgical color: \(colorName)"

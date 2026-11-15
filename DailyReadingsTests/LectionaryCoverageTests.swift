@@ -115,6 +115,50 @@ final class LectionaryCoverageTests: XCTestCase {
 
     // MARK: - Lectionary numbering → each Bible's numbering
 
+    // MARK: - Memorial readings
+
+    /// "Book chapter" for each reading of a type, e.g. "luke 13".
+    private func readings(_ type: ReadingType, on liturgicalDay: LiturgicalDay) -> [String] {
+        PericoreIndex.shared.entries(for: liturgicalDay)
+            .filter { $0.type == type }
+            .map { "\(BibleBook.find(named: $0.citation.book).map { "\($0)" } ?? $0.citation.book) \($0.citation.chapter ?? 0)" }
+    }
+
+    func testWeekdaysBeyondTheDatedDataKeepTheirOwnReadings() {
+        // Plain weekdays used to get a memorial override built from whatever fell on the same
+        // date in the dated years, so these days read another weekday's Gospel or psalm.
+        XCTAssertEqual(readings(.gospel, on: day(2028, 10, 31)), ["luke 13"], "Tuesday, 30th week: Luke 13:18-21")
+        XCTAssertEqual(readings(.gospel, on: day(2029, 10, 31)), ["luke 13"], "Wednesday, 30th week: Luke 13:22-30")
+        XCTAssertEqual(readings(.responsorialPsalm, on: day(2028, 1, 18)), ["psalms 89"], "Tuesday, 2nd week, Year II")
+        XCTAssertEqual(readings(.responsorialPsalm, on: day(2029, 1, 18)), ["psalms 40"], "Thursday, 2nd week, Year I")
+        XCTAssertEqual(readings(.responsorialPsalm, on: day(2028, 8, 26)), ["psalms 85"], "Saturday, 20th week, Year II")
+    }
+
+    func testMemorialsWithReadingsOfTheirOwnStillGetThem() {
+        XCTAssertEqual(readings(.gospel, on: day(2028, 9, 15)), ["john 19"], "Our Lady of Sorrows")
+        XCTAssertEqual(readings(.firstReading, on: day(2028, 1, 26)), ["secondTimothy 1"], "Saints Timothy and Titus")
+    }
+
+    func testMemorialOverridesExistOnlyForObligatoryMemorials() throws {
+        let url = try XCTUnwrap(Bundle.main.url(forResource: "lectionary", withExtension: "json"))
+        let index = try JSONDecoder().decode([String: [LectionaryEntry]].self, from: Data(contentsOf: url))
+        var stray: [String] = []
+        for (key, entries) in index where key.hasPrefix("proper_") {
+            let parts = key.split(separator: "_").compactMap { Int($0) }
+            let celebrations = FixedSolemnities.celebrationsByMonthAndDay[
+                FixedSolemnities.CelebrationKey(month: parts[0], day: parts[1])
+            ] ?? []
+            if !celebrations.contains(where: { $0.rank == .obligatoryMemorial }) {
+                stray.append("\(key): no obligatory memorial on this date")
+            }
+            let types = Set(entries.map(\.type))
+            if types.contains(.responsorialPsalm) && !types.contains(.firstReading) {
+                stray.append("\(key): a psalm without its own First Reading")
+            }
+        }
+        XCTAssertEqual(stray.sorted(), [])
+    }
+
     func testPsalm51StartsAtHaveMercyInBothBibles() async {
         let webc = await text(.webc, "Psalm 51:3-4, 5-6, 12-13")
         XCTAssertTrue(webc.text.hasPrefix("Have mercy on me"), webc.text)

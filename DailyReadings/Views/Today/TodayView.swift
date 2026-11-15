@@ -73,7 +73,8 @@ public struct TodayView: View {
                             audioPlayer.start(
                                 readings: readings,
                                 liturgicalTitle: title,
-                                liturgicalColor: viewModel.liturgicalDay?.color
+                                liturgicalColor: viewModel.liturgicalDay?.color,
+                                liturgicalSeason: viewModel.liturgicalDay?.season
                             )
                         }
                     } label: {
@@ -108,6 +109,10 @@ public struct TodayView: View {
             if viewModel.dailyReadings == nil {
                 await viewModel.loadReadings()
             }
+        }
+        .onAppear {
+            // Back from the Settings tab with a different translation or Ascension setting.
+            Task { await viewModel.reloadIfSettingsChanged() }
         }
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
@@ -144,9 +149,11 @@ public struct TodayView: View {
                     vigilBanner(for: tomorrowHolyDay.day)
                 }
                 
-                // Error Alert if any
-                if let error = viewModel.error {
-                    errorBanner(message: error)
+                // Error, or NAB chosen but not available
+                if let message = viewModel.error ?? viewModel.translationNotice {
+                    NoticeBanner(message: message, accentColor: currentColor.uiAccentColor) {
+                        await viewModel.refresh()
+                    }
                 }
                 
                 // Verse of the Day Card
@@ -310,6 +317,7 @@ public struct TodayView: View {
                     ReadingCard(
                         reading: reading,
                         liturgicalColor: currentColor,
+                        liturgicalSeason: viewModel.liturgicalDay?.season,
                         onSelect: {
                             readingToPresent = reading
                         }
@@ -337,32 +345,6 @@ public struct TodayView: View {
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-    
-    // MARK: - Error Banner
-    
-    private func errorBanner(message: String) -> some View {
-        HStack {
-            Image(systemName: "exclamationmark.triangle.fill")
-                .foregroundStyle(Color.orange)
-            
-            Text(message)
-                .font(.scaled(size: 14))
-                .foregroundStyle(Color.primary)
-            
-            Spacer()
-            
-            Button("Retry") {
-                Task {
-                    await viewModel.refresh()
-                }
-            }
-            .font(.scaled(size: 13, weight: .semibold))
-            .foregroundStyle(currentColor.uiAccentColor)
-        }
-        .padding(AppTheme.Spacing.medium)
-        .background(Color.orange.opacity(0.1))
-        .clipShape(RoundedRectangle(cornerRadius: AppTheme.CornerRadius.medium))
     }
     
     // MARK: - Empty State
@@ -398,9 +380,8 @@ public struct TodayView: View {
     }
 
     private var usccbURL: URL? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMddyy"
-        let dateStr = formatter.string(from: viewModel.currentDate)
+        let parts = Calendar.current.dateComponents([.year, .month, .day], from: viewModel.currentDate)
+        let dateStr = String(format: "%02d%02d%02d", parts.month ?? 0, parts.day ?? 0, (parts.year ?? 0) % 100)
         return URL(string: "https://bible.usccb.org/bible/readings/\(dateStr).cfm")
     }
     
