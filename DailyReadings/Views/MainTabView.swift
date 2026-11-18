@@ -96,13 +96,16 @@ public struct MainTabView: View {
         }
         .onChange(of: scenePhase) { _, phase in
             guard phase == .active else { return }
-            // Permission may have been granted or withdrawn in iOS Settings while the app was away.
+            // Permission may have been granted or withdrawn in iOS Settings while the app was away,
+            // and on a new day the 30 days of reminders move forward.
             Task {
                 let manager = NotificationManager.shared
                 let wasAuthorized = manager.isAuthorized
                 await manager.checkAuthorization()
                 if manager.isAuthorized != wasAuthorized {
                     manager.refreshScheduledNotifications()
+                } else {
+                    manager.refreshIfStale()
                 }
             }
         }

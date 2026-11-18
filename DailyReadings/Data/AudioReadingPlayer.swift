@@ -61,7 +61,7 @@ public struct VoiceOption: Identifiable, Hashable, Sendable {
 /// - Seamless sequential advancement across all Mass readings with contemplative delays.
 @MainActor
 @Observable
-public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthesizerDelegate {
+public final class AudioReadingPlayer: NSObject, AVSpeechSynthesizerDelegate {
     
     public static let shared = AudioReadingPlayer()
     
@@ -241,7 +241,8 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
     // MARK: - Private Properties
     
     private let synthesizer = AVSpeechSynthesizer()
-    private var isInterrupted: Bool = false
+    /// Set when an interruption paused a reading that was playing, so its end resumes only that.
+    private var pausedByInterruption: Bool = false
     private var isAuditioning: Bool = false
     private var remoteCommandsConfigured: Bool = false
     /// A passage waiting in, or being spoken by, the synthesizer.
@@ -406,22 +407,8 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
                 guard let self,
                       let typeValue,
                       let type = AVAudioSession.InterruptionType(rawValue: typeValue) else { return }
-                
-                switch type {
-                case .began:
-                    self.isInterrupted = true
-                    self.pause()
-                case .ended:
-                    self.isInterrupted = false
-                    if let optionValue {
-                        let options = AVAudioSession.InterruptionOptions(rawValue: optionValue)
-                        if options.contains(.shouldResume) {
-                            self.resume()
-                        }
-                    }
-                @unknown default:
-                    break
-                }
+                let options = AVAudioSession.InterruptionOptions(rawValue: optionValue ?? 0)
+                self.handleInterruption(type, shouldResume: options.contains(.shouldResume))
             }
         }
         
@@ -443,8 +430,26 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
         }
     }
     
+    /// A call or another app's audio started or ended. Playback the interruption paused resumes
+    /// when iOS allows it; a reading the listener had already paused stays paused.
+    func handleInterruption(_ type: AVAudioSession.InterruptionType, shouldResume: Bool) {
+        switch type {
+        case .began:
+            pausedByInterruption = isPlaying
+            pause()
+        case .ended:
+            let resumeNow = pausedByInterruption && shouldResume
+            pausedByInterruption = false
+            if resumeNow {
+                resume()
+            }
+        @unknown default:
+            break
+        }
+    }
+
     // MARK: - Playback APIs
-    
+
     /// Starts recitation of the provided readings.
     ///
     /// - Parameter liturgicalSeason: Decides whether the Gospel Acclamation is spoken with its
@@ -506,6 +511,7 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
     /// Resumes speech playback.
     public func resume() {
         guard isPaused else { return }
+        pausedByInterruption = false
         activateAudioSession()
         if requeueOnResume {
             // The speed changed while paused; speak the rest at the new speed from the same passage.
@@ -523,6 +529,7 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
         // Forget the queue first, so the cancel callbacks for it are ignored.
         queuedPassages.removeAll()
         requeueOnResume = false
+        pausedByInterruption = false
         if synthesizer.isSpeaking || synthesizer.isPaused {
             synthesizer.stopSpeaking(at: .immediate)
         }
@@ -851,72 +858,119 @@ public final class AudioReadingPlayer: NSObject, @preconcurrency AVSpeechSynthes
     }
     
     // MARK: - AVSpeechSynthesizerDelegate
-    
-    public func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
-        guard let passage = queuedPassages[ObjectIdentifier(utterance)] else { return }
-        let readingChanged = passage.readingIndex != currentReadingIndex || currentReading == nil
-        currentReadingIndex = passage.readingIndex
-        currentPassageIndex = passage.passageIndex
-        currentReading = activeReadings.indices.contains(passage.readingIndex) ? activeReadings[passage.readingIndex] : currentReading
-        let stateChanged = !isPlaying || isPaused
-        isPlaying = true
-        isPaused = false
-        // The lock screen only needs refreshing when the reading or the play state changes.
-        if readingChanged || stateChanged {
+
+    /// What the synthesizer reported about an utterance.
+    enum SpeechEvent: Sendable {
+        case started, finished, paused, continued, cancelled
+    }
+
+    /// Carries an utterance to the main actor. The synthesizer is finished with it by then; the
+    /// reference also keeps it alive, so its `ObjectIdentifier` cannot be reused in the meantime.
+    private struct UtteranceReference: @unchecked Sendable {
+        let utterance: AVSpeechUtterance
+    }
+
+    /// Apple does not say which thread the delegate is called on. On the main thread an event is
+    /// handled at once, as before; from any other thread it is handed to the main thread in order,
+    /// instead of tripping Swift's main-actor check and crashing.
+    private nonisolated func deliver(_ event: SpeechEvent, _ utterance: AVSpeechUtterance) {
+        let reference = UtteranceReference(utterance: utterance)
+        if Thread.isMainThread {
+            MainActor.assumeIsolated { handleSpeechEvent(event, for: reference.utterance) }
+        } else {
+            DispatchQueue.main.async { [weak self] in
+                MainActor.assumeIsolated { self?.handleSpeechEvent(event, for: reference.utterance) }
+            }
+        }
+    }
+
+    public nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+        deliver(.started, utterance)
+    }
+
+    public nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        deliver(.finished, utterance)
+    }
+
+    public nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance) {
+        deliver(.paused, utterance)
+    }
+
+    public nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didContinue utterance: AVSpeechUtterance) {
+        deliver(.continued, utterance)
+    }
+
+    public nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        deliver(.cancelled, utterance)
+    }
+
+    /// The utterances waiting in the synthesizer, in no particular order (for tests).
+    var queuedUtterances: [AVSpeechUtterance] { queuedPassages.values.map(\.utterance) }
+
+    func handleSpeechEvent(_ event: SpeechEvent, for utterance: AVSpeechUtterance) {
+        switch event {
+        case .started:
+            guard let passage = queuedPassages[ObjectIdentifier(utterance)] else { return }
+            let readingChanged = passage.readingIndex != currentReadingIndex || currentReading == nil
+            currentReadingIndex = passage.readingIndex
+            currentPassageIndex = passage.passageIndex
+            currentReading = activeReadings.indices.contains(passage.readingIndex) ? activeReadings[passage.readingIndex] : currentReading
+            let stateChanged = !isPlaying || isPaused
+            isPlaying = true
+            isPaused = false
+            // The lock screen only needs refreshing when the reading or the play state changes.
+            if readingChanged || stateChanged {
+                updateNowPlayingInfo()
+            }
+
+        case .finished:
+            if utterance === currentAuditionUtterance {
+                currentAuditionUtterance = nil
+                isAuditioning = false
+                deactivateAudioSession()
+                return
+            }
+            if utterance === currentStandaloneUtterance {
+                currentStandaloneUtterance = nil
+                standaloneSpeechID = nil
+                deactivateAudioSession()
+                return
+            }
+            guard queuedPassages.removeValue(forKey: ObjectIdentifier(utterance)) != nil else { return }
+            // The synthesizer moves to the next queued passage on its own. Only the end needs handling.
+            if queuedPassages.isEmpty {
+                stop()
+            }
+
+        case .paused:
+            guard queuedPassages[ObjectIdentifier(utterance)] != nil else { return }
+            isPlaying = false
+            isPaused = true
             updateNowPlayingInfo()
-        }
-    }
-    
-    public func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        if utterance === self.currentAuditionUtterance {
-            self.currentAuditionUtterance = nil
-            self.isAuditioning = false
-            self.deactivateAudioSession()
-            return
-        }
-        if utterance === self.currentStandaloneUtterance {
-            self.currentStandaloneUtterance = nil
-            self.standaloneSpeechID = nil
-            self.deactivateAudioSession()
-            return
-        }
-        guard queuedPassages.removeValue(forKey: ObjectIdentifier(utterance)) != nil else { return }
-        // The synthesizer moves to the next queued passage on its own. Only the end needs handling.
-        if queuedPassages.isEmpty {
-            self.stop()
-        }
-    }
-    
-    public func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance) {
-        guard queuedPassages[ObjectIdentifier(utterance)] != nil else { return }
-        self.isPlaying = false
-        self.isPaused = true
-        self.updateNowPlayingInfo()
-    }
-    
-    public func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didContinue utterance: AVSpeechUtterance) {
-        guard queuedPassages[ObjectIdentifier(utterance)] != nil else { return }
-        self.isPlaying = true
-        self.isPaused = false
-        self.updateNowPlayingInfo()
-    }
-    
-    public func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
-        if utterance === self.currentAuditionUtterance {
-            self.currentAuditionUtterance = nil
-            self.isAuditioning = false
-            return
-        }
-        if utterance === self.currentStandaloneUtterance {
-            self.currentStandaloneUtterance = nil
-            self.standaloneSpeechID = nil
-            return
-        }
-        // Passages are only cancelled by `stop` or `enqueue`, which have already cleared the queue
-        // and set the play state. A cancel that still finds its passage means the system stopped it.
-        guard queuedPassages.removeValue(forKey: ObjectIdentifier(utterance)) != nil else { return }
-        if queuedPassages.isEmpty {
-            self.stop()
+
+        case .continued:
+            guard queuedPassages[ObjectIdentifier(utterance)] != nil else { return }
+            isPlaying = true
+            isPaused = false
+            updateNowPlayingInfo()
+
+        case .cancelled:
+            if utterance === currentAuditionUtterance {
+                currentAuditionUtterance = nil
+                isAuditioning = false
+                return
+            }
+            if utterance === currentStandaloneUtterance {
+                currentStandaloneUtterance = nil
+                standaloneSpeechID = nil
+                return
+            }
+            // Passages are only cancelled by `stop` or `enqueue`, which have already cleared the queue
+            // and set the play state. A cancel that still finds its passage means the system stopped it.
+            guard queuedPassages.removeValue(forKey: ObjectIdentifier(utterance)) != nil else { return }
+            if queuedPassages.isEmpty {
+                stop()
+            }
         }
     }
 }

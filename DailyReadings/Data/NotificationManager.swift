@@ -93,6 +93,8 @@ public final class NotificationManager {
     private let readingsRepository: ReadingsRepository
     /// The refresh in progress, if any.
     private var refreshTask: Task<Void, Never>?
+    /// The day the last refresh started, so a return to the app on a later day extends the 30 days.
+    @ObservationIgnored private var lastRefreshDay: Date?
 
     // MARK: - Initialization
 
@@ -157,6 +159,7 @@ public final class NotificationManager {
     /// - Returns: The refresh, for callers that want to wait for it.
     @discardableResult
     public func refreshScheduledNotifications() -> Task<Void, Never> {
+        lastRefreshDay = Calendar.current.startOfDay(for: now())
         let previous = refreshTask
         previous?.cancel()
         let task = Task {
@@ -168,6 +171,18 @@ public final class NotificationManager {
         }
         refreshTask = task
         return task
+    }
+
+    /// Refreshes if the last refresh was on an earlier day (or never), so the 30 days of reminders
+    /// move forward even when the app stays in memory and is not launched again. Called whenever the
+    /// app comes to the foreground.
+    ///
+    /// - Returns: The refresh, or nil when the schedule was already refreshed today.
+    @discardableResult
+    public func refreshIfStale() -> Task<Void, Never>? {
+        let today = Calendar.current.startOfDay(for: now())
+        if let lastRefreshDay, lastRefreshDay >= today { return nil }
+        return refreshScheduledNotifications()
     }
 
     private func performRefresh() async {

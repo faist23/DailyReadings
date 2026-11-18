@@ -105,7 +105,7 @@
 
 ## Testing
 
-The project includes an automated test target with 82 unit tests covering calendar edge cases, Computus calculations, citation parsing (including "and" within psalm stanzas), verse-numbering maps, SQLite queries, psalm stanza formatting, liturgical audio recitation, daily reminder content and scheduling (against a fake notification center), Gospel Acclamation backfill and translation labels, reloading after a settings change, the NAB offline fallback, the Rosary's weekly schedule, memorial reading overrides, and a walk of every lectionary citation through 2028 in both bundled Bibles:
+The project includes an automated test target with 89 unit tests covering calendar edge cases, Computus calculations, citation parsing (including "and" within psalm stanzas), verse-numbering maps, SQLite queries, psalm stanza formatting, liturgical audio recitation, daily reminder content and scheduling (against a fake notification center), Gospel Acclamation backfill and translation labels, reloading after a settings change, the NAB offline fallback, readings loads that finish out of order, phone-call interruptions, speech callbacks from another thread, moving the reminder schedule forward on a new day, the Rosary's weekly schedule, memorial reading overrides, and a walk of every lectionary citation through 2028 in both bundled Bibles:
 
 ```bash
 xcodebuild test -scheme DailyReadings -destination "platform=iOS Simulator,name=iPhone 17"
@@ -142,4 +142,4 @@ The Xcode project is generated from `project.yml`; run `xcodegen generate` after
 
 ## Status
 
-Not released. Current build: 1.0.0 (20), which resolves every finding of the third audit round. What was done and what is still open is in `TODOS.md` ("Build 20" and "Active & Upcoming TODOS") and `ARCHITECTURE.md` sections 7 and 8.
+Not released. Current build: 1.0.0 (21), which resolves the fourth audit round (18 November 2026) on top of the third. What was done and what is still open is in `TODOS.md` ("Build 21", "Build 20" and "Active & Upcoming TODOS") and `ARCHITECTURE.md` sections 7 and 8.

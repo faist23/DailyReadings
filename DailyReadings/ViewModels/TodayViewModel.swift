@@ -72,6 +72,11 @@ public final class TodayViewModel {
     /// The settings the current readings were loaded with.
     @ObservationIgnored private var loadedSettings: ReadingSettings?
 
+    /// Counts loads. Loads are not cancelled when another starts (a pull to refresh, a return to the
+    /// app on a new day, a settings change), so only the latest may show its result: a slow NAB
+    /// download finishing late must not put the previous day's readings under today's date.
+    @ObservationIgnored private var loadGeneration = 0
+
     static let nabUnavailableNotice = "The New American Bible could not be downloaded, so these are the World English Bible readings."
     
     // MARK: - Dependencies
@@ -114,12 +119,16 @@ public final class TodayViewModel {
     ///
     /// - Parameter date: The target date for which to fetch readings (defaults to now).
     public func loadReadings(for date: Date = .now, forceRefresh: Bool = false) async {
+        loadGeneration += 1
+        let generation = loadGeneration
         isLoading = true
         error = nil
         currentDate = date
         
         defer {
-            isLoading = false
+            if generation == loadGeneration {
+                isLoading = false
+            }
         }
         
         if Task.isCancelled { return }
@@ -133,7 +142,7 @@ public final class TodayViewModel {
         let targetTranslation = settings.translation
         let repository = readingsRepository ?? ReadingsRepository()
         let readings = await repository.getReadings(for: date, preferredTranslation: targetTranslation, forceRefresh: forceRefresh)
-        if Task.isCancelled { return }
+        if Task.isCancelled || generation != loadGeneration { return }
         self.dailyReadings = readings
         self.loadedSettings = settings
         // Say so when NAB was chosen but the readings are another translation (offline, no cached copy).

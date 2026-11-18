@@ -959,6 +959,7 @@ public struct LiturgicalCalendar: Sendable {
         daysAhead: Int = 30,
         ascensionOnThursday: Bool? = nil
     ) -> (day: LiturgicalDay, daysAway: Int)? {
+        guard daysAhead >= 1 else { return nil }
         let calendar = Calendar.current
         let start = calendar.startOfDay(for: date)
 

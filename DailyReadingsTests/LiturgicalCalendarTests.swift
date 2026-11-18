@@ -447,4 +447,9 @@ final class LiturgicalCalendarTests: XCTestCase {
         ReadingsRepository().configure(modelContainer: container)
         XCTAssertEqual(try ModelContext(container).fetchCount(FetchDescriptor<CachedReading>()), 2)
     }
+
+    func testNextHolyDayWithNoDaysToSearchIsNil() {
+        XCTAssertNil(LiturgicalCalendar.shared.nextHolyDayOfObligation(from: .now, daysAhead: 0))
+        XCTAssertNil(LiturgicalCalendar.shared.nextHolyDayOfObligation(from: .now, daysAhead: -3))
+    }
 }

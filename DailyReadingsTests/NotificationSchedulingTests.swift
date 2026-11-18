@@ -51,13 +51,21 @@ final class NotificationSchedulingTests: XCTestCase {
     private var center: FakeNotificationCenter!
     private var defaults: UserDefaults!
     private var manager: NotificationManager!
+    /// The manager's clock; tests move it forward.
+    private var clock = Clock()
+
+    final class Clock: @unchecked Sendable {
+        var now = Date()
+    }
 
     override func setUp() async throws {
         center = FakeNotificationCenter()
         defaults = UserDefaults(suiteName: "NotificationSchedulingTests-\(UUID().uuidString)")!
         // Saturday 14 November 2026, 9:00 AM. The next Holy Day is the Immaculate Conception (Tuesday 8 December).
-        let now = Calendar.current.date(from: DateComponents(year: 2026, month: 11, day: 14, hour: 9))!
-        manager = NotificationManager(center: center, defaults: defaults, readingsRepository: ReadingsRepository(), now: { now })
+        clock = Clock()
+        clock.now = Calendar.current.date(from: DateComponents(year: 2026, month: 11, day: 14, hour: 9))!
+        let clock = clock
+        manager = NotificationManager(center: center, defaults: defaults, readingsRepository: ReadingsRepository(), now: { clock.now })
     }
 
     func testVigilAlertsAreOnWhenTheSettingWasNeverSaved() async {
@@ -144,5 +152,38 @@ final class NotificationSchedulingTests: XCTestCase {
         }
         print("Reminder verse for 360 day-translations: verse only \(quick), full readings \(full)")
         XCTAssertEqual(mismatches, [])
+    }
+
+    // MARK: - Moving the 30 days forward
+
+    /// The day of the last pending reminder.
+    private func lastReminderDay() -> Date? {
+        center.pending.values
+            .filter { $0.identifier.hasPrefix(NotificationManager.identifierPrefix) }
+            .compactMap { ($0.trigger as? UNCalendarNotificationTrigger).flatMap { Calendar.current.date(from: $0.dateComponents) } }
+            .max()
+            .map { Calendar.current.startOfDay(for: $0) }
+    }
+
+    func testReturningOnALaterDayMovesTheRemindersForward() async throws {
+        defaults.set(true, forKey: NotificationManager.Preference.reminderEnabled)
+        await manager.refreshScheduledNotifications().value
+        let firstLast = try XCTUnwrap(lastReminderDay())
+        XCTAssertNil(manager.refreshIfStale(), "Already refreshed today")
+
+        // The app stays in memory and comes back the next morning.
+        clock.now = Calendar.current.date(byAdding: .day, value: 1, to: clock.now)!
+        let refresh = try XCTUnwrap(manager.refreshIfStale(), "A new day refreshes")
+        await refresh.value
+
+        XCTAssertEqual(lastReminderDay(), Calendar.current.date(byAdding: .day, value: 1, to: firstLast))
+        XCTAssertEqual(center.reminders.count, 29)
+    }
+
+    func testFirstReturnRefreshesWhenNothingWasScheduledYet() async throws {
+        defaults.set(true, forKey: NotificationManager.Preference.reminderEnabled)
+        let refresh = try XCTUnwrap(manager.refreshIfStale())
+        await refresh.value
+        XCTAssertEqual(center.reminders.count, 29)
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import AVFoundation
 @testable import DailyReadings
 
 @MainActor
@@ -134,5 +135,60 @@ final class AudioPlaybackTests: XCTestCase {
         player.resume()
         XCTAssertTrue(player.isPlaying)
         XCTAssertEqual(player.queuedSpeechRates, [first.rawValue], "A change made while paused applies on resume")
+    }
+
+    // MARK: - Interruptions
+
+    private let massReadings: [Reading] = [
+        Reading(type: .firstReading, citation: ReadingCitation(book: "Isaiah", chapter: 40, verses: "1-2"), text: "Comfort my people. Speak tenderly to Jerusalem.", translation: "WEBC"),
+        Reading(type: .gospel, citation: ReadingCitation(book: "Mark", chapter: 1, verses: "1-3"), text: "Prepare the way of the Lord.", translation: "WEBC")
+    ]
+
+    func testACallDoesNotResumeAReadingTheListenerPaused() {
+        let player = AudioReadingPlayer.shared
+        defer { player.stop() }
+        player.start(readings: massReadings, liturgicalTitle: "Test", liturgicalColor: .green)
+        player.pause()
+
+        player.handleInterruption(.began, shouldResume: false)
+        player.handleInterruption(.ended, shouldResume: true)
+
+        XCTAssertTrue(player.isPaused, "The listener paused before the call; it stays paused")
+        XCTAssertFalse(player.isPlaying)
+    }
+
+    func testACallResumesTheReadingItPaused() {
+        let player = AudioReadingPlayer.shared
+        defer { player.stop() }
+        player.start(readings: massReadings, liturgicalTitle: "Test", liturgicalColor: .green)
+
+        player.handleInterruption(.began, shouldResume: false)
+        XCTAssertTrue(player.isPaused)
+        player.handleInterruption(.ended, shouldResume: true)
+
+        XCTAssertTrue(player.isPlaying)
+    }
+
+    // MARK: - Speech callbacks off the main thread
+
+    func testSpeechCallbacksFromAnotherThreadReachThePlayer() async throws {
+        let player = AudioReadingPlayer.shared
+        defer { player.stop() }
+        player.start(readings: massReadings, liturgicalTitle: "Test", liturgicalColor: .green)
+        player.pause()
+        let utterance = try XCTUnwrap(player.queuedUtterances.first)
+
+        // Apple does not promise the main thread. A callback from elsewhere must not crash and must
+        // still update the play state.
+        nonisolated(unsafe) let sent = (player, utterance)
+        await Task.detached {
+            XCTAssertFalse(Thread.isMainThread)
+            sent.0.speechSynthesizer(AVSpeechSynthesizer(), didContinue: sent.1)
+        }.value
+
+        for _ in 0..<100 where !player.isPlaying {
+            try await Task.sleep(for: .milliseconds(10))
+        }
+        XCTAssertTrue(player.isPlaying)
     }
 }

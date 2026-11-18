@@ -129,4 +129,43 @@ final class ReadingsReloadTests: XCTestCase {
         viewModel.reloadIfCalendarSettingChanged()
         XCTAssertTrue(viewModel.liturgicalDay(for: ascensionThursday)?.title.contains("Ascension") ?? false)
     }
+
+    // MARK: - A load that finishes late
+
+    func testALoadThatFinishesLateDoesNotReplaceTheLatest() async throws {
+        // NAB, with a server that takes a second to fail for 14 November and fails at once for the 15th:
+        // a pull to refresh still waiting on yesterday when the app opens on the new day.
+        UserDefaults.standard.set("New American Bible (NAB)", forKey: "bibleTranslation")
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [SlowFeedProtocol.self]
+        let service = EvangelizioService(baseURLString: "https://feed.test/AM/days/", urlSession: URLSession(configuration: configuration))
+        let viewModel = TodayViewModel(readingsRepository: ReadingsRepository(evangelizioService: service))
+        let nextDay = Calendar.current.date(byAdding: .day, value: 1, to: date)!
+
+        let slow = Task { await viewModel.loadReadings(for: date, forceRefresh: true) }
+        while !Calendar.current.isDate(viewModel.currentDate, inSameDayAs: date) { await Task.yield() }
+        await viewModel.loadReadings(for: nextDay)
+        await slow.value
+
+        let shown = try XCTUnwrap(viewModel.dailyReadings)
+        XCTAssertTrue(Calendar.current.isDate(shown.date, inSameDayAs: nextDay), "The earlier day's readings replaced the latest")
+        XCTAssertTrue(Calendar.current.isDate(viewModel.currentDate, inSameDayAs: nextDay))
+        XCTAssertFalse(viewModel.isLoading)
+    }
+}
+
+/// Fails every request, after a second for the feed's 14 November 2026 and at once otherwise.
+final class SlowFeedProtocol: URLProtocol {
+    override class func canInit(with request: URLRequest) -> Bool { true }
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+
+    override func startLoading() {
+        let delay: TimeInterval = request.url?.absoluteString.hasSuffix("2026-11-14") == true ? 1.0 : 0
+        nonisolated(unsafe) let loader = self
+        DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
+            loader.client?.urlProtocol(loader, didFailWithError: URLError(.notConnectedToInternet))
+        }
+    }
+
+    override func stopLoading() {}
 }

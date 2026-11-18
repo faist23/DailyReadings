@@ -1,7 +1,7 @@
 # DailyReadings — Project Status & TODOS
 
-**Last Updated:** 2026-11-14  
-**Current Version:** 1.0.0 (Build 20)  
+**Last Updated:** 2026-11-18  
+**Current Version:** 1.0.0 (Build 21)  
 **Bundle Identifier:** `com.ridepro.DailyReadings`  
 **Team ID:** `DT58WA8N32`  
 **Target Platform:** iOS 17.0+ | Swift 6.0 (`SWIFT_STRICT_CONCURRENCY = complete`) | SwiftUI | SwiftData  
@@ -15,6 +15,12 @@ DailyReadings is a contemplative Catholic daily Mass readings and liturgical cal
 - **Aesthetic:** Missal-inspired typography, New York serif, subtle gold liturgical accents, warm scripture paper backgrounds, and distraction-free layout.
 - **Offline Reliability:** Guaranteed offline liturgical Computus calendar algorithm and bundled WEB-C (default) and Douay-Rheims Bible SQLite databases, plus an online New American Bible (NAB) tier with SwiftData caching for personal testing only (not licensed for release; see `NAB_COPYRIGHT.md`).
 - **Audio Experience:** Reverent, contemplative audio recitation designed for personal prayer, morning commutes, and hands-free devotion.
+
+---
+
+## Build 21 (18 November 2026)
+
+Fourth audit round (Claude and Codex): a paused reading no longer resumes after a phone call; speech callbacks from another thread are handed to the main thread instead of crashing; the 30 days of reminders move forward when the app is opened on a new day; a slow NAB refresh can no longer show the previous day's readings, and Retry shows a spinner while it runs; `nextHolyDayOfObligation(daysAhead: 0)` returns nil. 89 unit tests (was 82); each new test was checked to fail against the old code. Details in `ARCHITECTURE.md` section 7 and the "Fourth audit round" list below.
 
 ---
 
@@ -373,7 +379,7 @@ Second audit round. There was no Build 15.
 - [ ] **Listen to a full day's readings**: does it continue past the First Reading (screen on, and screen locked); is the pace right; speed and voice changes mid-reading; a phone-call interruption. If it still stops, note whether the screen was locked and whether headphones or CarPlay were connected.
 - [ ] **Listen to a prayer and a Rosary decade**: the Stop button should reset when speech ends, and music from another app should resume.
 - [ ] **View every screen at the largest text sizes** (fonts now scale to 1.5x): calendar grid, category pills, mini player, Rosary bead row.
-- [ ] **Confirm speech delegate callbacks arrive on the main thread** on iOS (the delegate methods now trap otherwise).
+- [ ] **Build 21 fixes**: pause a reading, take or place a call, hang up; it should stay paused. Play a reading, take a call, hang up; it should resume. Leave the app in memory overnight with the reminder on, open it the next day, and check the last pending reminder moved a day later.
 
 ### P1 — Lectionary data gaps
 - [x] **31 days through 2031 are incomplete.** Added real citations to `lectionary_seeds.json`, rebuilt `lectionary.json`, re-ran tests. All 1,876 days through 2031 now complete.
@@ -397,6 +403,19 @@ Details in `ARCHITECTURE.md` section 7.
 - [x] Smaller: duplicate first load; speed from Settings and while paused; Alleluia; text size default; compiler warning; date formatters.
 - [ ] **Psalms the data only spells with commas** are still split at every comma. Needs the Lectionary's stanza layout (licensed text) to fix fully.
 
+### P1 — Fourth audit round (18 Nov 2026, resolved in Build 21)
+Claude and Codex audited Build 20; details in `ARCHITECTURE.md` section 7.
+- [x] **#1 A paused reading resumed after a phone call.** Now only what the interruption paused resumes.
+- [x] **#2 Speech callbacks off the main thread would crash.** The delegate now hands events to the main thread; replaces the old "confirm callbacks arrive on the main thread" device check.
+- [x] **#3 Reminders ran out after 30 days** when the app stayed in memory. Refreshed on each return to the app on a new day.
+- [x] **#4 A slow NAB refresh could show the previous day's readings** under today's date. Loads are numbered; Retry shows a spinner while it runs.
+- [x] **#6 `nextHolyDayOfObligation(daysAhead: 0)` crashed.** Returns nil.
+- [ ] **#5 "Used by permission" fallback notice** in `EvangelizioService`: with the NAB licensing item above.
+- [ ] **Background refresh** (`BGAppRefreshTask`) so reminders continue for a user who does not open the app for 30 days.
+- [ ] **Lenten Gospel Acclamation**: speak a Lenten acclamation ("Praise to you, Lord Jesus Christ, King of endless glory") around the verse in Lent.
+- [ ] **Play button on a calendar date** pauses or resumes the readings already playing from Today instead of starting that date's.
+- [ ] **`AVAudioSession.setActive` on the main thread**: Xcode warns it can stall the UI; consider the asynchronous activation API.
+
 ### P2 — Rosary guide
 The order of prayers, the prayer texts and the mysteries were reviewed and are accurate. Optional refinements:
 - [ ] **Fatima Prayer after the opening Glory Be**: the guide says it before the first decade. The usual practice says it only after each decade. Decide whether to keep it.
@@ -409,7 +428,7 @@ The order of prayers, the prayer texts and the mysteries were reviewed and are a
 - [x] **Ascension Thursday provinces** are not supported. Implemented full support for ecclesiastical provinces of Boston, Hartford, New York, Newark, Omaha, and Philadelphia. Added user toggle in `SettingsView` under *Liturgical Calendar*, wired `LiturgicalCalendar` with dynamic `ascensionOnThursday` evaluation, seeded Seventh Sunday of Easter (`easter_sun_7_A`, `easter_sun_7_B`, `easter_sun_7_C`) in `lectionary_seeds.json`, rebuilt `lectionary.json` (980 keys at the time; 966 after the Build 20 clean-up), and added unit test coverage in `LiturgicalCalendarTests`.
 
 ### P1 — App Store Submission & TestFlight Monitoring
-- [x] **Bump build version to 1.0.0 (Build 20)** for TestFlight beta testing.
+- [x] **Bump build version to 1.0.0 (Build 21)** for TestFlight beta testing.
 - [x] **App Store Connect Store Listing**:
   - Prepared `APP_STORE_LISTING.md` with verified App Name (29 chars), Subtitle (28 chars), Promotional text (154 chars), complete marketing description, keyword string (92 chars), review notes, and 6-slide screenshot specifications.
   - Added dedicated zero-tracking privacy policy document in `PRIVACY.md`.

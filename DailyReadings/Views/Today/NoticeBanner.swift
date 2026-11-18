@@ -14,6 +14,8 @@ struct NoticeBanner: View {
     let message: String
     let accentColor: Color
     let retry: () async -> Void
+    /// While a retry runs the button is replaced by a spinner, so repeated taps cannot start more.
+    @State private var isRetrying = false
 
     var body: some View {
         HStack {
@@ -27,11 +29,20 @@ struct NoticeBanner: View {
 
             Spacer()
 
-            Button("Retry") {
-                Task { await retry() }
+            if isRetrying {
+                ProgressView()
+                    .accessibilityLabel("Retrying")
+            } else {
+                Button("Retry") {
+                    isRetrying = true
+                    Task {
+                        await retry()
+                        isRetrying = false
+                    }
+                }
+                .font(.scaled(size: 13, weight: .semibold))
+                .foregroundStyle(accentColor)
             }
-            .font(.scaled(size: 13, weight: .semibold))
-            .foregroundStyle(accentColor)
         }
         .padding(AppTheme.Spacing.medium)
         .background(Color.orange.opacity(0.1))
