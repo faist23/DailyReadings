@@ -46,7 +46,10 @@
   - Browse past and future daily readings with swipe gestures.
   - Changing the translation or the Ascension setting updates Today, the calendar and the date view when you return to them.
 - **Saint of the Day**:
-  - Daily saint commemorations with historical era, patronages, and biography (expanded view with liturgical context by default).
+  - The day's saints from the General Roman Calendar and the US proper calendar, each on its current date, with the calendar's title and rank.
+  - Descriptions from each saint's or feast's Wikipedia article, credited on the card (CC BY-SA 4.0); patronages only where Wikipedia's infobox lists them.
+  - Life facts from Wikidata where known: years lived, birthplace, religious order, canonization year.
+  - A quote of the saint's own words for 49 saints and feasts, each checked word for word against its source (Scripture, Wikiquote, New Advent, the Catechism) when `Scripts/build_saints.py` builds the data.
 - **Reverent Audio Recitation**:
   - Continuous, sequential text-to-speech recitation of all Mass readings with proper liturgical announcements, responses, and acclamations (the Gospel Acclamation with its Alleluia, except in Lent).
   - Background audio playback using `AVAudioSession` (`.playback` / `.spokenAudio`) and `UIBackgroundModes` audio capability.
@@ -105,7 +108,7 @@
 
 ## Testing
 
-The project includes an automated test target with 89 unit tests covering calendar edge cases, Computus calculations, citation parsing (including "and" within psalm stanzas), verse-numbering maps, SQLite queries, psalm stanza formatting, liturgical audio recitation, daily reminder content and scheduling (against a fake notification center), Gospel Acclamation backfill and translation labels, reloading after a settings change, the NAB offline fallback, readings loads that finish out of order, phone-call interruptions, speech callbacks from another thread, moving the reminder schedule forward on a new day, the Rosary's weekly schedule, memorial reading overrides, and a walk of every lectionary citation through 2028 in both bundled Bibles:
+The project includes an automated test target with 100 unit tests covering calendar edge cases, Computus calculations, citation parsing (including "and" within psalm stanzas), verse-numbering maps, SQLite queries, psalm stanza formatting, liturgical audio recitation, daily reminder content and scheduling (against a fake notification center), Gospel Acclamation backfill and translation labels, reloading after a settings change, the NAB offline fallback, readings loads that finish out of order, phone-call interruptions, speech callbacks from another thread, moving the reminder schedule forward on a new day, saint dates (against the General Roman Calendar and the 2004 Roman Martyrology), sources, life facts and quotes, the Rosary's weekly schedule, memorial reading overrides, and a walk of every lectionary citation through 2028 in both bundled Bibles:
 
 ```bash
 xcodebuild test -scheme DailyReadings -destination "platform=iOS Simulator,name=iPhone 17"
@@ -142,4 +145,4 @@ The Xcode project is generated from `project.yml`; run `xcodegen generate` after
 
 ## Status
 
-Not released. Current build: 1.0.0 (21), which resolves the fourth audit round (18 November 2026) on top of the third. What was done and what is still open is in `TODOS.md` ("Build 21", "Build 20" and "Active & Upcoming TODOS") and `ARCHITECTURE.md` sections 7 and 8.
+Not released. Current build: 1.0.0 (22), which rebuilds the Saint of the Day data so every date, description and quote has a source (18 November 2026), on top of the fourth audit round. What was done and what is still open is in `TODOS.md` ("Build 22", "Build 21" and "Active & Upcoming TODOS") and `ARCHITECTURE.md` sections 7 and 8.

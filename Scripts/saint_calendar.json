@@ -1,0 +1,2148 @@
+{
+ "_about": "Celebrations of the General Roman Calendar with the United States proper calendar (USCCB), used by Scripts/build_saints.py to put each saint on the right day. Sources: https://en.wikipedia.org/wiki/General_Roman_Calendar (which cites the Roman Missal and the decrees inscribing later saints) and https://www.usccb.org/prayer-and-worship/liturgical-year-and-calendar/proper-calendar via https://en.wikipedia.org/wiki/National_calendars_of_the_Roman_Rite#United_States. Movable celebrations (Baptism of the Lord, Trinity, Corpus Christi, Sacred Heart, Christ the King, Holy Family, Mary Mother of the Church, Immaculate Heart) are not here; the app names them from the liturgical day.",
+ "celebrations": [
+  {
+   "date": "01-01",
+   "title": "Solemnity of Mary, the Holy Mother of God",
+   "rank": "solemnity",
+   "wikipedia": [
+    "Solemnity of Mary, the Holy Mother of God"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "01-02",
+   "title": "Saints Basil the Great and Gregory Nazianzen, Bishops and Doctors of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Basil of Caesarea",
+    "Gregory of Nazianzus"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "01-03",
+   "title": "The Most Holy Name of Jesus",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Feast of the Holy Name of Jesus"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "01-04",
+   "title": "Saint Elizabeth Ann Seton, Religious",
+   "rank": "memorial",
+   "wikipedia": [
+    "Elizabeth Ann Seton"
+   ],
+   "calendar": "Proper Calendar for the Dioceses of the United States"
+  },
+  {
+   "date": "01-05",
+   "title": "Saint John Neumann, Bishop",
+   "rank": "memorial",
+   "wikipedia": [
+    "John Neumann"
+   ],
+   "calendar": "Proper Calendar for the Dioceses of the United States"
+  },
+  {
+   "date": "01-06",
+   "title": "The Epiphany of the Lord",
+   "rank": "solemnity",
+   "wikipedia": [
+    "Epiphany (holiday)"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "01-06",
+   "title": "Saint André Bessette, Religious",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "André Bessette"
+   ],
+   "calendar": "Proper Calendar for the Dioceses of the United States"
+  },
+  {
+   "date": "01-07",
+   "title": "Saint Raymond of Penyafort, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Raymond of Penyafort"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "01-13",
+   "title": "Saint Hilary, Bishop and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Hilary of Poitiers"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "01-17",
+   "title": "Saint Anthony, Abbot",
+   "rank": "memorial",
+   "wikipedia": [
+    "Anthony the Great"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "01-20",
+   "title": "Saint Fabian, Pope and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Pope Fabian"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "01-20",
+   "title": "Saint Sebastian, Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Saint Sebastian"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "01-21",
+   "title": "Saint Agnes, Virgin and Martyr",
+   "rank": "memorial",
+   "wikipedia": [
+    "Agnes of Rome"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "01-23",
+   "title": "Saint Vincent, Deacon and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Vincent of Saragossa"
+   ],
+   "calendar": "General Roman Calendar, as observed in the United States"
+  },
+  {
+   "date": "01-23",
+   "title": "Saint Marianne Cope, Virgin",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Marianne Cope"
+   ],
+   "calendar": "Proper Calendar for the Dioceses of the United States"
+  },
+  {
+   "date": "01-24",
+   "title": "Saint Francis de Sales, Bishop and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Francis de Sales"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "01-25",
+   "title": "The Conversion of Saint Paul the Apostle",
+   "rank": "feast",
+   "wikipedia": [
+    "Conversion of Paul the Apostle"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "01-26",
+   "title": "Saints Timothy and Titus, Bishops",
+   "rank": "memorial",
+   "wikipedia": [
+    "Saint Timothy",
+    "Saint Titus"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "01-27",
+   "title": "Saint Angela Merici, Virgin",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Angela Merici"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "01-28",
+   "title": "Saint Thomas Aquinas, Priest and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Thomas Aquinas"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "01-31",
+   "title": "Saint John Bosco, Priest",
+   "rank": "memorial",
+   "wikipedia": [
+    "John Bosco"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "02-02",
+   "title": "The Presentation of the Lord",
+   "rank": "feast",
+   "wikipedia": [
+    "Presentation of Jesus at the Temple"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "02-03",
+   "title": "Saint Blaise, Bishop and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Saint Blaise"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "02-03",
+   "title": "Saint Ansgar, Bishop",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Ansgar"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "02-05",
+   "title": "Saint Agatha, Virgin and Martyr",
+   "rank": "memorial",
+   "wikipedia": [
+    "Agatha of Sicily"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "02-06",
+   "title": "Saints Paul Miki and Companions, Martyrs",
+   "rank": "memorial",
+   "wikipedia": [
+    "Paul Miki",
+    "26 Martyrs of Japan"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "02-08",
+   "title": "Saint Jerome Emiliani, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Gerolamo Emiliani"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "02-08",
+   "title": "Saint Josephine Bakhita, Virgin",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Josephine Bakhita"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "02-10",
+   "title": "Saint Scholastica, Virgin",
+   "rank": "memorial",
+   "wikipedia": [
+    "Scholastica"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "02-11",
+   "title": "Our Lady of Lourdes",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Our Lady of Lourdes"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "02-14",
+   "title": "Saints Cyril, Monk, and Methodius, Bishop",
+   "rank": "memorial",
+   "wikipedia": [
+    "Cyril and Methodius"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "02-17",
+   "title": "The Seven Holy Founders of the Servite Order",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Seven Holy Founders of the Servite Order"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "02-21",
+   "title": "Saint Peter Damian, Bishop and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Peter Damian"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "02-22",
+   "title": "The Chair of Saint Peter the Apostle",
+   "rank": "feast",
+   "wikipedia": [
+    "Chair of Saint Peter"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "02-23",
+   "title": "Saint Polycarp, Bishop and Martyr",
+   "rank": "memorial",
+   "wikipedia": [
+    "Polycarp"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "02-27",
+   "title": "Saint Gregory of Narek, Abbot and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Gregory of Narek"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "03-03",
+   "title": "Saint Katharine Drexel, Virgin",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Katharine Drexel"
+   ],
+   "calendar": "Proper Calendar for the Dioceses of the United States"
+  },
+  {
+   "date": "03-04",
+   "title": "Saint Casimir",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Saint Casimir"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "03-07",
+   "title": "Saints Perpetua and Felicity, Martyrs",
+   "rank": "memorial",
+   "wikipedia": [
+    "Perpetua and Felicity"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "03-08",
+   "title": "Saint John of God, Religious",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "John of God"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "03-09",
+   "title": "Saint Frances of Rome, Religious",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Frances of Rome"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "03-17",
+   "title": "Saint Patrick, Bishop",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Saint Patrick"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "03-18",
+   "title": "Saint Cyril of Jerusalem, Bishop and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Cyril of Jerusalem"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "03-19",
+   "title": "Saint Joseph, Spouse of the Blessed Virgin Mary",
+   "rank": "solemnity",
+   "wikipedia": [
+    "Saint Joseph"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "03-23",
+   "title": "Saint Turibius of Mongrovejo, Bishop",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Turibius of Mongrovejo"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "03-25",
+   "title": "The Annunciation of the Lord",
+   "rank": "solemnity",
+   "wikipedia": [
+    "Annunciation"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "04-02",
+   "title": "Saint Francis of Paola, Hermit",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Francis of Paola"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "04-04",
+   "title": "Saint Isidore, Bishop and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Isidore of Seville"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "04-05",
+   "title": "Saint Vincent Ferrer, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Vincent Ferrer"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "04-07",
+   "title": "Saint John Baptist de la Salle, Priest",
+   "rank": "memorial",
+   "wikipedia": [
+    "Jean-Baptiste de La Salle"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "04-11",
+   "title": "Saint Stanislaus, Bishop and Martyr",
+   "rank": "memorial",
+   "wikipedia": [
+    "Stanislaus of Szczepanów"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "04-13",
+   "title": "Saint Martin I, Pope and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Pope Martin I"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "04-21",
+   "title": "Saint Anselm, Bishop and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Anselm of Canterbury"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "04-23",
+   "title": "Saint George, Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Saint George"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "04-23",
+   "title": "Saint Adalbert, Bishop and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Adalbert of Prague"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "04-24",
+   "title": "Saint Fidelis of Sigmaringen, Priest and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Fidelis of Sigmaringen"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "04-25",
+   "title": "Saint Mark, Evangelist",
+   "rank": "feast",
+   "wikipedia": [
+    "Mark the Evangelist"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "04-28",
+   "title": "Saint Peter Chanel, Priest and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Peter Chanel"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "04-28",
+   "title": "Saint Louis Grignon de Montfort, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Louis de Montfort"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "04-29",
+   "title": "Saint Catherine of Siena, Virgin and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Catherine of Siena"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "04-30",
+   "title": "Saint Pius V, Pope",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Pope Pius V"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-01",
+   "title": "Saint Joseph the Worker",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Saint Joseph"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-02",
+   "title": "Saint Athanasius, Bishop and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Athanasius of Alexandria"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-03",
+   "title": "Saints Philip and James, Apostles",
+   "rank": "feast",
+   "wikipedia": [
+    "Philip the Apostle",
+    "James, son of Alphaeus"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-10",
+   "title": "Saint John of Ávila, Priest and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "John of Ávila"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-10",
+   "title": "Saint Damien de Veuster, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Father Damien"
+   ],
+   "calendar": "Proper Calendar for the Dioceses of the United States"
+  },
+  {
+   "date": "05-12",
+   "title": "Saints Nereus and Achilleus, Martyrs",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Saints Nereus and Achilleus"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-12",
+   "title": "Saint Pancras, Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Pancras of Rome"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-13",
+   "title": "Our Lady of Fatima",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Our Lady of Fátima"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-14",
+   "title": "Saint Matthias, Apostle",
+   "rank": "feast",
+   "wikipedia": [
+    "Matthias the Apostle"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-15",
+   "title": "Saint Isidore",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Isidore the Laborer"
+   ],
+   "calendar": "Proper Calendar for the Dioceses of the United States"
+  },
+  {
+   "date": "05-18",
+   "title": "Saint John I, Pope and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Pope John I"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-20",
+   "title": "Saint Bernardine of Siena, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Bernardino of Siena"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-21",
+   "title": "Saint Christopher Magallanes, Priest, and Companions, Martyrs",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Cristóbal Magallanes Jara"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-22",
+   "title": "Saint Rita of Cascia, Religious",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Rita of Cascia"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-25",
+   "title": "Saint Bede the Venerable, Priest and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Bede"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-25",
+   "title": "Saint Gregory VII, Pope",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Pope Gregory VII"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-25",
+   "title": "Saint Mary Magdalene de’ Pazzi, Virgin",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Mary Magdalene de' Pazzi"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-26",
+   "title": "Saint Philip Neri, Priest",
+   "rank": "memorial",
+   "wikipedia": [
+    "Philip Neri"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-27",
+   "title": "Saint Augustine of Canterbury, Bishop",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Augustine of Canterbury"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-29",
+   "title": "Saint Paul VI, Pope",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Pope Paul VI"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "05-31",
+   "title": "The Visitation of the Blessed Virgin Mary",
+   "rank": "feast",
+   "wikipedia": [
+    "Visitation (Christianity)"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-01",
+   "title": "Saint Justin, Martyr",
+   "rank": "memorial",
+   "wikipedia": [
+    "Justin Martyr"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-02",
+   "title": "Saints Marcellinus and Peter, Martyrs",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Marcellinus and Peter"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-03",
+   "title": "Saints Charles Lwanga and Companions, Martyrs",
+   "rank": "memorial",
+   "wikipedia": [
+    "Charles Lwanga"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-05",
+   "title": "Saint Boniface, Bishop and Martyr",
+   "rank": "memorial",
+   "wikipedia": [
+    "Saint Boniface"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-06",
+   "title": "Saint Norbert, Bishop",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Norbert of Xanten"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-09",
+   "title": "Saint Ephrem, Deacon and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Ephrem the Syrian"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-11",
+   "title": "Saint Barnabas, Apostle",
+   "rank": "memorial",
+   "wikipedia": [
+    "Barnabas"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-13",
+   "title": "Saint Anthony of Padua, Priest and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Anthony of Padua"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-19",
+   "title": "Saint Romuald, Abbot",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Romuald"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-21",
+   "title": "Saint Aloysius Gonzaga, Religious",
+   "rank": "memorial",
+   "wikipedia": [
+    "Aloysius Gonzaga"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-22",
+   "title": "Saint Paulinus of Nola, Bishop",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Paulinus of Nola"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-22",
+   "title": "Saints John Fisher, Bishop, and Thomas More, Martyrs",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "John Fisher",
+    "Thomas More"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-24",
+   "title": "The Nativity of Saint John the Baptist",
+   "rank": "solemnity",
+   "wikipedia": [
+    "Nativity of John the Baptist"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-27",
+   "title": "Saint Cyril of Alexandria, Bishop and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Cyril of Alexandria"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-28",
+   "title": "Saint Irenaeus, Bishop, Martyr and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Irenaeus"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-29",
+   "title": "Saints Peter and Paul, Apostles",
+   "rank": "solemnity",
+   "wikipedia": [
+    "Feast of Saints Peter and Paul"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "06-30",
+   "title": "The First Martyrs of Holy Roman Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "First Martyrs of the Church of Rome"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-01",
+   "title": "Saint Junípero Serra, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Junípero Serra"
+   ],
+   "calendar": "Proper Calendar for the Dioceses of the United States"
+  },
+  {
+   "date": "07-03",
+   "title": "Saint Thomas, Apostle",
+   "rank": "feast",
+   "wikipedia": [
+    "Thomas the Apostle"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-05",
+   "title": "Saint Elizabeth of Portugal",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Elizabeth of Portugal"
+   ],
+   "calendar": "General Roman Calendar, as observed in the United States"
+  },
+  {
+   "date": "07-05",
+   "title": "Saint Anthony Zaccaria, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Anthony Zaccaria"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-06",
+   "title": "Saint Maria Goretti, Virgin and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Maria Goretti"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-09",
+   "title": "Saint Augustine Zhao Rong, Priest, and Companions, Martyrs",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Martyr Saints of China"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-11",
+   "title": "Saint Benedict, Abbot",
+   "rank": "memorial",
+   "wikipedia": [
+    "Benedict of Nursia"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-13",
+   "title": "Saint Henry",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Henry II, Holy Roman Emperor"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-14",
+   "title": "Saint Kateri Tekakwitha, Virgin",
+   "rank": "memorial",
+   "wikipedia": [
+    "Kateri Tekakwitha"
+   ],
+   "calendar": "Proper Calendar for the Dioceses of the United States"
+  },
+  {
+   "date": "07-15",
+   "title": "Saint Bonaventure, Bishop and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Bonaventure"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-16",
+   "title": "Our Lady of Mount Carmel",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Our Lady of Mount Carmel"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-18",
+   "title": "Saint Camillus de Lellis, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Camillus de Lellis"
+   ],
+   "calendar": "General Roman Calendar, as observed in the United States"
+  },
+  {
+   "date": "07-20",
+   "title": "Saint Apollinaris, Bishop and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Apollinaris of Ravenna"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-21",
+   "title": "Saint Lawrence of Brindisi, Priest and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Lawrence of Brindisi"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-22",
+   "title": "Saint Mary Magdalene",
+   "rank": "feast",
+   "wikipedia": [
+    "Mary Magdalene"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-23",
+   "title": "Saint Bridget, Religious",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Bridget of Sweden"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-24",
+   "title": "Saint Sharbel Makhluf, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Charbel Makhlouf"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-25",
+   "title": "Saint James, Apostle",
+   "rank": "feast",
+   "wikipedia": [
+    "James the Great"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-26",
+   "title": "Saints Joachim and Anne, Parents of the Blessed Virgin Mary",
+   "rank": "memorial",
+   "wikipedia": [
+    "Joachim",
+    "Saint Anne"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-29",
+   "title": "Saints Martha, Mary and Lazarus",
+   "rank": "memorial",
+   "wikipedia": [
+    "Martha",
+    "Mary of Bethany",
+    "Lazarus of Bethany"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-30",
+   "title": "Saint Peter Chrysologus, Bishop and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Peter Chrysologus"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "07-31",
+   "title": "Saint Ignatius of Loyola, Priest",
+   "rank": "memorial",
+   "wikipedia": [
+    "Ignatius of Loyola"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-01",
+   "title": "Saint Alphonsus Liguori, Bishop and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Alphonsus Liguori"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-02",
+   "title": "Saint Eusebius of Vercelli, Bishop",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Eusebius of Vercelli"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-02",
+   "title": "Saint Peter Julian Eymard, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Peter Julian Eymard"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-04",
+   "title": "Saint Jean Vianney, Priest",
+   "rank": "memorial",
+   "wikipedia": [
+    "Jean Vianney"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-05",
+   "title": "The Dedication of the Basilica of Saint Mary Major",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Dedication of the Basilica of Saint Mary Major"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-06",
+   "title": "The Transfiguration of the Lord",
+   "rank": "feast",
+   "wikipedia": [
+    "Feast of the Transfiguration"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-07",
+   "title": "Saint Sixtus II, Pope, and Companions, Martyrs",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Pope Sixtus II"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-07",
+   "title": "Saint Cajetan, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Gaetano dei Conti di Thiene"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-08",
+   "title": "Saint Dominic, Priest",
+   "rank": "memorial",
+   "wikipedia": [
+    "Saint Dominic"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-09",
+   "title": "Saint Teresa Benedicta of the Cross, Virgin and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Edith Stein"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-10",
+   "title": "Saint Lawrence, Deacon and Martyr",
+   "rank": "feast",
+   "wikipedia": [
+    "Saint Lawrence"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-11",
+   "title": "Saint Clare, Virgin",
+   "rank": "memorial",
+   "wikipedia": [
+    "Clare of Assisi"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-12",
+   "title": "Saint Jane Frances de Chantal, Religious",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Jane Frances de Chantal"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-13",
+   "title": "Saints Pontian, Pope, and Hippolytus, Priest, Martyrs",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Pope Pontian",
+    "Hippolytus of Rome"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-14",
+   "title": "Saint Maximilian Kolbe, Priest and Martyr",
+   "rank": "memorial",
+   "wikipedia": [
+    "Maximilian Kolbe"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-15",
+   "title": "The Assumption of the Blessed Virgin Mary",
+   "rank": "solemnity",
+   "wikipedia": [
+    "Assumption of Mary"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-16",
+   "title": "Saint Stephen of Hungary",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Stephen I of Hungary"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-19",
+   "title": "Saint John Eudes, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "John Eudes"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-20",
+   "title": "Saint Bernard, Abbot and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Bernard of Clairvaux"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-21",
+   "title": "Saint Pius X, Pope",
+   "rank": "memorial",
+   "wikipedia": [
+    "Pope Pius X"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-22",
+   "title": "The Queenship of the Blessed Virgin Mary",
+   "rank": "memorial",
+   "wikipedia": [
+    "Queen of Heaven"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-23",
+   "title": "Saint Rose of Lima, Virgin",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Rose of Lima"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-24",
+   "title": "Saint Bartholomew, Apostle",
+   "rank": "feast",
+   "wikipedia": [
+    "Bartholomew the Apostle"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-25",
+   "title": "Saint Louis",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Louis IX of France"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-25",
+   "title": "Saint Joseph Calasanz, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Joseph Calasanz"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-27",
+   "title": "Saint Monica",
+   "rank": "memorial",
+   "wikipedia": [
+    "Saint Monica"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-28",
+   "title": "Saint Augustine of Hippo, Bishop and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Augustine of Hippo"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "08-29",
+   "title": "The Passion of Saint John the Baptist, Martyr",
+   "rank": "memorial",
+   "wikipedia": [
+    "Beheading of John the Baptist"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-03",
+   "title": "Saint Gregory the Great, Pope and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Pope Gregory I"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-05",
+   "title": "Saint Teresa of Calcutta, Virgin",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Mother Teresa"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-08",
+   "title": "The Nativity of the Blessed Virgin Mary",
+   "rank": "feast",
+   "wikipedia": [
+    "Nativity of Mary"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-09",
+   "title": "Saint Peter Claver, Priest",
+   "rank": "memorial",
+   "wikipedia": [
+    "Peter Claver"
+   ],
+   "calendar": "General Roman Calendar, as observed in the United States"
+  },
+  {
+   "date": "09-12",
+   "title": "The Most Holy Name of Mary",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Most Holy Name of the Blessed Virgin Mary"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-13",
+   "title": "Saint John Chrysostom, Bishop and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "John Chrysostom"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-14",
+   "title": "The Exaltation of the Holy Cross",
+   "rank": "feast",
+   "wikipedia": [
+    "Feast of the Cross"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-15",
+   "title": "Our Lady of Sorrows",
+   "rank": "memorial",
+   "wikipedia": [
+    "Our Lady of Sorrows"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-16",
+   "title": "Saints Cornelius, Pope, and Cyprian, Bishop, Martyrs",
+   "rank": "memorial",
+   "wikipedia": [
+    "Pope Cornelius",
+    "Cyprian"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-17",
+   "title": "Saint Robert Bellarmine, Bishop and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Robert Bellarmine"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-17",
+   "title": "Saint Hildegard of Bingen, Virgin and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Hildegard of Bingen"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-19",
+   "title": "Saint Januarius, Bishop and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Januarius"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-20",
+   "title": "Saints Andrew Kim Tae-gon, Priest, Paul Chong Ha-sang, and Companions, Martyrs",
+   "rank": "memorial",
+   "wikipedia": [
+    "Andrew Kim Taegon",
+    "Paul Chong Hasang",
+    "Korean Martyrs"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-21",
+   "title": "Saint Matthew, Apostle and Evangelist",
+   "rank": "feast",
+   "wikipedia": [
+    "Matthew the Apostle"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-23",
+   "title": "Saint Pius of Pietrelcina, Priest",
+   "rank": "memorial",
+   "wikipedia": [
+    "Padre Pio"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-26",
+   "title": "Saints Cosmas and Damian, Martyrs",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Saints Cosmas and Damian"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-27",
+   "title": "Saint Vincent de Paul, Priest",
+   "rank": "memorial",
+   "wikipedia": [
+    "Vincent de Paul"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-28",
+   "title": "Saint Wenceslaus, Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Wenceslas I, Duke of Bohemia"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-28",
+   "title": "Saint Lawrence Ruiz and Companions, Martyrs",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Lorenzo Ruiz"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-29",
+   "title": "Saints Michael, Gabriel and Raphael, Archangels",
+   "rank": "feast",
+   "wikipedia": [
+    "Michael (archangel)",
+    "Gabriel",
+    "Raphael (archangel)"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "09-30",
+   "title": "Saint Jerome, Priest and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Jerome"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-01",
+   "title": "Saint Thérèse of the Child Jesus, Virgin and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Thérèse of Lisieux"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-02",
+   "title": "The Holy Guardian Angels",
+   "rank": "memorial",
+   "wikipedia": [
+    "Memorial of the Holy Guardian Angels"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-04",
+   "title": "Saint Francis of Assisi",
+   "rank": "memorial",
+   "wikipedia": [
+    "Francis of Assisi"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-05",
+   "title": "Saint Faustina Kowalska, Virgin",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Faustina Kowalska"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-05",
+   "title": "Blessed Francis Xavier Seelos, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Francis Xavier Seelos"
+   ],
+   "calendar": "Proper Calendar for the Dioceses of the United States"
+  },
+  {
+   "date": "10-06",
+   "title": "Saint Bruno, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Bruno of Cologne"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-06",
+   "title": "Blessed Marie-Rose Durocher, Virgin",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Marie-Rose Durocher"
+   ],
+   "calendar": "Proper Calendar for the Dioceses of the United States"
+  },
+  {
+   "date": "10-07",
+   "title": "Our Lady of the Rosary",
+   "rank": "memorial",
+   "wikipedia": [
+    "Our Lady of the Rosary"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-09",
+   "title": "Saint Denis, Bishop, and Companions, Martyrs",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Saint Denis of Paris"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-09",
+   "title": "Saint John Leonardi, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "John Leonardi"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-09",
+   "title": "Saint John Henry Newman, Priest and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "John Henry Newman"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-11",
+   "title": "Saint John XXIII, Pope",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Pope John XXIII"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-14",
+   "title": "Saint Callistus I, Pope and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Pope Callistus I"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-15",
+   "title": "Saint Teresa of Jesus, Virgin and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Teresa of Ávila"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-16",
+   "title": "Saint Hedwig, Religious",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Hedwig of Silesia"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-16",
+   "title": "Saint Margaret Mary Alacoque, Virgin",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Margaret Mary Alacoque"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-17",
+   "title": "Saint Ignatius of Antioch, Bishop and Martyr",
+   "rank": "memorial",
+   "wikipedia": [
+    "Ignatius of Antioch"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-18",
+   "title": "Saint Luke, Evangelist",
+   "rank": "feast",
+   "wikipedia": [
+    "Luke the Evangelist"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-19",
+   "title": "Saints John de Brébeuf, Isaac Jogues, Priests, and Companions, Martyrs",
+   "rank": "memorial",
+   "wikipedia": [
+    "Jean de Brébeuf",
+    "Isaac Jogues",
+    "Canadian Martyrs"
+   ],
+   "calendar": "General Roman Calendar, as observed in the United States"
+  },
+  {
+   "date": "10-20",
+   "title": "Saint Paul of the Cross, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Paul of the Cross"
+   ],
+   "calendar": "General Roman Calendar, as observed in the United States"
+  },
+  {
+   "date": "10-22",
+   "title": "Saint John Paul II, Pope",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Pope John Paul II"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-23",
+   "title": "Saint John of Capistrano, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "John of Capistrano"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-24",
+   "title": "Saint Anthony Mary Claret, Bishop",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Anthony Mary Claret"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "10-28",
+   "title": "Saints Simon and Jude, Apostles",
+   "rank": "feast",
+   "wikipedia": [
+    "Simon the Zealot",
+    "Jude the Apostle"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-01",
+   "title": "All Saints",
+   "rank": "solemnity",
+   "wikipedia": [
+    "All Saints' Day"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-02",
+   "title": "The Commemoration of All the Faithful Departed",
+   "rank": "solemnity",
+   "wikipedia": [
+    "All Souls' Day"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-03",
+   "title": "Saint Martin de Porres, Religious",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Martin de Porres"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-04",
+   "title": "Saint Charles Borromeo, Bishop",
+   "rank": "memorial",
+   "wikipedia": [
+    "Charles Borromeo"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-09",
+   "title": "The Dedication of the Lateran Basilica",
+   "rank": "feast",
+   "wikipedia": [
+    "Dedication of the Lateran Basilica"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-10",
+   "title": "Saint Leo the Great, Pope and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Pope Leo I"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-11",
+   "title": "Saint Martin of Tours, Bishop",
+   "rank": "memorial",
+   "wikipedia": [
+    "Martin of Tours"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-12",
+   "title": "Saint Josaphat, Bishop and Martyr",
+   "rank": "memorial",
+   "wikipedia": [
+    "Josaphat Kuntsevych"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-13",
+   "title": "Saint Frances Xavier Cabrini, Virgin",
+   "rank": "memorial",
+   "wikipedia": [
+    "Frances Xavier Cabrini"
+   ],
+   "calendar": "Proper Calendar for the Dioceses of the United States"
+  },
+  {
+   "date": "11-15",
+   "title": "Saint Albert the Great, Bishop and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Albertus Magnus"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-16",
+   "title": "Saint Margaret of Scotland",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Saint Margaret of Scotland"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-16",
+   "title": "Saint Gertrude, Virgin",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Gertrude the Great"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-17",
+   "title": "Saint Elizabeth of Hungary, Religious",
+   "rank": "memorial",
+   "wikipedia": [
+    "Elizabeth of Hungary"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-18",
+   "title": "The Dedication of the Basilicas of Saints Peter and Paul, Apostles",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "St. Peter's Basilica",
+    "Basilica of Saint Paul Outside the Walls"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-18",
+   "title": "Saint Rose Philippine Duchesne, Virgin",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Rose Philippine Duchesne"
+   ],
+   "calendar": "Proper Calendar for the Dioceses of the United States"
+  },
+  {
+   "date": "11-21",
+   "title": "The Presentation of the Blessed Virgin Mary",
+   "rank": "memorial",
+   "wikipedia": [
+    "Presentation of Mary"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-22",
+   "title": "Saint Cecilia, Virgin and Martyr",
+   "rank": "memorial",
+   "wikipedia": [
+    "Saint Cecilia"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-23",
+   "title": "Saint Clement I, Pope and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Clement of Rome"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-23",
+   "title": "Saint Columban, Abbot",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Columbanus"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-23",
+   "title": "Blessed Miguel Agustín Pro, Priest and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Miguel Pro"
+   ],
+   "calendar": "Proper Calendar for the Dioceses of the United States"
+  },
+  {
+   "date": "11-24",
+   "title": "Saints Andrew Dung-Lac, Priest, and Companions, Martyrs",
+   "rank": "memorial",
+   "wikipedia": [
+    "Andrew Dũng-Lạc",
+    "Vietnamese Martyrs"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-25",
+   "title": "Saint Catherine of Alexandria, Virgin and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Catherine of Alexandria"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "11-30",
+   "title": "Saint Andrew, Apostle",
+   "rank": "feast",
+   "wikipedia": [
+    "Andrew the Apostle"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-03",
+   "title": "Saint Francis Xavier, Priest",
+   "rank": "memorial",
+   "wikipedia": [
+    "Francis Xavier"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-04",
+   "title": "Saint John Damascene, Priest and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "John of Damascus"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-06",
+   "title": "Saint Nicholas, Bishop",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Saint Nicholas"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-07",
+   "title": "Saint Ambrose, Bishop and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "Ambrose"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-08",
+   "title": "The Immaculate Conception of the Blessed Virgin Mary",
+   "rank": "solemnity",
+   "wikipedia": [
+    "Immaculate Conception"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-09",
+   "title": "Saint Juan Diego Cuauhtlatoatzin",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Juan Diego"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-10",
+   "title": "Our Lady of Loreto",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Basilica della Santa Casa"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-11",
+   "title": "Saint Damasus I, Pope",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Pope Damasus I"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-12",
+   "title": "Our Lady of Guadalupe",
+   "rank": "feast",
+   "wikipedia": [
+    "Our Lady of Guadalupe"
+   ],
+   "calendar": "General Roman Calendar, as observed in the United States"
+  },
+  {
+   "date": "12-13",
+   "title": "Saint Lucy, Virgin and Martyr",
+   "rank": "memorial",
+   "wikipedia": [
+    "Saint Lucy"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-14",
+   "title": "Saint John of the Cross, Priest and Doctor of the Church",
+   "rank": "memorial",
+   "wikipedia": [
+    "John of the Cross"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-21",
+   "title": "Saint Peter Canisius, Priest and Doctor of the Church",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Peter Canisius"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-23",
+   "title": "Saint John of Kanty, Priest",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "John Cantius"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-25",
+   "title": "Nativity of the Lord",
+   "rank": "solemnity",
+   "wikipedia": [
+    "Christmas"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-26",
+   "title": "Saint Stephen, the First Martyr",
+   "rank": "feast",
+   "wikipedia": [
+    "Saint Stephen"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-27",
+   "title": "Saint John, Apostle and Evangelist",
+   "rank": "feast",
+   "wikipedia": [
+    "John the Apostle"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-28",
+   "title": "The Holy Innocents, Martyrs",
+   "rank": "feast",
+   "wikipedia": [
+    "Massacre of the Innocents"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-29",
+   "title": "Saint Thomas Becket, Bishop and Martyr",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Thomas Becket"
+   ],
+   "calendar": "General Roman Calendar"
+  },
+  {
+   "date": "12-31",
+   "title": "Saint Sylvester I, Pope",
+   "rank": "optional memorial",
+   "wikipedia": [
+    "Pope Sylvester I"
+   ],
+   "calendar": "General Roman Calendar"
+  }
+ ]
+}

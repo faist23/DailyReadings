@@ -8,6 +8,12 @@
 
 import Foundation
 
+/// A celebration's description and the articles it comes from.
+public struct CelebrationText: Sendable {
+    public let summary: String
+    public let sources: [SaintSource]
+}
+
 /// Service for loading, indexing, and querying Catholic saints from the bundled `saints.json` database.
 /// Provides fast, synchronous, thread-safe lookups by date, feast day, ID, and keyword.
 public final class SaintsDatabase: Sendable {
@@ -20,15 +26,19 @@ public final class SaintsDatabase: Sendable {
     private let saintsByFeastDate: [String: [Saint]]
     /// Saints indexed by unique identifier.
     private let saintsById: [String: Saint]
+    /// Descriptions of the celebrations in `LiturgicalCelebrationBlurbs`, by id.
+    private let celebrations: [String: CelebrationText]
 
     /// Designated initializer. Loads saints from the specified bundle URL or bundled `saints.json`.
     /// Falls back to embedded prominent saints if the bundled file is missing.
     public init(customURL: URL? = nil) {
         var loadedSaints: [Saint] = []
-        
+        var loadedCelebrations: [String: CelebrationText] = [:]
+
         let url = customURL ?? Bundle.main.url(forResource: "saints", withExtension: "json")
         if let url, let data = try? Data(contentsOf: url) {
             loadedSaints = Self.parseSaintsJSON(from: data)
+            loadedCelebrations = Self.parseCelebrations(from: data)
         }
         
         if loadedSaints.isEmpty {
@@ -50,6 +60,7 @@ public final class SaintsDatabase: Sendable {
 
         self.saintsByFeastDate = byDate
         self.saintsById = byId
+        self.celebrations = loadedCelebrations
     }
 
     // MARK: - Query APIs
@@ -60,30 +71,48 @@ public final class SaintsDatabase: Sendable {
     /// or movable solemnity (e.g. Easter, Pentecost, Lateran Basilica, Christ the King),
     /// the celebration blurb takes precedence to explain the sacred mystery celebrated on that day.
     public func saint(for date: Date, liturgicalDay: LiturgicalDay? = nil) -> Saint? {
-        // 1. Check for dedicated Solemnity or Feast of the Lord blurb
+        // 1. A solemnity, feast of the Lord or movable celebration named by the liturgical day.
+        if let liturgicalDay, let feast = LiturgicalCelebrationBlurbs.feast(forTitle: liturgicalDay.title, date: date) {
+            return feast
+        }
+
+        // 2. The day's saints, calendar celebrations first. When the liturgical day names one of
+        //    them (an optional memorial chosen over the first), prefer it. Only this date's
+        //    saints are searched: a name match across the whole year found the wrong Peter or
+        //    John on another saint's day.
+        let key = Self.feastDateKey(from: date)
+        let daySaints = saintsByFeastDate[key] ?? []
         if let liturgicalDay {
-            if let feast = LiturgicalCelebrationBlurbs.feast(forTitle: liturgicalDay.title, date: date) {
-                return feast
-            }
-            
-            // Check if the liturgical celebration title specifically names a saint
-            let titleLower = liturgicalDay.title.lowercased()
-            if let match = allSaints.first(where: {
-                let nameLower = $0.name.lowercased()
-                return !nameLower.isEmpty && (titleLower.contains(nameLower) || nameLower.contains(titleLower))
+            let title = Self.matchKey(liturgicalDay.title)
+            if let named = daySaints.first(where: { saint in
+                let name = Self.matchKey(saint.name)
+                return name.count > 3 && title.contains(name)
             }) {
-                return match
+                return named
             }
         }
-        
-        // 2. Query by calendar date (MM-DD)
-        let key = Self.feastDateKey(from: date)
-        if let daySaints = saintsByFeastDate[key], let primary = daySaints.first {
+        if let primary = daySaints.first {
             return primary
         }
-        
+
         // 3. Guaranteed fallback to seed saints if date matches
         return Self.seedSaints.first { Self.normalizeFeastDate($0.feastDate) == key }
+    }
+
+    /// Lowercased letters only, without a leading "saint"/"saints"/"the", for matching a calendar
+    /// title against a saint's name.
+    static func matchKey(_ text: String) -> String {
+        var t = text.lowercased().folding(options: .diacriticInsensitive, locale: nil)
+        if let comma = t.firstIndex(of: ",") { t = String(t[..<comma]) }
+        for prefix in ["saints ", "saint ", "blessed ", "the "] where t.hasPrefix(prefix) {
+            t.removeFirst(prefix.count)
+        }
+        return t.filter(\.isLetter)
+    }
+
+    /// The Wikipedia description and sources for a celebration in `LiturgicalCelebrationBlurbs`.
+    public func celebration(id: String) -> CelebrationText? {
+        celebrations[id]
     }
 
     /// Legacy convenience query without liturgical day metadata.
@@ -140,7 +169,7 @@ public final class SaintsDatabase: Sendable {
 
         var results: [Saint] = []
         for (dateKey, val) in jsonObject {
-            guard dateKey != "index", let dayDict = val as? [String: Any] else { continue }
+            guard dateKey.count == 5, dateKey.dropFirst(2).first == "-", let dayDict = val as? [String: Any] else { continue }
             guard let saintsArray = dayDict["saints"] as? [[String: Any]] else { continue }
 
             for (idx, saintDict) in saintsArray.enumerated() {
@@ -158,7 +187,7 @@ public final class SaintsDatabase: Sendable {
                     .joined(separator: "_")
                 let id = "\(dateKey)_\(slug)_\(idx)"
 
-                results.append(Saint(
+                var saint = Saint(
                     id: id,
                     name: name,
                     feastDate: dateKey,
@@ -167,10 +196,43 @@ public final class SaintsDatabase: Sendable {
                     biography: summary,
                     patronages: patronage,
                     imageURL: image
-                ))
+                )
+                saint.born = saintDict["born"] as? String
+                saint.died = saintDict["died"] as? String
+                saint.birthplace = saintDict["birthplace"] as? String
+                saint.religiousOrder = saintDict["order"] as? String
+                saint.canonized = saintDict["canonized"] as? String
+                if let quote = saintDict["quote"] as? [String: Any],
+                   let text = quote["text"] as? String, let source = quote["source"] as? String {
+                    saint.quote = SaintQuote(text: text, source: source)
+                }
+                saint.sources = Self.parseSources(saintDict["sources"])
+                saint.rank = saintDict["rank"] as? String
+                saint.martyrologyDay = (saintDict["martyrology"] as? [String: Any])?["label"] as? String
+                results.append(saint)
             }
         }
         return results
+    }
+
+    private static func parseSources(_ value: Any?) -> [SaintSource] {
+        (value as? [[String: Any]] ?? []).compactMap { source in
+            guard let title = source["title"] as? String, let url = source["url"] as? String else { return nil }
+            return SaintSource(title: title, url: url)
+        }
+    }
+
+    /// Parses the `celebrations` section: Wikipedia descriptions for the feasts in
+    /// `LiturgicalCelebrationBlurbs`.
+    private static func parseCelebrations(from data: Data) -> [String: CelebrationText] {
+        guard let root = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let section = root["celebrations"] as? [String: [String: Any]] else { return [:] }
+        var result: [String: CelebrationText] = [:]
+        for (id, entry) in section {
+            guard let summary = entry["summary"] as? String, !summary.isEmpty else { continue }
+            result[id] = CelebrationText(summary: summary, sources: parseSources(entry["sources"]))
+        }
+        return result
     }
 
     /// Converts a Gregorian Date into "MM-DD" format.

@@ -1,0 +1,2003 @@
+{
+ "_about": "Days on which the 2004 Martyrologium Romanum (editio typica altera, https://archive.org/details/MartRom2004) lists saints, keyed by Wikipedia article. 'entry' is the saint's line in the book's index of names, as OCR'd (errors kept so it can be checked); Scripts/check_martyrology.py confirms every line is in the index and carries the date. The app shows saints on their celebrated day and adds this day on the card when it differs; it never moves a saint. Matched by name and death year, or looked up by Codex in the index and checked; each match was read before it was kept.",
+ "saints": {
+  "Adrian of Batanea": {
+   "name": "Adrian and Eubulus",
+   "entry": "Hadrianus, m. in Palestina, 5 mar., 5 (309)",
+   "date": "03-05",
+   "matched_by": "name and death year"
+  },
+  "Aelred of Rievaulx": {
+   "name": "Aelred",
+   "entry": "ZElredus, 12 1an., 6 (ca. 1166)",
+   "date": "01-12",
+   "matched_by": "found by hand in the index"
+  },
+  "Agapitus of Palestrina": {
+   "name": "Agapetus",
+   "entry": "Agapitus, m. Preeneste, 18 aug., 1 (s. inc.)",
+   "date": "08-18",
+   "matched_by": "found by hand in the index"
+  },
+  "Agnes of Montepulciano": {
+   "name": "Agnes of Monte Pulciano",
+   "entry": "Agnes, abbatissa in Monte Politiano, 20 apr., 12 (1317)",
+   "date": "04-20",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Agnes of Rome": {
+   "name": "Saint Agnes",
+   "entry": "Agnes, m. Rome, 21 1an., 1 (s. ILI/IV 1n.)",
+   "date": "01-21",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Albinus of Angers": {
+   "name": "Albinus",
+   "entry": "Albinus, 1 mar., 2 (ca. 550)",
+   "date": "03-01",
+   "matched_by": "name and death year"
+  },
+  "Alexius of Rome": {
+   "name": "Alexius of Rome",
+   "entry": "Alexius, homo Dei, 17 iul., 5 (s. IV)",
+   "date": "07-17",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Alphonsus Rodriguez": {
+   "name": "Alphonsus Rodriguez",
+   "entry": "Alphonsus Rodríguez, religiosus Soc. Ie- su, 31 oct., 9 (1617)",
+   "date": "10-31",
+   "matched_by": "name and death year"
+  },
+  "Andrew Avellino": {
+   "name": "Andrew Avellino",
+   "entry": "Andreas Avellino, 10 nov., 8 (1608)",
+   "date": "11-10",
+   "matched_by": "name and death year"
+  },
+  "Andrew Bobola": {
+   "name": "Andrew Bobola",
+   "entry": "Andreas Bobola, 16 maii, 15 (1657)",
+   "date": "05-16",
+   "matched_by": "name and death year"
+  },
+  "Andrew Corsini": {
+   "name": "Andrew Corsini",
+   "entry": "Andreas Corsini, 6 1an., 7 (1373)",
+   "date": "01-06",
+   "matched_by": "name and death year"
+  },
+  "Andrew the Apostle": {
+   "name": "Saint Andrew",
+   "entry": "Andreas, Apostolus, 30 nov., 1",
+   "date": "11-30",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Andronicus, Probus, and Tarachus": {
+   "name": "Tarachus",
+   "entry": "'lharacus, Probus et Andronicus, 11 oct., 2 (ca. 304)",
+   "date": "10-11",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Angela of Foligno": {
+   "name": "Angela of Foligno",
+   "entry": "Angela de Fulginio*, 4 ian., 8 (1309)",
+   "date": "01-04",
+   "matched_by": "name and death year"
+  },
+  "Anna Maria Taigi": {
+   "name": "Anna Maria Taigi",
+   "entry": "Anna Maria Taigi*, 9 iun., 11 (1837)",
+   "date": "06-09",
+   "matched_by": "name and death year"
+  },
+  "Antoninus of Florence": {
+   "name": "Antoninus",
+   "entry": "Antoninus, ep. Florentin, 2 mai, 8 (1459)",
+   "date": "05-02",
+   "matched_by": "name and death year"
+  },
+  "Apollinaris Claudius": {
+   "name": "Apollinaris",
+   "entry": "Apollinaris, ». Hizerapoli, 8 ian., 1 (s. II)",
+   "date": "01-08",
+   "matched_by": "Codex lookup (low), checked against the index"
+  },
+  "Apollonius the Apologist": {
+   "name": "Apollonius",
+   "entry": "Apollonius, *A:losophus, 21 apr., 2 (185)",
+   "date": "04-21",
+   "matched_by": "name and death year"
+  },
+  "Arcadius of Mauretania": {
+   "name": "Arcadius",
+   "entry": "Arcadius, m. in Mauretania, 12 1an., 1 (ca. 304)",
+   "date": "01-12",
+   "matched_by": "name and death year"
+  },
+  "Audomar": {
+   "name": "Omer",
+   "entry": "Audomarus, 1 nov., 12 (ca. 670)",
+   "date": "11-01",
+   "matched_by": "name and death year"
+  },
+  "Augustine of Canterbury": {
+   "name": "Saint Augustine of Canterbury",
+   "entry": "Augustinus, ep. Cantuarien., memoria: 27 maii, 1; depositio: 26 maii, 6 (604/",
+   "date": "05-27",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Balthild of Chelles": {
+   "name": "Bathilde",
+   "entry": "Bathildis, 30 ian., 4 (680)",
+   "date": "01-30",
+   "matched_by": "name and death year"
+  },
+  "Barbatus of Benevento": {
+   "name": "Barbatus",
+   "entry": "Barbatus, 19 feb., 4 (682)",
+   "date": "02-19",
+   "matched_by": "name and death year"
+  },
+  "Barnabas": {
+   "name": "Saint Barnabas",
+   "entry": "Barnabas, Apostolus, 11 1un., 1",
+   "date": "06-11",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Bartholomew the Apostle": {
+   "name": "Saint Bartholomew",
+   "entry": "Bartholomzeus, Apostolus, 24 aug., 1",
+   "date": "08-24",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Bede": {
+   "name": "Saint Bede the Venerable",
+   "entry": "Beda Venerabilis, presb. et doctor Eccl., 25 man, 1 (735)",
+   "date": "05-25",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Beheading of John the Baptist": {
+   "name": "The Passion of Saint John the Baptist",
+   "entry": "Ioannes Baptista, nativitas: 24 iun., 1; passio: 29 aug., 1",
+   "date": "08-29",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Benedict Biscop": {
+   "name": "Benedict Biscop",
+   "entry": "Benedictus Biscop, 12 ian., 5 (ca. 690)",
+   "date": "01-12",
+   "matched_by": "name and death year"
+  },
+  "Benedict Joseph Labre": {
+   "name": "Benedict Joseph Labre",
+   "entry": "Benedictus Iosephus Labre, 16 apr., 11 (1783)",
+   "date": "04-16",
+   "matched_by": "name and death year"
+  },
+  "Benedict of Aniane": {
+   "name": "Benedict of Anian",
+   "entry": "Benedictus, abbas Anianen., 12 feb., 3 (821)",
+   "date": "02-12",
+   "matched_by": "name and death year"
+  },
+  "Benedict the Moor": {
+   "name": "Benedict of Palermo",
+   "entry": "Benedictus Massarari, 4 apr., 7 (1589)",
+   "date": "04-04",
+   "matched_by": "name and death year"
+  },
+  "Benjamin the Deacon and Martyr": {
+   "name": "Benjamin",
+   "entry": "Beniamin, m. zn Perside, 31 mar., 1 (ca. 420)",
+   "date": "03-31",
+   "matched_by": "name and death year"
+  },
+  "Bernadette Soubirous": {
+   "name": "Bernadette Soubirous",
+   "entry": "Soubirous, Maria Bernatda, 16 apr., 13 (1879)",
+   "date": "04-16",
+   "matched_by": "name and death year"
+  },
+  "Bertha of Artois": {
+   "name": "Bertha",
+   "entry": "Bertha, 4 iul., 6 (ca. 725)",
+   "date": "07-04",
+   "matched_by": "name and death year"
+  },
+  "Berthild of Chelles": {
+   "name": "Bertilla",
+   "entry": "Bertilla, 5 nov., 6 (ca. 705)",
+   "date": "11-05",
+   "matched_by": "name and death year"
+  },
+  "Bibiana of Rome": {
+   "name": "Bibiana",
+   "entry": "Bibiana, m. Rom«e, 2 dec., 2 (s. inc.)",
+   "date": "12-02",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Brendan the Navigator": {
+   "name": "Brendan",
+   "entry": "Brendanus, 16 maii, 7 (577/583)",
+   "date": "05-16",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Brigid of Kildare": {
+   "name": "Brigid of Ireland",
+   "entry": "Brigida, 1 feb., 4 (ca. 525)",
+   "date": "02-01",
+   "matched_by": "name and death year"
+  },
+  "Bruno of Cologne": {
+   "name": "Saint Bruno",
+   "entry": "Bruno, eremita, 6 oct., 1 ( 1101)",
+   "date": "10-06",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Camillus de Lellis": {
+   "name": "Camillus de Lellis",
+   "entry": "Camillus de Lellis, 14 iul., 1 (1614)",
+   "date": "07-14",
+   "matched_by": "name and death year (calendar saint)"
+  },
+  "Canute IV of Denmark": {
+   "name": "Canute IV",
+   "entry": "Canutus, m. in Dania, 10 iul., 11 (1086)",
+   "date": "07-10",
+   "matched_by": "name and death year"
+  },
+  "Catherine Labouré": {
+   "name": "Catherine Labouré",
+   "entry": "Catharina Labouré, 31 dec., 10 (1876)",
+   "date": "12-31",
+   "matched_by": "name and death year"
+  },
+  "Catherine de' Ricci": {
+   "name": "Catherine of Ricci",
+   "entry": "Catharina de' Ricci, 2 feb., 7 (1590)",
+   "date": "02-02",
+   "matched_by": "name and death year"
+  },
+  "Catherine of Genoa": {
+   "name": "Catherine of Genoa",
+   "entry": "Catharina Fieschi*, 15 sept., 11 (1510)",
+   "date": "09-15",
+   "matched_by": "name and death year"
+  },
+  "Catherine of St. Augustine": {
+   "name": "Catherine of St. Augustine",
+   "entry": "Maria Catharina a Sancto Augustino (Catharina) Symon de Longprey', 8 . maii, 15 (1668)",
+   "date": "05-08",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Catherine of Vadstena": {
+   "name": "Catherine of Sweden",
+   "entry": "Catharina de Suecia, 24 mar., 6 (1381)",
+   "date": "03-24",
+   "matched_by": "name and death year"
+  },
+  "Christina of Bolsena": {
+   "name": "Christina",
+   "entry": "Christina, virgo et m., 24 1ul., 2 (s. inc.)",
+   "date": "07-24",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Chrysanthus and Daria": {
+   "name": "Chrysanthus",
+   "entry": "Chrysanthus et Daria, 25 oct., 1 (ca. 253)",
+   "date": "10-25",
+   "matched_by": "name and death year"
+  },
+  "Clare of Montefalco": {
+   "name": "Clare of Montefalco",
+   "entry": "Clara a Cruce, 17 aug., 8 (1308)",
+   "date": "08-17",
+   "matched_by": "name and death year"
+  },
+  "Claudius of Besançon": {
+   "name": "Claude",
+   "entry": "Claudius, ep. Condatiscen. et abbas, 6 iun., 7 (ca. 703)",
+   "date": "06-06",
+   "matched_by": "name and death year"
+  },
+  "Clement Mary Hofbauer": {
+   "name": "Clement Mary Hofbauer",
+   "entry": "Clemens Maria Hofbauer, 15 mar., 7 (1820)",
+   "date": "03-15",
+   "matched_by": "name and death year"
+  },
+  "Clement of Rome": {
+   "name": "Saint Clement I",
+   "entry": "Clemens Pp, 23 nov., 1 (s. I ex.)",
+   "date": "11-23",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Clodoald": {
+   "name": "Cloud",
+   "entry": "Clodoaldus, 7 sept., 8 (560)",
+   "date": "09-07",
+   "matched_by": "name and death year"
+  },
+  "Clotilde": {
+   "name": "Clotilda",
+   "entry": "Clotildis, 3 iun., 4 (545)",
+   "date": "06-03",
+   "matched_by": "name and death year"
+  },
+  "Colette of Corbie": {
+   "name": "Colette",
+   "entry": "Coleta Boylet, 6 mar., 11 (1447)",
+   "date": "03-06",
+   "matched_by": "name and death year"
+  },
+  "Columba": {
+   "name": "Columba",
+   "entry": "Columba seu Colum Cille, 9 iun., 6 (ca. 597)",
+   "date": "06-09",
+   "matched_by": "name and death year"
+  },
+  "Conrad of Piacenza": {
+   "name": "Conrad of Piacenza",
+   "entry": "Conradus de Placentia Confalonieri*, 19 feb., 8 (1351)",
+   "date": "02-19",
+   "matched_by": "name and death year"
+  },
+  "Crispin and Crispinian": {
+   "name": "Crispin and Crispinian",
+   "entry": "Crispinus et Crispinianus, 25 oct., 2 (ca. s. III)",
+   "date": "10-25",
+   "matched_by": "name and death year"
+  },
+  "Cunigunde of Luxembourg": {
+   "name": "Cunegundes",
+   "entry": "Cunegundis, Zmperatrix, 3 mar., 8 (1033/ 1039)",
+   "date": "03-03",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Cyricus and Julitta": {
+   "name": "Julitta",
+   "entry": "Quiricus et Iulitta, 16 1iun., 1 (s. inc.)",
+   "date": "06-16",
+   "matched_by": "name and death year"
+  },
+  "Didacus of Alcalá": {
+   "name": "Didacus",
+   "entry": "Didacus, religiosus Ord. Minorum, 12 nov., 10 (1463)",
+   "date": "11-12",
+   "matched_by": "name and death year"
+  },
+  "Dionysius the Areopagite": {
+   "name": "Dionysius the Areopagite",
+   "entry": "Dionysius Areopagita, 3 oct., 1 (s. I)",
+   "date": "10-03",
+   "matched_by": "name and death year"
+  },
+  "Dominic Savio": {
+   "name": "Dominic Savio",
+   "entry": "Dominicus Savio, 9 mar., 7 (1857)",
+   "date": "03-09",
+   "matched_by": "name and death year"
+  },
+  "Dominic of Silos": {
+   "name": "Dominic of Silos",
+   "entry": "Dominicus, abbas Exilien., 20 dec., 5 (1073)",
+   "date": "12-20",
+   "matched_by": "name and death year"
+  },
+  "Donatian and Rogatian": {
+   "name": "Donatian and Rogatian",
+   "entry": "Donatianus et Rogatianus, 24. maii, 5 (ca. 304)",
+   "date": "05-24",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Dorothea of Caesarea": {
+   "name": "Dorothy",
+   "entry": "Dorothea et 'T'heophilus, 6 feb., 4 (ca. s. IV)",
+   "date": "02-06",
+   "matched_by": "found by hand in the index"
+  },
+  "Edmund of Abingdon": {
+   "name": "Edmund of Abingdon",
+   "entry": "Rich, Edmundus, 16 nov., 8 (1240)",
+   "date": "11-16",
+   "matched_by": "name and death year"
+  },
+  "Edward the Confessor": {
+   "name": "Edward the Confessor",
+   "entry": "Eduardus Confessor, 5 ian., 5 (1066)",
+   "date": "01-05",
+   "matched_by": "name and death year"
+  },
+  "Elizabeth of Portugal": {
+   "name": "Elizabeth of Portugal",
+   "entry": "Elisabeth de Lusitania, 4 1ul., 1 (1336)",
+   "date": "07-04",
+   "matched_by": "name and death year (calendar saint)"
+  },
+  "Emily de Vialar": {
+   "name": "Emily de Vialar",
+   "entry": "Vialar, /Emilia de, 24 aug., 8 (1856)",
+   "date": "08-24",
+   "matched_by": "name and death year"
+  },
+  "Engratia": {
+   "name": "Engratia and her Companions",
+   "entry": "Engratia, 16 apr., 3 (s. IV)",
+   "date": "04-16",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Epiphanius of Salamis": {
+   "name": "Epiphanius",
+   "entry": "Epiphanius, ep. Salamnen., 12 maii, 4 (403)",
+   "date": "05-12",
+   "matched_by": "name and death year"
+  },
+  "Eucherius of Orléans": {
+   "name": "Eucherius",
+   "entry": "Eucherius, ep. Aurelianen., 20 feb., 5 (ca. 738)",
+   "date": "02-20",
+   "matched_by": "name and death year"
+  },
+  "Eugenius of Carthage": {
+   "name": "Eugenius",
+   "entry": "Eugenius, ep. Carthaginen., 13 iul, 7 (501)",
+   "date": "07-13",
+   "matched_by": "name and death year"
+  },
+  "Eulalia of Mérida": {
+   "name": "Eulalia",
+   "entry": "Eulalia, 10 dec., 1 (304)",
+   "date": "12-10",
+   "matched_by": "name and death year"
+  },
+  "Eulogius of Alexandria": {
+   "name": "Eulogius of Alexandria",
+   "entry": "Eulogius, ep. Alexandrin., 13 1un., 6 (ca. 607)",
+   "date": "06-13",
+   "matched_by": "name and death year"
+  },
+  "Eulogius of Córdoba": {
+   "name": "Eulogius of Cordoba",
+   "entry": "Eulogius, m. Cordube, 11 mar., 8 (859)",
+   "date": "03-11",
+   "matched_by": "name and death year"
+  },
+  "Euphrasia of Constantinople": {
+   "name": "Euphrasia",
+   "entry": "Euphrasia, virgo in Thebaide, 24 iul., 5 (s. V)",
+   "date": "07-24",
+   "matched_by": "found by hand in the index"
+  },
+  "Father Damien": {
+   "name": "Father Damien",
+   "entry": "Damianus de Veuster*, 15 apr., 8 (1889)",
+   "date": "04-15",
+   "matched_by": "name and death year (calendar saint)"
+  },
+  "Faustina Kowalska": {
+   "name": "Saint Faustina Kowalska",
+   "entry": "Kowalska, Maria Faustina (Helena), 5 oct., 19 (1938)",
+   "date": "10-05",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Faustinus and Jovita": {
+   "name": "Faustinus and Jovita",
+   "entry": "Faustinus et Iovita, 15 feb., 2 (s. inc.)",
+   "date": "02-15",
+   "matched_by": "name and death year"
+  },
+  "Felicitas of Rome": {
+   "name": "Felicity",
+   "entry": "Felicitas, m. Rome, 23 nov., 3 (s. inc.)",
+   "date": "11-23",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Felix of Cantalice": {
+   "name": "Felix of Cantalice",
+   "entry": "Felix de Cantalicio, 18 maii, 9 (1587)",
+   "date": "05-18",
+   "matched_by": "name and death year"
+  },
+  "Felix of Nola": {
+   "name": "Felix of Nola",
+   "entry": "Felix, presb. Nolan., 14 ian., 3 (s. III/IV)",
+   "date": "01-14",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Felix of Valois": {
+   "name": "Felix of Valois",
+   "entry": "Felix de Valois, 4 nov., 10 (s. XIII)",
+   "date": "11-04",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Fermin": {
+   "name": "Firmin",
+   "entry": "Firminus, ep. A4mbianen., 25 sept., 2 (s.",
+   "date": "09-25",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Finbar of Cork": {
+   "name": "Finbarr",
+   "entry": "Finbarrus, 25 sept., 6 (s. VI)",
+   "date": "09-25",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Finnian of Clonard": {
+   "name": "Finnian",
+   "entry": "Finnianus, 12 dec., 4 (549)",
+   "date": "12-12",
+   "matched_by": "name and death year"
+  },
+  "Flavian of Constantinople": {
+   "name": "Flavian",
+   "entry": "Flavianus, ep. Cpolitan., 17 feb., 6 (449)",
+   "date": "02-17",
+   "matched_by": "name and death year"
+  },
+  "Forty Martyrs of Sebaste": {
+   "name": "Forty Martyrs of Sebaste",
+   "entry": "in Armenia XL cappadoces, 9 mar., 2 (320)",
+   "date": "03-09",
+   "matched_by": "found by hand in the index"
+  },
+  "Frances Xavier Cabrini": {
+   "name": "Frances Xavier Cabrini",
+   "entry": "Francisca Xaveria Cabrini, 22 dec., 7 (1917)",
+   "date": "12-22",
+   "matched_by": "name and death year (calendar saint)"
+  },
+  "Frances of Rome": {
+   "name": "Saint Frances of Rome",
+   "entry": "Francisca, religiosa romana, 9 mar., 1",
+   "date": "03-09",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Francis Borgia": {
+   "name": "Francis Borgia",
+   "entry": "Franciscus de Borja, 30 sept., 11 (1572)",
+   "date": "09-30",
+   "matched_by": "name and death year"
+  },
+  "Francis Caracciolo": {
+   "name": "Francis Caracciolo",
+   "entry": "Franciscus Caracciolo, 4 iun., 8 (1608)",
+   "date": "06-04",
+   "matched_by": "name and death year"
+  },
+  "Francis Regis Clet": {
+   "name": "Francis Regis Clet",
+   "entry": "Franciscus Régis Clet, memoria: 9 1ul., 1 n.; passio: 18 feb., 9 (1820)",
+   "date": "02-18",
+   "matched_by": "name and death year"
+  },
+  "Francis Solanus": {
+   "name": "Francis Solano",
+   "entry": "Franciscus Solano, 14 iul., 9 (1610)",
+   "date": "07-14",
+   "matched_by": "name and death year"
+  },
+  "Francis Xavier Seelos": {
+   "name": "Francis Xavier Seelos",
+   "entry": "Franciscus Xaverius Seelos', 4 oct., 5 (1867)",
+   "date": "10-04",
+   "matched_by": "name and death year (calendar saint)"
+  },
+  "Francis of Paola": {
+   "name": "Saint Francis of Paola",
+   "entry": "Franciscus de Paula, 2 apr., 1 (1507)",
+   "date": "04-02",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "François de Laval": {
+   "name": "François de Laval",
+   "entry": "Franciscus de Montmorency-Laval*, 6 maii, 9 (1708)",
+   "date": "05-06",
+   "matched_by": "name and death year"
+  },
+  "Frumentius": {
+   "name": "Frumentius",
+   "entry": "Frumentius, ep. in Ethiopia, 20 iul., ? (s. IV)",
+   "date": "07-20",
+   "matched_by": "found by hand in the index (Codex's quote was inexact)"
+  },
+  "Frédéric Janssoone": {
+   "name": "Frederick Janssoone",
+   "entry": "Fridericus Janssoone^*, 4 aug., 11 (1916)",
+   "date": "08-04",
+   "matched_by": "name and death year"
+  },
+  "Fulgentius of Ruspe": {
+   "name": "Fulgentius",
+   "entry": "Fulgentius, ep. Ruspen., 1 ian., 6 (533)",
+   "date": "01-01",
+   "matched_by": "name and death year"
+  },
+  "Gabriel of Our Lady of Sorrows": {
+   "name": "Gabriel of Our Lady of Sorrows",
+   "entry": "Possenti, 27 feb., 11 (1862)",
+   "date": "02-27",
+   "matched_by": "name and death year"
+  },
+  "Gal I (bishop of Clermont)": {
+   "name": "Gal",
+   "entry": "Gallus, ep. Claromontan., 14 mai, 9 (551)",
+   "date": "05-14",
+   "matched_by": "name and death year"
+  },
+  "Gatianus of Tours": {
+   "name": "Gatian",
+   "entry": "Gatianus, 18 dec., 3 (s. III)",
+   "date": "12-18",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Gemma Galgani": {
+   "name": "Gemma Galgani",
+   "entry": "Gemma Galgani, 11 apr., 11 (1905)",
+   "date": "04-11",
+   "matched_by": "name and death year"
+  },
+  "Genevieve": {
+   "name": "Genevieve",
+   "entry": "Genovefa, virgo in Gallia, 3 1an., 8 (ca. 500)",
+   "date": "01-03",
+   "matched_by": "name and death year"
+  },
+  "Gerard Majella": {
+   "name": "Gerard Majella",
+   "entry": "Gerardus Majella, 16 oct., 16 (1755)",
+   "date": "10-16",
+   "matched_by": "name and death year"
+  },
+  "Germain of Paris": {
+   "name": "Germanus of Paris",
+   "entry": "Germanus, ep. Parisien., 28 maii, 4 (576)",
+   "date": "05-28",
+   "matched_by": "name and death year"
+  },
+  "Germanus of Auxerre": {
+   "name": "Germanus of Auxerre",
+   "entry": "Germanus, ep. Autissiodoren., 31 iul., 6 (448)",
+   "date": "07-31",
+   "matched_by": "name and death year"
+  },
+  "Giuseppe Benedetto Cottolengo": {
+   "name": "Joseph Benedict Cottolengo",
+   "entry": "Cottolengo, losephus .Benedictus, 30 apr., 19 (1842)",
+   "date": "04-30",
+   "matched_by": "name and death year"
+  },
+  "Goar of Aquitaine": {
+   "name": "Goar",
+   "entry": "Goar, 6 iul., 7 (s. VI)",
+   "date": "07-06",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Godfrey of Amiens": {
+   "name": "Godfrey",
+   "entry": "Godefridus, ep. Ambianen., 8 nov., 5 (1115)",
+   "date": "11-08",
+   "matched_by": "name and death year"
+  },
+  "Gregory Thaumaturgus": {
+   "name": "Gregory Thaumaturge",
+   "entry": "Gregorius, ep. Neocesarien. in Ponto, 17 nov., 2 (ca. 270)",
+   "date": "11-17",
+   "matched_by": "name and death year"
+  },
+  "Gregory of Langres": {
+   "name": "Gregory of Langres",
+   "entry": "Gregorius, ep. Lingonen., 4 ian., 3 (539/ 540)",
+   "date": "01-04",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Guntram": {
+   "name": "Gontran",
+   "entry": "Gunthramnus, 28 mar., 5 (593)",
+   "date": "03-28",
+   "matched_by": "found by hand in the index"
+  },
+  "Guy of Anderlecht": {
+   "name": "Guy of Anderlecht",
+   "entry": "Guido, peregrinus, 12 sept., 5 (ca. 1012)",
+   "date": "09-12",
+   "matched_by": "name and death year"
+  },
+  "Gérard of Brogne": {
+   "name": "Gerard",
+   "entry": "Gerardus, abbas, 3 oct., 9 (959)",
+   "date": "10-03",
+   "matched_by": "name and death year"
+  },
+  "Hegesippus (chronicler)": {
+   "name": "Hegesippus",
+   "entry": "Hegesippus, 7 apr., 2 (ca. 180)",
+   "date": "04-07",
+   "matched_by": "name and death year"
+  },
+  "Helena, mother of Constantine I": {
+   "name": "Helen",
+   "entry": "Helena, mater Constantini 1mpevatoris, 18 aug., 4 (ca. 329)",
+   "date": "08-18",
+   "matched_by": "name and death year"
+  },
+  "Heliodorus of Altino": {
+   "name": "Heliodorus",
+   "entry": "Heliodorus, 3 iul., 5 (s. IV ex. - V in.)",
+   "date": "07-03",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Henry Suso": {
+   "name": "Henry Suzo",
+   "entry": "Henricus Suso*, 25 ian., 10 (1366)",
+   "date": "01-25",
+   "matched_by": "name and death year"
+  },
+  "Hermann Joseph von Steinfeld": {
+   "name": "Herman Joseph of Steinfeld",
+   "entry": "Hermannus losephus, 7 apr., 9 (1241/ 1252)",
+   "date": "04-07",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Hermenegild": {
+   "name": "Hermenegild",
+   "entry": "Hermenegildus, 13 apr., 4 (586)",
+   "date": "04-13",
+   "matched_by": "name and death year"
+  },
+  "Hilarion": {
+   "name": "Hilarion",
+   "entry": "Hilarion, abbas in Cypro, 21 oct., 3 (ca. 371)",
+   "date": "10-21",
+   "matched_by": "name and death year"
+  },
+  "Honoratus": {
+   "name": "Honoratus",
+   "entry": "Honoratus, ep. Arelaten., 16 ian., 4 (429)",
+   "date": "01-16",
+   "matched_by": "name and death year"
+  },
+  "Hospitius": {
+   "name": "Hospitius",
+   "entry": "Hospicius, 21 maii, 6 (ca. 581)",
+   "date": "05-21",
+   "matched_by": "name and death year"
+  },
+  "Hubert of Liège": {
+   "name": "Hubert",
+   "entry": "Hubertus, 30 man, 5 (727)",
+   "date": "05-30",
+   "matched_by": "found by hand in the index (Codex's quote was inexact)"
+  },
+  "Hugh of Cluny": {
+   "name": "Hugh of Cluny",
+   "entry": "Hugo, abbas Cluniacen., 29 apr., 5 (1109)",
+   "date": "04-29",
+   "matched_by": "name and death year"
+  },
+  "Hyacinth of Poland": {
+   "name": "Hyacinth",
+   "entry": "Hyacinthus, presb. Ord. Predicat., 15 aug., 8 (1257)",
+   "date": "08-15",
+   "matched_by": "name and death year"
+  },
+  "Hyacintha Mariscotti": {
+   "name": "Hyacintha of Mariscotti",
+   "entry": "Hyacintha de Mariscottis, 30 1ian., 10 (1640)",
+   "date": "01-30",
+   "matched_by": "name and death year"
+  },
+  "Ildefonsus": {
+   "name": "Ildephonsus",
+   "entry": "Hildephonsus, ep. Toletan., 23 ian., 5 (667)",
+   "date": "01-23",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Imelda Lambertini": {
+   "name": "Imelda",
+   "entry": "Imelda Lambertini*, 12 maii, 10 (1333)",
+   "date": "05-12",
+   "matched_by": "name and death year"
+  },
+  "Ivo of Kermartin": {
+   "name": "Yves",
+   "entry": "Ivo, presb., 19 maii, 7 (1303)",
+   "date": "05-19",
+   "matched_by": "name and death year"
+  },
+  "Jacob of Nisibis": {
+   "name": "James of Nisibis",
+   "entry": "Iacobus, ep. N?siben., 15 iul., 7 (338)",
+   "date": "07-15",
+   "matched_by": "name and death year"
+  },
+  "James of the Marches": {
+   "name": "James of the March of Ancona",
+   "entry": "Iacobus de Marchia, 28 nov., 5 (1476)",
+   "date": "11-28",
+   "matched_by": "name and death year"
+  },
+  "James the Great": {
+   "name": "Saint James",
+   "entry": "Iacobus, Apostolus, filius Zebedei, 25 iul., 1 (43/44)",
+   "date": "07-25",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Jeanne-Antide Thouret": {
+   "name": "Joan Antide Thouret",
+   "entry": "Ioanna Antida Thouret, 24 aug., 7 (1826)",
+   "date": "08-24",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Joan of Arc": {
+   "name": "Joan of Arc",
+   "entry": "Arc, Ioanna d', 30 maii, 7 (1431)",
+   "date": "05-30",
+   "matched_by": "name and death year"
+  },
+  "Joan of France, Duchess of Berry": {
+   "name": "Jane of Valois",
+   "entry": "Ioanna de Valois, 4 feb., 10 (1505)",
+   "date": "02-04",
+   "matched_by": "name and death year"
+  },
+  "John Berchmans": {
+   "name": "John Berchmans",
+   "entry": "Berchmans, Ioannes, 13 aug., 10 (1621)",
+   "date": "08-13",
+   "matched_by": "name and death year"
+  },
+  "John Climacus": {
+   "name": "John Climacus",
+   "entry": "Ioannes Climacus, 30 mar., 5 (649)",
+   "date": "03-30",
+   "matched_by": "name and death year"
+  },
+  "John Francis Regis": {
+   "name": "John Francis Regis",
+   "entry": "Ioannes Franciscus Régis, 31 dec., 8 (1640)",
+   "date": "12-31",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "John Gabriel Perboyre": {
+   "name": "John Gabriel Perboyre",
+   "entry": "Perboyre, Ioannes Gabriel, 11 sept., 13 (1840)",
+   "date": "09-11",
+   "matched_by": "name and death year"
+  },
+  "John Gualbert": {
+   "name": "John Gualbert",
+   "entry": "Gualbertus, Ioannes, 12 iul., 6 (1073)",
+   "date": "07-12",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "John Joseph of the Cross": {
+   "name": "John Joseph of the Cross",
+   "entry": "Calosirto, 5 mar., 11 (1734)",
+   "date": "03-05",
+   "matched_by": "name and death year"
+  },
+  "John and Paul": {
+   "name": "John and Paul",
+   "entry": "Ioannes et Paulus, titulares basilicee in Urbe, 26 iun., 1 (s. IV)",
+   "date": "06-26",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "John of Matha": {
+   "name": "John of Matha",
+   "entry": "Ioannes de Matha, 17 dec., 8 (1213)",
+   "date": "12-17",
+   "matched_by": "name and death year"
+  },
+  "John of Nepomuk": {
+   "name": "John Nepomucene",
+   "entry": "loannes Nepomucenus, m. Prage, 20 mar., 10 (1393)",
+   "date": "03-20",
+   "matched_by": "found by hand in the index"
+  },
+  "John of Sahagún": {
+   "name": "John of Sahagun",
+   "entry": "Ioannes a Sancto Facundo, 11 iun., 9 (1479)",
+   "date": "06-11",
+   "matched_by": "found by hand in the index"
+  },
+  "John the Apostle": {
+   "name": "Saint John",
+   "entry": "Ioannes, Apostolus, 27 dec., 1",
+   "date": "12-27",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "John the Baptist": {
+   "name": "The Beheading of Saint John the Baptist",
+   "entry": "Ioannes Baptista, nativitas: 24 iun., 1; passio: 29 aug., 1",
+   "date": "08-29",
+   "matched_by": "name and death year"
+  },
+  "John the Merciful": {
+   "name": "John the Almsgiver",
+   "entry": "Ioannes Eleemosynarius, 11 nov., 5 (620)",
+   "date": "11-11",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "John the Silent": {
+   "name": "John the Silent",
+   "entry": "Ioannes Silentiarius seu Hesychasta, 7 dec., 5 (558)",
+   "date": "12-07",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Joseph of Cupertino": {
+   "name": "Joseph of Cupertino",
+   "entry": "Cupertino, 18 sept. 9 Iosephus Imbert*, 9 iun., 10 (1794)",
+   "date": "09-18",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Julia of Corsica": {
+   "name": "Julia",
+   "entry": "Iulia, virgo et m. tn Corsica, 22 maii, 4 (s. inc.)",
+   "date": "05-22",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Julian and Basilissa": {
+   "name": "Julian and Basilissa",
+   "entry": "Iuhanus et Basilissa, 6 1an., 2 (s. IV)",
+   "date": "01-06",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Juliana Falconieri": {
+   "name": "Juliana Falconieri",
+   "entry": "Iuliana Falconieri, 19 1un., 7 (ca. 1341)",
+   "date": "06-19",
+   "matched_by": "name and death year"
+  },
+  "Juliana of Liège": {
+   "name": "Juliana of Mt. Cornillon",
+   "entry": "Iuliana, virgo in Brabantia, 5 apr., 8 (1258)",
+   "date": "04-05",
+   "matched_by": "name and death year"
+  },
+  "Junípero Serra": {
+   "name": "Junípero Serra",
+   "entry": "Serra*, 28 aug., 13 (1784)",
+   "date": "08-28",
+   "matched_by": "name and death year (calendar saint)"
+  },
+  "Kateri Tekakwitha": {
+   "name": "Kateri Tekakwitha",
+   "entry": "Catharina 'lekakwitha*, 17 apr., 15",
+   "date": "04-17",
+   "matched_by": "name and death year (calendar saint)"
+  },
+  "Ladislaus I of Hungary": {
+   "name": "Ladislas I",
+   "entry": "Ladislaus, rex Hungarie, 30 iun. 7 (1095)",
+   "date": "06-30",
+   "matched_by": "name and death year"
+  },
+  "Lambert of Maastricht": {
+   "name": "Lambert",
+   "entry": "Lambertus, ep. Tvai:ecten., 17 sept., 3 (ca. 705)",
+   "date": "09-17",
+   "matched_by": "name and death year"
+  },
+  "Lawrence Justinian": {
+   "name": "Lawrence Justinian",
+   "entry": "Laurentius Giustiniani, 8 ian., 12 (1456)",
+   "date": "01-08",
+   "matched_by": "name and death year"
+  },
+  "Leander of Seville": {
+   "name": "Leander",
+   "entry": "Leandrus, 13 mar., 5 (ca. 600)",
+   "date": "03-13",
+   "matched_by": "name and death year"
+  },
+  "Leocadia": {
+   "name": "Leocadia",
+   "entry": "Leocadia, 9 dec., 2 (ca. 304)",
+   "date": "12-09",
+   "matched_by": "name and death year"
+  },
+  "Leonard of Noblac": {
+   "name": "Leonard",
+   "entry": "Leonardus, eremita, 6 nov., 5 (ca. s. VI)",
+   "date": "11-06",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Leonides of Alexandria": {
+   "name": "Leonides",
+   "entry": "Leonides, m. Alexandrie, 22 apr., 3 (204)",
+   "date": "04-22",
+   "matched_by": "name and death year"
+  },
+  "Lidwina": {
+   "name": "Lydwina of Schiedam",
+   "entry": "Liduina, 14 apr., 11 (1433)",
+   "date": "04-14",
+   "matched_by": "name and death year"
+  },
+  "Lorcán Ua Tuathail": {
+   "name": "Laurence O'Toole",
+   "entry": "O'Toole (Lorcan Ua Tuathail), Lauren- tius, 14 nov., 6 (1180)",
+   "date": "11-14",
+   "matched_by": "found by hand in the index"
+  },
+  "Louis Bertrand (saint)": {
+   "name": "Louis Bertrand",
+   "entry": "Ludovicus Bertrán, 9 oct., 13 (1581)",
+   "date": "10-09",
+   "matched_by": "name and death year"
+  },
+  "Louis of Toulouse": {
+   "name": "Louis of Toulouse",
+   "entry": "Ludovicus, ep. Tolosan., 19 aug. 13 (1297)",
+   "date": "08-19",
+   "matched_by": "name and death year"
+  },
+  "Luchesius Modestini": {
+   "name": "Luchesio",
+   "entry": "Luchesius *, 28 apr., 9 (1260)",
+   "date": "04-28",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Lucian of Antioch": {
+   "name": "Lucian",
+   "entry": "Lucianus, m. Nicomedie, 7 ian., 3 (312)",
+   "date": "01-07",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Ludger": {
+   "name": "Ludger",
+   "entry": "Liudgerus, 26 mar., 8 (809)",
+   "date": "03-26",
+   "matched_by": "name and death year"
+  },
+  "Luke the Evangelist": {
+   "name": "Saint Luke",
+   "entry": "Lucas, Evangelista, 18 oct., 1",
+   "date": "10-18",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Macarius of Alexandria": {
+   "name": "Macarius of Alexandria",
+   "entry": "Macarius Magnus, 19 ian., 4 (ca. 390)",
+   "date": "01-19",
+   "matched_by": "name and death year"
+  },
+  "Magloire": {
+   "name": "Magloire",
+   "entry": "Maglorius, 24 oct., 8 (ca. 605)",
+   "date": "10-24",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Mamertus": {
+   "name": "Mammertus",
+   "entry": "Mamertus, 11 maii, 4 (ca. 475)",
+   "date": "05-11",
+   "matched_by": "name and death year"
+  },
+  "Marcellinus of Gaul": {
+   "name": "Marcellinus",
+   "entry": "Marcellinus, ep. Ebrodunen., 20 apr., 4 (ca. 374)",
+   "date": "04-20",
+   "matched_by": "name and death year"
+  },
+  "Marcellus of Tangier": {
+   "name": "Marcellus",
+   "entry": "Marcellus, centurio, 30 oct., 4 (298)",
+   "date": "10-30",
+   "matched_by": "name and death year"
+  },
+  "Margaret of Cortona": {
+   "name": "Margaret of Cortona",
+   "entry": "Margarita de Cortona, 22 feb., 7 (1297)",
+   "date": "02-22",
+   "matched_by": "name and death year"
+  },
+  "Margaret the Virgin": {
+   "name": "Margaret of Antioch",
+   "entry": "Margarita, m. in Pisidia, 20 iul, 4 (s. inc.)",
+   "date": "07-20",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Marguerite Bourgeoys": {
+   "name": "Margaret Bourgeoys",
+   "entry": "Bourgeoys, Margarita, 12 ian., 9 (1700)",
+   "date": "01-12",
+   "matched_by": "name and death year"
+  },
+  "Maria Assunta Pallotta": {
+   "name": "Mary Assunta",
+   "entry": "Maria Assumpta Pallotta*, 7 apr., 13 (1905)",
+   "date": "04-07",
+   "matched_by": "name and death year"
+  },
+  "Maria Micaela Desmaisieres": {
+   "name": "Mary Micaela",
+   "entry": "Maria Michaela a Sanctissimo Sacra- mento Desmaisiéres, 24 aug., 9 (1865)",
+   "date": "08-24",
+   "matched_by": "name and death year"
+  },
+  "Marie Deluil-Martiny": {
+   "name": "Mary of Jesus Deluil-Martiny",
+   "entry": "Maria a Iesu Deluil Martiny *, 27 feb., 12 (1884)",
+   "date": "02-27",
+   "matched_by": "name and death year"
+  },
+  "Marie of Oignies": {
+   "name": "Mary of Oignies",
+   "entry": "Maria*, reclusa, 23 iun., 6 (1213)",
+   "date": "06-23",
+   "matched_by": "name and death year"
+  },
+  "Marie of the Incarnation (Carmelite)": {
+   "name": "Mary of the Incarnation",
+   "entry": "Avrillot*, Maria ab Incarnatione (Barba- ra), 18 apr., 14 (1618)",
+   "date": "04-18",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Marie of the Incarnation (Ursuline)": {
+   "name": "Mary of the Incarnation",
+   "entry": "Maria ab Incarnatione Guyart Martin *, 30 apr., 18 (1672)",
+   "date": "04-30",
+   "matched_by": "name and death year"
+  },
+  "Marie-Marguerite d'Youville": {
+   "name": "Margaret d'Youville",
+   "entry": "Youville, Maria Margarita d', 23 dec., 9 (1771)",
+   "date": "12-23",
+   "matched_by": "name and death year"
+  },
+  "Mark and Marcellian": {
+   "name": "Marcus and Marcellianus",
+   "entry": "Marcus et Marcellianus, 18 1un., 1 (ca. 304)",
+   "date": "06-18",
+   "matched_by": "name and death year"
+  },
+  "Mark the Evangelist": {
+   "name": "Saint Mark",
+   "entry": "Marcus, Evangelista, 25 apr., 1",
+   "date": "04-25",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Martina of Rome": {
+   "name": "Martina",
+   "entry": "Martina, 30 1an., 3 (677)",
+   "date": "01-30",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Mary Euphrasia Pelletier": {
+   "name": "Mary Euphrasia Pelletier",
+   "entry": "Maria a Sancta Euphrasia (Rosa Virgi- nia) Pelletier, 24 apr., 11 (1868)",
+   "date": "04-24",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Mary of Egypt": {
+   "name": "Mary of Egypt",
+   "entry": "Maria ZEgyptia, 1 apr., 3 (s. V)",
+   "date": "04-01",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Matilda of Ringelheim": {
+   "name": "Mathilda",
+   "entry": "Mathildis, 14 mar., 4 (968)",
+   "date": "03-14",
+   "matched_by": "name and death year"
+  },
+  "Matthew the Apostle": {
+   "name": "Saint Matthew",
+   "entry": "Matthaeus Levi, 21 sept., 1",
+   "date": "09-21",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Matthias the Apostle": {
+   "name": "Saint Matthias",
+   "entry": "Matthias, Apostolus, 14 man, 1",
+   "date": "05-14",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Maturinus": {
+   "name": "Maturinus",
+   "entry": "Maturinus, presb., 1 nov., 11 (ca. s. VII)",
+   "date": "11-01",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Maurilius of Angers": {
+   "name": "Maurilius",
+   "entry": "Maurilius, 13 sept., 7 (453)",
+   "date": "09-13",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Mechthild of Hackeborn": {
+   "name": "Mechtildis of Hackeborn",
+   "entry": "Mechtildis, 19 nov., 8 (ca. 1298)",
+   "date": "11-19",
+   "matched_by": "name and death year"
+  },
+  "Medardus": {
+   "name": "Medard",
+   "entry": "Medardus, 8 1un., 3 (561)",
+   "date": "06-08",
+   "matched_by": "name and death year"
+  },
+  "Mesmin": {
+   "name": "Maximin of Verdun",
+   "entry": "Maximinus, presb., 15 dec., 2 (s. VI)",
+   "date": "12-15",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Michael de Sanctis": {
+   "name": "Michael de los Santos",
+   "entry": "Michael de Sanctis, 10 apr., 9 (1625)",
+   "date": "04-10",
+   "matched_by": "name and death year"
+  },
+  "Michel Garicoïts": {
+   "name": "Michael Garicoits",
+   "entry": "Michael Garicoits, 14 maii, 14 (1863)",
+   "date": "05-14",
+   "matched_by": "name and death year"
+  },
+  "Narcissus of Jerusalem": {
+   "name": "Narcissus",
+   "entry": "Narcissus, ep. Hierosolymitan., 29 oct., 2 (ca. 222)",
+   "date": "10-29",
+   "matched_by": "name and death year"
+  },
+  "Nativity of John the Baptist": {
+   "name": "The Nativity of Saint John the Baptist",
+   "entry": "Ioannes Baptista, nativitas: 24 iun., 1;",
+   "date": "06-24",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Nazarius and Celsus": {
+   "name": "Nazarius",
+   "entry": "Nazarius et Celsus, 28 iul., 5 (Inventio, 395)",
+   "date": "07-28",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Nicasius of Rheims": {
+   "name": "Nicasius",
+   "entry": "Nicasius, ep. Remen., 14 dec., 7 (407)",
+   "date": "12-14",
+   "matched_by": "name and death year"
+  },
+  "Nicholas of Flüe": {
+   "name": "Nicholas of Flue",
+   "entry": "Nicolaus de Flüe, 21 mar., 8 (1487)",
+   "date": "03-21",
+   "matched_by": "name and death year"
+  },
+  "Nicholas of Tolentino": {
+   "name": "Nicholas of Tolentino",
+   "entry": "Nicolaus, presb. Ord. Eremit. S. Augusti- ni, 10 sept., 9 (1305)",
+   "date": "09-10",
+   "matched_by": "name and death year"
+  },
+  "Odo of Cluny": {
+   "name": "Odon of Cluny",
+   "entry": "Odo, abbas, 18 nov., 7 (942)",
+   "date": "11-18",
+   "matched_by": "name and death year"
+  },
+  "Olympias the Deaconess": {
+   "name": "Olympia of Constantinople",
+   "entry": "Olympias, 25 1ul., 5 (408)",
+   "date": "07-25",
+   "matched_by": "name and death year"
+  },
+  "Onesimus": {
+   "name": "Onesimus",
+   "entry": "Onesimus*^*, 15 feb., 1",
+   "date": "02-15",
+   "matched_by": "Codex lookup (low), checked against the index"
+  },
+  "Oswald of Worcester": {
+   "name": "Oswald",
+   "entry": "Oswaldus, ep. Vigornien., 28 feb.,.5, et 29 feb., 2 (992)",
+   "date": "02-29",
+   "matched_by": "name and death year"
+  },
+  "Pachomius the Great": {
+   "name": "Pachomius",
+   "entry": "Pachomius, abbas in Thebaide, 9 maii, 3 (347/348)",
+   "date": "05-09",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Palladius (bishop of Ireland)": {
+   "name": "Palladius",
+   "entry": "Palladius, ep. Scotorum, 6 iul., 5 (432)",
+   "date": "07-06",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Pamphilus of Caesarea": {
+   "name": "Pamphilus",
+   "entry": "Pamphilus, duo, mm. C«esarec in Palesti- na, cf. 16 feb., 2 (309)",
+   "date": "02-16",
+   "matched_by": "name and death year"
+  },
+  "Pancras of Rome": {
+   "name": "Saint Pancras",
+   "entry": "Pancratius, m. Rome, 12 maii, 2 (s. IV in.)",
+   "date": "05-12",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Pantaenus": {
+   "name": "Pantaenus",
+   "entry": "Pantzenus, 7 iul., 1 (s. III)",
+   "date": "07-07",
+   "matched_by": "found by hand in the index"
+  },
+  "Paphnutius of Thebes": {
+   "name": "Paphnutius",
+   "entry": "Paphnutius, 11 sept., 3 (s. IV)",
+   "date": "09-11",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Paschal Baylón": {
+   "name": "Paschal Baylon",
+   "entry": "Baylon, Paschalis, 17 maii, 6 (1592)",
+   "date": "05-17",
+   "matched_by": "name and death year"
+  },
+  "Paul of Thebes": {
+   "name": "Paul the Hermit",
+   "entry": "Paulus, eremita, 10 1an., 2 (s. IV)",
+   "date": "01-10",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Paul of the Cross": {
+   "name": "Paul of the Cross",
+   "entry": "Paulus a Cruce, memoria: 19 oct., 2; na- talis: 18 oct., 8 (1775)",
+   "date": "10-19",
+   "matched_by": "name and death year (calendar saint)"
+  },
+  "Paul the Apostle": {
+   "name": "The Commemoration of Saint Paul",
+   "entry": "Paulus, Apostolus, cf. 29 iun., 1; conver- sio, 25 1an., 1 (ca. 67)",
+   "date": "06-29",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Peter Faber": {
+   "name": "Peter Favre",
+   "entry": "Petrus Favre*, 1 aug., 13 (1546)",
+   "date": "08-01",
+   "matched_by": "name and death year"
+  },
+  "Peter Fourier": {
+   "name": "Peter Fourier",
+   "entry": "Petrus Fourier, 9 dec., 7 (1640)",
+   "date": "12-09",
+   "matched_by": "name and death year"
+  },
+  "Peter González": {
+   "name": "Peter Gonzales",
+   "entry": "Petrus González Telmi?*, 14 apr., 10 (1246)",
+   "date": "04-14",
+   "matched_by": "name and death year"
+  },
+  "Peter Nolasco": {
+   "name": "Peter Nolasco",
+   "entry": "Petrus Nolasco, 6 maii, 6 (1245)",
+   "date": "05-06",
+   "matched_by": "name and death year"
+  },
+  "Peter of Alcántara": {
+   "name": "Peter of Alcantara",
+   "entry": "Petrus de Alcantara, 18 oct., 6 (1562)",
+   "date": "10-18",
+   "matched_by": "name and death year"
+  },
+  "Peter of Verona": {
+   "name": "Peter of Verona",
+   "entry": "Petrus Veronensis, 6 apr., 10 (1252)",
+   "date": "04-06",
+   "matched_by": "name and death year"
+  },
+  "Peter, Andrew, Paul, and Denise": {
+   "name": "Peter, Andrew, Paul and Dionysia",
+   "entry": "Petrus, Andreas, Paulus et Dionysia, 15 mail, 1 (s. III)",
+   "date": "05-15",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Philip Benizi de Damiani": {
+   "name": "Philip Benizi",
+   "entry": "Benizi, Philippus, 22 aug., 4 (1285)",
+   "date": "08-22",
+   "matched_by": "name and death year"
+  },
+  "Philip of Jesus": {
+   "name": "Philip of Jesus",
+   "entry": "Philippus a Iesu de Las Casas, 6 feb., 1 n. (1597)",
+   "date": "02-06",
+   "matched_by": "name and death year"
+  },
+  "Philogonius": {
+   "name": "Philogonius",
+   "entry": "Philogonius, 20 dec., 3 (324)",
+   "date": "12-20",
+   "matched_by": "name and death year"
+  },
+  "Placidus (abbot)": {
+   "name": "Placid",
+   "entry": "Placidus, monachus, cf. 5 oct., 5 (s. VI)",
+   "date": "10-05",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Pope Anacletus": {
+   "name": "Cletus",
+   "entry": "Cletus Pp, 26 apr., 1 (88)",
+   "date": "04-26",
+   "matched_by": "found by hand in the index"
+  },
+  "Pope Anicetus": {
+   "name": "Anicetus",
+   "entry": "Anicetus Pp, 20 apr., 1 (ca. 166)",
+   "date": "04-20",
+   "matched_by": "name and death year"
+  },
+  "Pope Celestine I": {
+   "name": "Celestine",
+   "entry": "Caelestinus Pp I, 27 iul., 4 (432)",
+   "date": "07-27",
+   "matched_by": "name and death year"
+  },
+  "Pope Celestine V": {
+   "name": "Peter Celestine",
+   "entry": "Petrus Coclesti nues 19 maii, 6 (1296)",
+   "date": "05-19",
+   "matched_by": "name and death year"
+  },
+  "Pope Evaristus": {
+   "name": "Evaristus",
+   "entry": "Evaristus Pp, 27 oct., 1 (108)",
+   "date": "10-27",
+   "matched_by": "name and death year"
+  },
+  "Pope Felix I": {
+   "name": "Felix I",
+   "entry": "Felix Pp I, 30 dec., 1 (274)",
+   "date": "12-30",
+   "matched_by": "name and death year"
+  },
+  "Pope Hyginus": {
+   "name": "Hyginus",
+   "entry": "Hyginus Pp, 11 ian., 1 (142)",
+   "date": "01-11",
+   "matched_by": "name and death year"
+  },
+  "Pope John XXIII": {
+   "name": "Pope John XXIII",
+   "entry": "Ioannes Pp XXIII', 3 iun., 19 (1963)",
+   "date": "06-03",
+   "matched_by": "name and death year (calendar saint)"
+  },
+  "Pope Julius I": {
+   "name": "Julius I",
+   "entry": "Iulius Pp I, 12 apr., 2 (352)",
+   "date": "04-12",
+   "matched_by": "name and death year"
+  },
+  "Pope Leo II": {
+   "name": "Leo II",
+   "entry": "Leo Pp II, 3 1iul., 7 (683)",
+   "date": "07-03",
+   "matched_by": "name and death year"
+  },
+  "Pope Leo IX": {
+   "name": "Leo IX",
+   "entry": "Leo Pp IX, 19 apr., 6 (1054)",
+   "date": "04-19",
+   "matched_by": "name and death year"
+  },
+  "Pope Linus": {
+   "name": "Linus",
+   "entry": "Linus Pp, 23 sept., 3 (s. I)",
+   "date": "09-23",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Pope Marcellus I": {
+   "name": "Marcellus",
+   "entry": "Marcellus Pp I, 16 ian., 1 (309)",
+   "date": "01-16",
+   "matched_by": "name and death year"
+  },
+  "Pope Pius I": {
+   "name": "Pius I",
+   "entry": "Pius Pp I, 11 iul., 2 (155)",
+   "date": "07-11",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Pope Pius X": {
+   "name": "Saint Pius X",
+   "entry": "Pius Pp X, memoria: 21 aug., 1; natalis: 20 aug., 9 (1914)",
+   "date": "08-21",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Pope Silverius": {
+   "name": "Silverius",
+   "entry": "Silverius Pp, 2 dec., 5 (537)",
+   "date": "12-02",
+   "matched_by": "name and death year"
+  },
+  "Pope Simplicius": {
+   "name": "Simplicius",
+   "entry": "Simplicius Pp, 10 mar., 4 (483)",
+   "date": "03-10",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Pope Soter": {
+   "name": "Soter and Caius",
+   "entry": "Soter Pp, 22 apr., 1 (175)",
+   "date": "04-22",
+   "matched_by": "name and death year"
+  },
+  "Pope Stephen I": {
+   "name": "Pope Stephen I",
+   "entry": "Stephanus Pp I, 2 aug., 4 (257)",
+   "date": "08-02",
+   "matched_by": "name and death year"
+  },
+  "Pope Telesphorus": {
+   "name": "Telesphorus",
+   "entry": "'Telesphorus Pp, 2 1an., 2 (ca. 136)",
+   "date": "01-02",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Pope Urban V": {
+   "name": "Urban V",
+   "entry": "Urbanus Pp V *, 19 dec., 4 (1370)",
+   "date": "12-19",
+   "matched_by": "name and death year"
+  },
+  "Pope Zachary": {
+   "name": "Zachary",
+   "entry": "Zacharias Pp, 15 mar., 2 (752)",
+   "date": "03-15",
+   "matched_by": "name and death year"
+  },
+  "Praxedes": {
+   "name": "Praxedes",
+   "entry": "Praxedes, 21 1ul., 4 (ante 491)",
+   "date": "07-21",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Primus and Felician": {
+   "name": "Primus and Felicianus",
+   "entry": "Primus et Felicianus, 9 iun., 2 (s. inc.)",
+   "date": "06-09",
+   "matched_by": "name and death year"
+  },
+  "Prosper of Aquitaine": {
+   "name": "Prosper of Aquitaine",
+   "entry": "Prosperus Aquitanus, 25 iun., 2 (ca. 463)",
+   "date": "06-25",
+   "matched_by": "name and death year"
+  },
+  "Radegund": {
+   "name": "Radegund",
+   "entry": "Radegundis, 13 aug., 4 (587)",
+   "date": "08-13",
+   "matched_by": "name and death year"
+  },
+  "Raymond Nonnatus": {
+   "name": "Raymund Nonnatus",
+   "entry": "Nonnatus, Raymundus, 31 aug., 5 (ca. 1240)",
+   "date": "08-31",
+   "matched_by": "name and death year"
+  },
+  "Richard of Chichester": {
+   "name": "Richard of Chichester",
+   "entry": "Richardus, ep. Cicestrien., 3 apr. 7 (1235) Richardus, peregrinus, 7 feb., 6 (ca. 720)",
+   "date": "04-03",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Rita of Cascia": {
+   "name": "Saint Rita of Cascia",
+   "entry": "Rita de Cassia, 22 maii, 1 (ante 1457)",
+   "date": "05-22",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Robert of Arbrissel": {
+   "name": "Robert of Arbrissel",
+   "entry": "Robertus de Arbrisello*, 25 feb., 6 (1116)",
+   "date": "02-25",
+   "matched_by": "name and death year"
+  },
+  "Robert of Newminster": {
+   "name": "Robert of Newminster",
+   "entry": "Robertus, abbas Novomonasterien., 7 iun., 3 (1159)",
+   "date": "06-07",
+   "matched_by": "name and death year"
+  },
+  "Romanus Ostiarius": {
+   "name": "Romanus",
+   "entry": "Romanus, m. Rome, 9 aug., 2 (ca. 258)",
+   "date": "08-09",
+   "matched_by": "name and death year"
+  },
+  "Romanus of Condat": {
+   "name": "Romanus",
+   "entry": "Romanus, abbas 1n monte lurá. 28 feb., 2 (463)",
+   "date": "02-28",
+   "matched_by": "name and death year"
+  },
+  "Rose of Viterbo": {
+   "name": "Rose of Viterbo",
+   "entry": "Rosa de Viterbio*, 6 mar., 10 (1253)",
+   "date": "03-06",
+   "matched_by": "name and death year"
+  },
+  "Sabbas the Sanctified": {
+   "name": "Sabas",
+   "entry": "Sabas, abbas, 5 dec., 2 (532)",
+   "date": "12-05",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Sabinus of Spoleto": {
+   "name": "Sabinus",
+   "entry": "Sabinus, ep. Spoletan., 7 dec.",
+   "date": "12-07",
+   "matched_by": "found by hand in the index"
+  },
+  "Saint Apollonia": {
+   "name": "Apollonia",
+   "entry": "Apollonia, virgo alexandrina, 9 feb., 1 (ca. 250)",
+   "date": "02-09",
+   "matched_by": "name and death year"
+  },
+  "Saint Barbara": {
+   "name": "Barbara",
+   "entry": "Barbara, virgo nicomedien., 4 dec., 2 (s. inc.)",
+   "date": "12-04",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Saint Christopher": {
+   "name": "Christopher",
+   "entry": "Christophorus, m. Lycia, 25 iul, 2 (s. inc.)",
+   "date": "07-25",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Saint David": {
+   "name": "David",
+   "entry": "David, ep. Menevien., 1 mar., 3 (ca. 601)",
+   "date": "03-01",
+   "matched_by": "name and death year"
+  },
+  "Saint Eligius": {
+   "name": "Eligius",
+   "entry": "Eligius, ep. Noviomen., 1 dec., 7 (660)",
+   "date": "12-01",
+   "matched_by": "name and death year"
+  },
+  "Saint Eustace": {
+   "name": "Eustace",
+   "entry": "Eustachius, m. Rome, 20 sept., 3 (s. inc.)",
+   "date": "09-20",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Saint Fiacre": {
+   "name": "Fiaker",
+   "entry": "Fiacrius, 30 aug., 5 (ca. 670)",
+   "date": "08-30",
+   "matched_by": "name and death year"
+  },
+  "Saint Gall": {
+   "name": "Gall",
+   "entry": "Gallus, presb., 16 oct., 7 (ca. 645)",
+   "date": "10-16",
+   "matched_by": "name and death year"
+  },
+  "Saint George": {
+   "name": "Saint George",
+   "entry": "Georgius, m. in Palestina, 23 apr., 1 (s. IV)",
+   "date": "04-23",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Saint Giles": {
+   "name": "Giles",
+   "entry": "ZEgidius, abbas, 1 sept., 9 (s. VI/VII)",
+   "date": "09-01",
+   "matched_by": "found by hand in the index"
+  },
+  "Saint Ischyrion": {
+   "name": "Ischyrion",
+   "entry": "Ischyrion, m. in ZEgypto, 22 dec., 2 (ca. 250)",
+   "date": "12-22",
+   "matched_by": "name and death year"
+  },
+  "Saint Joseph": {
+   "name": "Saint Joseph",
+   "entry": "Ioseph, sponsus beatcee Virgimis Marice, 19 mar., 1; opifex: 1 man, 1 Ioseph Barsabbas Iustus *, 20 iul., 3 Ioseph de Arimathza et Nicodemus, 31 aug., 1 Iosepha Moscardó Montalvá*, cf. 22 sept., 15 (1936)",
+   "date": "03-19",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Saint Lucy": {
+   "name": "Saint Lucy",
+   "entry": "Lucia, virgo et m., 13 dec., 1 (ca. 304-",
+   "date": "12-13",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Saint Malachy": {
+   "name": "Malachy",
+   "entry": "Malachias, ep. Dunen., 2 nov., 11 (1148)",
+   "date": "11-02",
+   "matched_by": "name and death year"
+  },
+  "Saint Maurice": {
+   "name": "Maurice",
+   "entry": "Mauritius, Exsuperius, Candidus, Victor et socii Thebzz legionis, 22 sept., 2 (ca. 302)",
+   "date": "09-22",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Saint Maurus": {
+   "name": "Maurus",
+   "entry": "Maurus, abbas, 15 ian., 5 (s. VI/VII)",
+   "date": "01-15",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Saint Nicholas": {
+   "name": "Saint Nicholas",
+   "entry": "Nicolaus, ep. Myren., 6 dec., 1 (s. IV)",
+   "date": "12-06",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Saint Pantaleon": {
+   "name": "Pantaleon",
+   "entry": "Pantaleon seu Pantalaimon, 27 1ul., 2 (ca. 305)",
+   "date": "07-27",
+   "matched_by": "name and death year"
+  },
+  "Saint Patrick": {
+   "name": "Saint Patrick",
+   "entry": "Patricius, ep. in Hibernia, 17. mar., 1",
+   "date": "03-17",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Saint Perpetuus": {
+   "name": "Perpetuus",
+   "entry": "Perpetuus, ep. T'uronen., 30 dec., 4 (491)",
+   "date": "12-30",
+   "matched_by": "name and death year"
+  },
+  "Saint Porphyrius": {
+   "name": "Porphyry",
+   "entry": "Porphyrius, ep. Gazen., 26 feb., 3 (421)",
+   "date": "02-26",
+   "matched_by": "name and death year"
+  },
+  "Saint Pothinus": {
+   "name": "Pothinus",
+   "entry": "Porhinus- Blandina et XLVII soci, 2 iun., 2 (177)",
+   "date": "06-02",
+   "matched_by": "found by hand in the index"
+  },
+  "Saint Prisca": {
+   "name": "Prisca",
+   "entry": "Prisca, titularis basilicee in Urbe, 18 ian., 4",
+   "date": "01-18",
+   "matched_by": "Codex lookup, entry number corrected"
+  },
+  "Saint Quentin": {
+   "name": "Quentin",
+   "entry": "Quintinus, m. Auguste Virimanduorum, 31 oct., 2 (s. III)",
+   "date": "10-31",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Saint Remigius": {
+   "name": "Remigius",
+   "entry": "Remigius, ep. Remen., 13 ian., 4 (ca. 530)",
+   "date": "01-13",
+   "matched_by": "name and death year"
+  },
+  "Saint Roch": {
+   "name": "Roch",
+   "entry": "Rochus, peregrinus, 16 aug., 8 (ca. 1379)",
+   "date": "08-16",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Saint Rosalia": {
+   "name": "Rosalia",
+   "entry": "Rosalia, virgo panormitana, 4 sept., 8 (s. Iosephus Maria, 15 aug., Arthurus, cf. 28 aug., 16 1; passio: Rosalia (Ioanna Maria)",
+   "date": "09-04",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Saint Sebastian": {
+   "name": "Saint Sebastian",
+   "entry": "Sebastianus, m. Rome, 20 ian., 2 (s. IV",
+   "date": "01-20",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Saint Stephen": {
+   "name": "Saint Stephen",
+   "entry": "Stephanus, protomartyr, 26 dec., 1",
+   "date": "12-26",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Saint Tiburtius": {
+   "name": "Tiburtius",
+   "entry": "Tiburtius, n. ONES 11 aug., 3 (s. III/IV in.)",
+   "date": "08-11",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Saint Ursula": {
+   "name": "Ursula",
+   "entry": "Ursula, virgo, cf. 21 oct., 2 (ca. s. IV)",
+   "date": "10-21",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Saint Valentine": {
+   "name": "Valentine",
+   "entry": "Valentinus, m. Rome, 14 feb., 2 (s. inc.)",
+   "date": "02-14",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Saint Vitus": {
+   "name": "Vitus",
+   "entry": "Vitus, m. in Lucania, 15 iun., 3 (s. inc.)",
+   "date": "06-15",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Serenus the Gardener": {
+   "name": "Serenus",
+   "entry": "Sirenus seu Sinerus, 23 feb., 2 (ca. 307)",
+   "date": "02-23",
+   "matched_by": "name and death year"
+  },
+  "Servulus of Rome": {
+   "name": "Servulus of Rome",
+   "entry": "Servulus, pavralyticus, 23 dec., 3 (ca. 590)",
+   "date": "12-23",
+   "matched_by": "name and death year"
+  },
+  "Simeon Stylites": {
+   "name": "Simeon Stylites",
+   "entry": "Simeon, stylita brope Antiochiam, 27 il., 5 (459)",
+   "date": "07-27",
+   "matched_by": "name and death year"
+  },
+  "Simeon of Jerusalem": {
+   "name": "Simeon",
+   "entry": "Simeon, ep. Hierosolymitan., 27 apr., 1",
+   "date": "04-27",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Simon Stock": {
+   "name": "Simon Stock",
+   "entry": "Simon Stock*, 16 maii, 14 (1265)",
+   "date": "05-16",
+   "matched_by": "name and death year"
+  },
+  "Stanislaus Kostka": {
+   "name": "Stanislaw Kostka",
+   "entry": "Stanislaus Kostka, 15 aug., 11 (1568)",
+   "date": "08-15",
+   "matched_by": "name and death year"
+  },
+  "Stephana de Quinzanis": {
+   "name": "Stephanie Quinzani",
+   "entry": "Stephana Quinzani*, 2 ian., 13 (1530)",
+   "date": "01-02",
+   "matched_by": "name and death year"
+  },
+  "Symphorian and Timotheus": {
+   "name": "Symphorian",
+   "entry": "Symphorianus, 22 aug., 2 (s. IH/IV)",
+   "date": "08-22",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Tarasios of Constantinople": {
+   "name": "Tarasius",
+   "entry": "'Tarasius, 18 feb., 3 (806)",
+   "date": "02-18",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Theodore Tiron": {
+   "name": "Theodore Tyro",
+   "entry": "Theodorus Tiro, 17 feb., 2 (306-311)",
+   "date": "02-17",
+   "matched_by": "found by hand in the index"
+  },
+  "Theodoret (martyr)": {
+   "name": "Theodoret",
+   "entry": ". Theodoretus, 23 oct., 4 (ca. 362)",
+   "date": "10-23",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Theodosius the Cenobiarch": {
+   "name": "Theodosius",
+   "entry": "Theodosius, coenobiarcha, 11 1an., 7 (529)",
+   "date": "01-11",
+   "matched_by": "Codex lookup, line number removed"
+  },
+  "Thomas Aquinas": {
+   "name": "Saint Thomas Aquinas",
+   "entry": "' Thomas de Aquino, memoria: 28 1an., 1;",
+   "date": "01-28",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Thomas of Villanova": {
+   "name": "Thomas of Villanova",
+   "entry": "'Thomas de Villanova, 8 sept., 9 (1555)",
+   "date": "09-08",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Thomas the Apostle": {
+   "name": "Saint Thomas",
+   "entry": "'Thomas, Apostolus, 3 1ul., 1",
+   "date": "07-03",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Vicente Liem de la Paz": {
+   "name": "Vincent Liem de la Paz",
+   "entry": "Vincentius Lé Quang Liém, memoria: 24 nov., 1; passio: cf. 7 nov., 13 (1773)",
+   "date": "11-07",
+   "matched_by": "name and death year"
+  },
+  "Victor of Marseilles": {
+   "name": "Victor of Marseille",
+   "entry": "Victor, m. Massilie, 21 1ul., 2 (ca. 292)",
+   "date": "07-21",
+   "matched_by": "name and death year"
+  },
+  "Victorian, Frumentius and Companions": {
+   "name": "Victorian and Companions",
+   "entry": "Victorianus et Frumentius duo, 23 mar., 3 (484)",
+   "date": "03-23",
+   "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Vincent Strambi": {
+   "name": "Vincent Strambi",
+   "entry": "Vincentius Maria Strambi, 1 ian., 15 (1824)",
+   "date": "01-01",
+   "matched_by": "name and death year"
+  },
+  "Vitalis of Milan": {
+   "name": "Vitalis of Ravenna",
+   "entry": "Vitalis, m. Ravenne, 28 apr., 5 (s. inc.)",
+   "date": "04-28",
+   "matched_by": "found by hand in the index"
+  },
+  "Wenceslaus I, Duke of Bohemia": {
+   "name": "Saint Wenceslaus",
+   "entry": "Venceslaus, dux Bohemie, 28 sept., 1 (929/935)",
+   "date": "09-28",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Wilfrid": {
+   "name": "Wilfrid",
+   "entry": "Wilfridus, 24 apr., 8 (709)",
+   "date": "04-24",
+   "matched_by": "name and death year"
+  },
+  "Willibrord": {
+   "name": "Willibrord",
+   "entry": "Willibrordus, 7 nov., 9 (739)",
+   "date": "11-07",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Wulfram of Sens": {
+   "name": "Wulfran",
+   "entry": "Vulframnus, 20 mar., 6 (ca. 700)",
+   "date": "03-20",
+   "matched_by": "name and death year"
+  },
+  "Zita": {
+   "name": "Zita",
+   "entry": "Zita, 27 apr., 7 (1278)",
+   "date": "04-27",
+   "matched_by": "name and death year"
+  },
+  "Ælfheah of Canterbury": {
+   "name": "Elphege",
+   "entry": "ZElphegus, 19 apr., 5 (1012)",
+   "date": "04-19",
+   "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "Æthelthryth": {
+   "name": "Etheldreda",
+   "entry": "Ediltrudis, 23 1un., 2 (679)",
+   "date": "06-23",
+   "matched_by": "name and death year"
+  }
+ }
+}

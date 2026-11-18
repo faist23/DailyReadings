@@ -1,0 +1,685 @@
+{
+ "_about": "Decisions from reviewing the saints whose date neither the calendar, Wikidata nor the Wikipedia infobox confirmed (18 November 2026), by Claude with a Codex second opinion (first from Codex's memory, then a Codex web search that confirmed one decision and found no source for most). The strongest source used is the Vatican's martyr list (Pontifical Academy Cultorum Martyrum), which covers martyrs only. Decisions with basis 'memory' are removals of entries that have no source for their date; their stated reasons are unverified. Every move or relink rests on the evidence quoted; where Codex's view rested only on its own memory, the sourced date was used and Codex's view is recorded. Applied by Scripts/build_saints.py. The app shows each saint's celebrated day; a Martyrology day that differs is shown on the card, never used to move the saint.",
+ "decisions": [
+  {
+   "date": "01-01",
+   "name": "The Eternal Father",
+   "action": "remove",
+   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): A devotional title, not a liturgical feast.",
+   "codex": "agree",
+   "basis": "memory"
+  },
+  {
+   "date": "01-01",
+   "name": "The Circumcision of Our Lord",
+   "action": "remove",
+   "evidence": "USCCB (https://www.usccb.org/prayer-and-worship/liturgical-year/christmas/christmas-january-1): 1 January is the Solemnity of Mary, the Holy Mother of God, already on the calendar.",
+   "codex": "agree",
+   "basis": "USCCB"
+  },
+  {
+   "date": "01-02",
+   "name": "Macarius of Alexandria",
+   "action": "move",
+   "to": "01-19",
+   "evidence": "Infobox: 19 January (Eastern Orthodox and Roman Catholic Church); Wikidata 19 January.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "01-09",
+   "name": "Julian",
+   "action": "relink",
+   "to": "01-09",
+   "article": "Julian and Basilissa",
+   "new_name": "Julian and Basilissa",
+   "evidence": "The entry describes Julian with his wife Basilissa, but linked Julian the Hospitaller. Julian and Basilissa infobox: 9 January (the celebrated day; the 2004 Martyrology lists them on 6 January, shown on the card).",
+   "codex": "Codex: move to 02-12 as the Hospitaller",
+   "basis": "infobox"
+  },
+  {
+   "date": "01-13",
+   "name": "The Baptism of Our Lord",
+   "action": "remove",
+   "evidence": "Old fixed date; the Baptism of the Lord is movable and named from the liturgical day.",
+   "codex": "agree",
+   "basis": "calendar"
+  },
+  {
+   "date": "01-16",
+   "name": "Stephanie Quinzani",
+   "action": "move",
+   "to": "01-02",
+   "evidence": "Infobox and Wikidata: 2 January.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "01-19",
+   "name": "Canute",
+   "action": "relink",
+   "to": "07-10",
+   "article": "Canute IV of Denmark",
+   "new_name": "Canute IV",
+   "evidence": "The entry describes Canute IV, King of Denmark (it linked Cnut the Great). The Vatican's martyr list (https://www.vatican.va/roman_curia/pontifical_academies/cult-martyrum/martiri/009.html) has him on 10 July: \"A Odense, in Danimarca, ricordo di S. Canuto (Knut), martire, che, re...\"; his infobox also gives 10 July. (19 January is the pre-1969 date; Canute Lavard, a different saint, is 7 January.)",
+   "codex": "Codex: keep 01-19 (own knowledge, medium); Codex's web check cited the Vatican list for Canute Lavard (7 January), a different saint",
+   "basis": "Vatican martyr list"
+  },
+  {
+   "date": "01-28",
+   "name": "Peter Nolasco",
+   "action": "move",
+   "to": "05-06",
+   "evidence": "Infobox and Wikidata: 6 May. 28 January is the pre-1969 date.",
+   "codex": "Codex: keep 01-28 (own knowledge, medium)",
+   "basis": "infobox"
+  },
+  {
+   "date": "02-05",
+   "name": "Holy Martyrs of Japan",
+   "action": "remove",
+   "evidence": "The entry describes Paul Miki and companions, celebrated on 6 February (on the calendar); its link was to the Martyrs of Jasenovac.",
+   "codex": "agree",
+   "basis": "calendar"
+  },
+  {
+   "date": "02-16",
+   "name": "John de Britto",
+   "action": "move",
+   "to": "02-04",
+   "evidence": "Infobox and Wikidata: 4 February.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "02-17",
+   "name": "Francis Regis Clet",
+   "action": "move",
+   "to": "02-18",
+   "evidence": "Infobox: 18 February; Wikidata 18 February.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "02-26",
+   "name": "Mechtildis of Hackeborn",
+   "action": "move",
+   "to": "11-19",
+   "evidence": "Infobox and Wikidata: 19 November.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "03-02",
+   "name": "Simplicius",
+   "action": "move",
+   "to": "03-10",
+   "evidence": "Pope Simplicius. Infobox and Wikidata: 10 March.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "03-16",
+   "name": "Abraham and Mary his Niece",
+   "action": "remove",
+   "evidence": "Not settled: the infobox lists several dates, none 16 March and none marked Roman Catholic. Left out until checked against the Roman Martyrology.",
+   "codex": "agree (unsure)",
+   "basis": "no source found"
+  },
+  {
+   "date": "03-22",
+   "name": "Catherine of Sweden",
+   "action": "move",
+   "to": "03-24",
+   "evidence": "Infobox: 24 March (Roman Catholic Church).",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "03-31",
+   "name": "Nicholas of Flue",
+   "action": "move",
+   "to": "03-21",
+   "evidence": "Infobox: 21 March (25 September in Switzerland and Germany).",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "04-06",
+   "name": "Celestine",
+   "action": "move",
+   "to": "07-27",
+   "evidence": "Pope Celestine I. Infobox: 27 July (Catholic).",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "04-07",
+   "name": "Juliana of Mt. Cornillon",
+   "action": "move",
+   "to": "04-06",
+   "evidence": "Infobox: 6 April (Wikidata says 5 April).",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "04-08",
+   "name": "Mary Assunta",
+   "action": "move",
+   "to": "04-07",
+   "evidence": "Infobox: 7 April.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "04-09",
+   "name": "John the Almsgiver",
+   "action": "move",
+   "to": "01-23",
+   "evidence": "Infobox: 23 January (Roman Catholic).",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "04-09",
+   "name": "Mary of Egypt",
+   "action": "move",
+   "to": "04-01",
+   "evidence": "Infobox: Roman Catholic 1 April (Ordinary Form).",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "04-12",
+   "name": "Catherine of St. Augustine",
+   "action": "move",
+   "to": "05-08",
+   "evidence": "Infobox and Wikidata: 8 May.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "04-29",
+   "name": "Joseph Benedict Cottolengo",
+   "action": "move",
+   "to": "04-30",
+   "evidence": "Infobox and Wikidata: 30 April.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "05-06",
+   "name": "John",
+   "action": "remove",
+   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): St. John before the Latin Gate, removed in 1960; St. John is celebrated on 27 December (on the calendar).",
+   "codex": "agree",
+   "basis": "memory"
+  },
+  {
+   "date": "05-14",
+   "name": "Pachomius",
+   "action": "move",
+   "to": "05-09",
+   "evidence": "Infobox: 9 May (15 May for Benedictines); Wikidata 9 May.",
+   "codex": "Codex: move to 05-15",
+   "basis": "infobox"
+  },
+  {
+   "date": "05-21",
+   "name": "Andrew Bobola",
+   "action": "move",
+   "to": "05-16",
+   "evidence": "Infobox and Wikidata: 16 May.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "05-23",
+   "name": "Julia",
+   "action": "move",
+   "to": "05-22",
+   "evidence": "Infobox: 22 May (Catholic Church).",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "06-02",
+   "name": "Mary of the Incarnation",
+   "action": "move",
+   "to": "04-30",
+   "evidence": "Infobox and Wikidata: 30 April.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "06-07",
+   "name": "Claude",
+   "action": "move",
+   "to": "06-06",
+   "evidence": "Claudius of Besançon. Infobox and Wikidata: 6 June.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "06-12",
+   "name": "John of Sahagun",
+   "action": "move",
+   "to": "06-11",
+   "evidence": "Infobox and Wikidata: 11 June.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "06-17",
+   "name": "Avitus",
+   "action": "remove",
+   "evidence": "The entry describes Avitus, abbot near Orléans, but linked the Roman emperor Avitus; no Wikipedia article for the abbot was found.",
+   "codex": "agree (unsure)",
+   "basis": "no source found"
+  },
+  {
+   "date": "07-01",
+   "name": "Most Precious Blood of Jesus",
+   "action": "remove",
+   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): Feast removed from the calendar in 1969.",
+   "codex": "agree",
+   "basis": "memory"
+  },
+  {
+   "date": "07-10",
+   "name": "Felicity",
+   "action": "move",
+   "to": "11-23",
+   "evidence": "Felicitas of Rome. The Vatican's martyr list (https://www.vatican.va/roman_curia/pontifical_academies/cult-martyrum/martiri/009.html) has her on 23 November: \"A Roma nel cimitero di Massimo sulla Via Salaria Nuova, ricordo di Santa Felicita, martire.\" Infobox and Wikidata agree.",
+   "codex": "Codex: unsure",
+   "basis": "Vatican martyr list"
+  },
+  {
+   "date": "07-11",
+   "name": "James of Nisibis",
+   "action": "move",
+   "to": "07-15",
+   "evidence": "Infobox: 15 July (Syriac Orthodox Church and Roman Catholic Church).",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "07-21",
+   "name": "François de Laval",
+   "action": "move",
+   "to": "05-06",
+   "evidence": "Infobox and Wikidata: 6 May.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "07-24",
+   "name": "Francis Solano",
+   "action": "move",
+   "to": "07-14",
+   "evidence": "Infobox and Wikidata: 14 July.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "07-30",
+   "name": "Germanus of Auxerre",
+   "action": "move",
+   "to": "07-31",
+   "evidence": "Infobox: 31 July (universal).",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "08-01",
+   "name": "Peter",
+   "action": "remove",
+   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): St. Peter in Chains, removed in 1960; St. Peter is on the calendar on 22 February and 29 June.",
+   "codex": "agree",
+   "basis": "memory"
+  },
+  {
+   "date": "08-02",
+   "name": "Joseph Chiwatenhwa",
+   "action": "remove",
+   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): Wikipedia: an early Christian convert in Canada; not a saint or blessed.",
+   "codex": "agree (unsure)",
+   "basis": "memory"
+  },
+  {
+   "date": "08-02",
+   "name": "Stephen",
+   "action": "relink",
+   "to": "08-02",
+   "article": "Pope Stephen I",
+   "new_name": "Pope Stephen I",
+   "evidence": "The entry describes Pope Stephen I, but linked Stephen of Armenia. Pope Stephen I infobox: 2 August.",
+   "codex": "Codex: unsure",
+   "basis": "infobox"
+  },
+  {
+   "date": "08-04",
+   "name": "Frederick Janssoone",
+   "action": "move",
+   "to": "08-05",
+   "evidence": "Infobox and Wikidata: 5 August.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "08-05",
+   "name": "The Dedication of Saint Mary of the Snows",
+   "action": "remove",
+   "evidence": "Duplicate of the calendar's Dedication of the Basilica of Saint Mary Major (5 August).",
+   "codex": "agree",
+   "basis": "calendar"
+  },
+  {
+   "date": "08-06",
+   "name": "Transfiguration of Our Lord",
+   "action": "remove",
+   "evidence": "Duplicate of the calendar's Transfiguration of the Lord (6 August).",
+   "codex": "Codex: keep (missed that the calendar already has it)",
+   "basis": "calendar"
+  },
+  {
+   "date": "08-08",
+   "name": "Peter Favre",
+   "action": "move",
+   "to": "08-02",
+   "evidence": "Infobox: 2 August (Wikidata says 1 August).",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "08-13",
+   "name": "The Dormition of Mary",
+   "action": "remove",
+   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): Eastern title; the Assumption is on the calendar on 15 August.",
+   "codex": "agree",
+   "basis": "memory"
+  },
+  {
+   "date": "08-17",
+   "name": "Liberatus",
+   "action": "remove",
+   "evidence": "The entry describes Liberatus, abbot, martyred with six companions under Huneric (it linked the historian Liberatus of Carthage). The Vatican's martyr list (https://www.vatican.va/roman_curia/pontifical_academies/cult-martyrum/martiri/009.html) has them on 2 July, not 17 August: \"A Cartagine, ricordo dei SS. martiri Liberato, abate, Bonifacio, diacono...\". Left out: no Wikipedia article to describe them.",
+   "codex": "Codex: keep (own knowledge)",
+   "basis": "Vatican martyr list"
+  },
+  {
+   "date": "08-18",
+   "name": "Clare of Montefalco",
+   "action": "move",
+   "to": "08-17",
+   "evidence": "Infobox and Wikidata: 17 August.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "08-22",
+   "name": "The Immaculate Heart of Mary",
+   "action": "remove",
+   "evidence": "Former fixed date; now the Saturday after the Sacred Heart, named from the liturgical day. 22 August is the Queenship (on the calendar).",
+   "codex": "agree",
+   "basis": "calendar"
+  },
+  {
+   "date": "09-06",
+   "name": "Rosalia",
+   "action": "move",
+   "to": "09-04",
+   "evidence": "Infobox and Wikidata: 4 September.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "09-19",
+   "name": "Our Lady of La Salette",
+   "action": "keep",
+   "to": "09-19",
+   "evidence": "The article dates the apparition to 19 September 1846.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "09-20",
+   "name": "Maximin Giraud",
+   "action": "remove",
+   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): A La Salette visionary; not a saint or blessed.",
+   "codex": "agree",
+   "basis": "memory"
+  },
+  {
+   "date": "09-24",
+   "name": "Our Lady of Ransom",
+   "action": "remove",
+   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): Former feast, not in the current General Roman or US calendar.",
+   "codex": "agree",
+   "basis": "memory"
+  },
+  {
+   "date": "09-25",
+   "name": "Vincent Strambi",
+   "action": "move",
+   "to": "01-01",
+   "evidence": "Infobox and Wikidata: 1 January.",
+   "codex": "Codex: keep 09-25 (own knowledge, medium)",
+   "basis": "infobox"
+  },
+  {
+   "date": "10-09",
+   "name": "Dionysius the Areopagite",
+   "action": "move",
+   "to": "10-03",
+   "evidence": "Infobox: 3 October (9 October is the Church of England's 1662 Book of Common Prayer); Wikidata 3 October. 9 October is St. Denis of Paris (on the calendar).",
+   "codex": "Codex: keep 10-09 (own knowledge, medium)",
+   "basis": "infobox"
+  },
+  {
+   "date": "10-12",
+   "name": "Jeanne Leber",
+   "action": "remove",
+   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): Not canonized or beatified.",
+   "codex": "agree",
+   "basis": "memory"
+  },
+  {
+   "date": "10-22",
+   "name": "Hilarion",
+   "action": "move",
+   "to": "10-21",
+   "evidence": "Infobox and Wikidata: 21 October.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "10-23",
+   "name": "The Feast of the Holy Redeemer",
+   "action": "remove",
+   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): A local (Redemptorist) feast, not in the General Roman or US calendar.",
+   "codex": "agree",
+   "basis": "memory"
+  },
+  {
+   "date": "11-02",
+   "name": "Malachy",
+   "action": "move",
+   "to": "11-03",
+   "evidence": "Infobox and Wikidata: 3 November.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "11-05",
+   "name": "The Feast of the Holy Relics",
+   "action": "remove",
+   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): A local feast, not in the General Roman or US calendar.",
+   "codex": "agree",
+   "basis": "memory"
+  },
+  {
+   "date": "11-09",
+   "name": "Maturinus",
+   "action": "move",
+   "to": "11-01",
+   "evidence": "Infobox and Wikidata: 1 November.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "11-16",
+   "name": "Edmund",
+   "action": "relink",
+   "to": "11-16",
+   "article": "Edmund of Abingdon",
+   "new_name": "Edmund of Abingdon",
+   "evidence": "The entry describes Edmund of Canterbury (Abingdon), but linked Edmund the Martyr. Edmund of Abingdon infobox: 16 November.",
+   "codex": "Codex: move to 11-20 as Edmund the Martyr",
+   "basis": "infobox"
+  },
+  {
+   "date": "11-18",
+   "name": "Peter",
+   "action": "remove",
+   "evidence": "Duplicate of the calendar's Dedication of the Basilicas of Saints Peter and Paul (18 November).",
+   "codex": "agree",
+   "basis": "calendar"
+  },
+  {
+   "date": "11-26",
+   "name": "Peter of Alexandria",
+   "action": "move",
+   "to": "11-25",
+   "evidence": "Infobox: 25 November; Wikidata 25 November.",
+   "codex": "Codex: keep 11-26 (own knowledge, medium)",
+   "basis": "infobox"
+  },
+  {
+   "date": "11-27",
+   "name": "Catherine Labouré",
+   "action": "move",
+   "to": "12-31",
+   "evidence": "Infobox: 31 December (2004 Roman Martyrology); 28 November is the Vincentian Family's date.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "11-28",
+   "name": "Catherine Labouré",
+   "action": "remove",
+   "evidence": "Duplicate: she is placed on 31 December, her Roman Martyrology date.",
+   "codex": "not reviewed",
+   "basis": "calendar"
+  },
+  {
+   "date": "12-14",
+   "name": "Melanie Calvat",
+   "action": "remove",
+   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): A La Salette visionary; not a saint or blessed.",
+   "codex": "agree",
+   "basis": "memory"
+  },
+  {
+   "date": "12-17",
+   "name": "Olympia of Constantinople",
+   "action": "move",
+   "to": "07-25",
+   "evidence": "Infobox: 25 July; venerated in the Catholic Church.",
+   "codex": "Codex: remove (not shown to be venerated in the Catholic Church; the infobox says she is)",
+   "basis": "infobox"
+  },
+  {
+   "date": "12-23",
+   "name": "Margaret d'Youville",
+   "action": "move",
+   "to": "10-16",
+   "evidence": "Infobox and Wikidata: 16 October.",
+   "codex": "agree",
+   "basis": "infobox"
+  },
+  {
+   "date": "12-25",
+   "name": "The Nativity of Our Lord Jesus Christ",
+   "action": "remove",
+   "evidence": "Duplicate of the Nativity of the Lord (on the calendar).",
+   "codex": "agree",
+   "basis": "calendar"
+  },
+  {
+   "date": "08-29",
+   "name": "The Beheading of Saint John the Baptist",
+   "action": "remove",
+   "basis": "calendar",
+   "evidence": "Duplicate of the calendar's Passion of Saint John the Baptist (29 August).",
+   "codex": "not reviewed"
+  },
+  {
+   "date": "06-30",
+   "name": "The Commemoration of Saint Paul",
+   "action": "remove",
+   "basis": "calendar",
+   "evidence": "Pre-1969 commemoration; St. Paul is celebrated with St. Peter on 29 June (on the calendar), and the 2004 Martyrology index lists him at 29 June.",
+   "codex": "not reviewed"
+  },
+  {
+   "date": "01-18",
+   "name": "Peter",
+   "action": "remove",
+   "basis": "infobox",
+   "evidence": "Pre-1960 Chair of St. Peter at Rome; its only support was the infobox's \"18 January: Confession of Saint Peter (Anglicanism, Lutheranism)\". St. Peter is on the calendar on 22 February and 29 June.",
+   "codex": "not reviewed"
+  },
+  {
+   "date": "02-25",
+   "name": "Tarasius",
+   "action": "move",
+   "basis": "infobox",
+   "evidence": "Infobox: \"18 February (Catholic Church) (General Roman Calendar); 25 February (Eastern Orthodox Church)\"; the 2004 Martyrology also lists him on 18 February.",
+   "codex": "not reviewed",
+   "to": "02-18"
+  },
+  {
+   "date": "02-27",
+   "name": "Leander",
+   "action": "move",
+   "basis": "infobox",
+   "evidence": "Infobox: \"13 March (... Catholic Novus Ordo; Mozarabic Rite)\"; 27 February is the pre-1969 (Vetus Ordo) date. The 2004 Martyrology lists him on 13 March.",
+   "codex": "not reviewed",
+   "to": "03-13"
+  },
+  {
+   "date": "07-01",
+   "name": "Gal",
+   "action": "move",
+   "basis": "infobox",
+   "evidence": "Infobox: \"1 July (Eastern Orthodox); 3 July (Roman Catholic)\". The 2004 Martyrology lists him on 14 May, shown on the card.",
+   "codex": "not reviewed",
+   "to": "07-03"
+  },
+  {
+   "date": "07-13",
+   "name": "Anacletus",
+   "action": "remove",
+   "basis": "Martyrologium Romanum (2004)",
+   "evidence": "The same pope as Cletus (both entries link the Wikipedia article Pope Anacletus); the 2004 Martyrology has one entry, \"Cletus Pp, 26 apr., 1 (88)\", and the app keeps him on 26 April. 13 July was the pre-1960 separate feast of Anacletus.",
+   "codex": "not reviewed"
+  },
+  {
+   "date": "03-24",
+   "name": "Simon",
+   "action": "remove",
+   "basis": "Wikipedia and Martyrologium Romanum (2004)",
+   "evidence": "Simon of Trent: his death was used as a blood libel against the Jews of Trent, and \"on 28 October 1965 ... archbishop of Trent Alessandro Maria Gottardi abolished the cult of Simon\" (Wikipedia, Simon of Trent). He is not in the 2004 Martyrology's index of names.",
+   "codex": "not reviewed"
+  },
+  {
+   "date": "08-11",
+   "name": "Philomena",
+   "action": "remove",
+   "basis": "Martyrologium Romanum (2004)",
+   "evidence": "Not in the 2004 Martyrology's index of names; her Wikipedia article says she was \"never formally canonized in the Catholic Church\". Removed at Craig's decision (18 November 2026).",
+   "codex": "not reviewed"
+  }
+ ]
+}

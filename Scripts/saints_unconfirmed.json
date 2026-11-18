@@ -1,0 +1,259 @@
+{
+ "_about": "Saints outside the calendar whose date neither Wikidata, the Wikipedia infobox nor a review decision confirms. 'kept': true means the saint is still shown on that date; 'kept': false means it is left out (no Wikipedia article to describe it). 'removed' lists saints taken out by Scripts/saint_date_review.json, with the reason.",
+ "saints": [
+  {
+   "date": "02-11",
+   "name": "Severinus",
+   "wikipedia": null,
+   "wikidata_feast_days": [],
+   "kept": false,
+   "reason": "no Wikipedia article"
+  },
+  {
+   "date": "02-13",
+   "name": "Ambrose Leblanc",
+   "wikipedia": null,
+   "wikidata_feast_days": [],
+   "kept": false,
+   "reason": "no Wikipedia article"
+  },
+  {
+   "date": "02-21",
+   "name": "Didace Pelletier",
+   "wikipedia": null,
+   "wikidata_feast_days": [],
+   "kept": false,
+   "reason": "no Wikipedia article"
+  },
+  {
+   "date": "04-15",
+   "name": "Paternus",
+   "wikipedia": null,
+   "wikidata_feast_days": [],
+   "kept": false,
+   "reason": "no Wikipedia article"
+  },
+  {
+   "date": "05-29",
+   "name": "Cyril",
+   "wikipedia": null,
+   "wikidata_feast_days": [],
+   "kept": false,
+   "reason": "no Wikipedia article"
+  },
+  {
+   "date": "07-05",
+   "name": "Peter of Luxembourg",
+   "wikipedia": "https://en.wikipedia.org/wiki/Peter_of_Luxembourg",
+   "wikidata_feast_days": [],
+   "kept": false,
+   "reason": "no Wikipedia article"
+  },
+  {
+   "date": "09-06",
+   "name": "Eleutherius",
+   "wikipedia": null,
+   "wikidata_feast_days": [],
+   "kept": false,
+   "reason": "no Wikipedia article"
+  },
+  {
+   "date": "11-27",
+   "name": "Maximus",
+   "wikipedia": null,
+   "wikidata_feast_days": [],
+   "kept": false,
+   "reason": "no Wikipedia article"
+  },
+  {
+   "date": "12-24",
+   "name": "Delphinus",
+   "wikipedia": null,
+   "wikidata_feast_days": [],
+   "kept": false,
+   "reason": "no Wikipedia article"
+  }
+ ],
+ "removed": [
+  {
+   "date": "01-01",
+   "name": "The Eternal Father",
+   "reason": "NOT SOURCED (from memory; Codex's web check found no source either): A devotional title, not a liturgical feast.",
+   "basis": "memory"
+  },
+  {
+   "date": "01-01",
+   "name": "The Circumcision of Our Lord",
+   "reason": "USCCB (https://www.usccb.org/prayer-and-worship/liturgical-year/christmas/christmas-january-1): 1 January is the Solemnity of Mary, the Holy Mother of God, already on the calendar.",
+   "basis": "USCCB"
+  },
+  {
+   "date": "01-13",
+   "name": "The Baptism of Our Lord",
+   "reason": "Old fixed date; the Baptism of the Lord is movable and named from the liturgical day.",
+   "basis": "calendar"
+  },
+  {
+   "date": "01-18",
+   "name": "Peter",
+   "reason": "Pre-1960 Chair of St. Peter at Rome; its only support was the infobox's \"18 January: Confession of Saint Peter (Anglicanism, Lutheranism)\". St. Peter is on the calendar on 22 February and 29 June.",
+   "basis": "infobox"
+  },
+  {
+   "date": "02-05",
+   "name": "Holy Martyrs of Japan",
+   "reason": "The entry describes Paul Miki and companions, celebrated on 6 February (on the calendar); its link was to the Martyrs of Jasenovac.",
+   "basis": "calendar"
+  },
+  {
+   "date": "03-16",
+   "name": "Abraham and Mary his Niece",
+   "reason": "Not settled: the infobox lists several dates, none 16 March and none marked Roman Catholic. Left out until checked against the Roman Martyrology.",
+   "basis": "no source found"
+  },
+  {
+   "date": "03-24",
+   "name": "Simon",
+   "reason": "Simon of Trent: his death was used as a blood libel against the Jews of Trent, and \"on 28 October 1965 ... archbishop of Trent Alessandro Maria Gottardi abolished the cult of Simon\" (Wikipedia, Simon of Trent). He is not in the 2004 Martyrology's index of names.",
+   "basis": "Wikipedia and Martyrologium Romanum (2004)"
+  },
+  {
+   "date": "05-06",
+   "name": "John",
+   "reason": "NOT SOURCED (from memory; Codex's web check found no source either): St. John before the Latin Gate, removed in 1960; St. John is celebrated on 27 December (on the calendar).",
+   "basis": "memory"
+  },
+  {
+   "date": "06-17",
+   "name": "Avitus",
+   "reason": "The entry describes Avitus, abbot near Orléans, but linked the Roman emperor Avitus; no Wikipedia article for the abbot was found.",
+   "basis": "no source found"
+  },
+  {
+   "date": "06-30",
+   "name": "The Commemoration of Saint Paul",
+   "reason": "Pre-1969 commemoration; St. Paul is celebrated with St. Peter on 29 June (on the calendar), and the 2004 Martyrology index lists him at 29 June.",
+   "basis": "calendar"
+  },
+  {
+   "date": "07-01",
+   "name": "Most Precious Blood of Jesus",
+   "reason": "NOT SOURCED (from memory; Codex's web check found no source either): Feast removed from the calendar in 1969.",
+   "basis": "memory"
+  },
+  {
+   "date": "07-13",
+   "name": "Anacletus",
+   "reason": "The same pope as Cletus (both entries link the Wikipedia article Pope Anacletus); the 2004 Martyrology has one entry, \"Cletus Pp, 26 apr., 1 (88)\", and the app keeps him on 26 April. 13 July was the pre-1960 separate feast of Anacletus.",
+   "basis": "Martyrologium Romanum (2004)"
+  },
+  {
+   "date": "08-01",
+   "name": "Peter",
+   "reason": "NOT SOURCED (from memory; Codex's web check found no source either): St. Peter in Chains, removed in 1960; St. Peter is on the calendar on 22 February and 29 June.",
+   "basis": "memory"
+  },
+  {
+   "date": "08-02",
+   "name": "Joseph Chiwatenhwa",
+   "reason": "NOT SOURCED (from memory; Codex's web check found no source either): Wikipedia: an early Christian convert in Canada; not a saint or blessed.",
+   "basis": "memory"
+  },
+  {
+   "date": "08-05",
+   "name": "The Dedication of Saint Mary of the Snows",
+   "reason": "Duplicate of the calendar's Dedication of the Basilica of Saint Mary Major (5 August).",
+   "basis": "calendar"
+  },
+  {
+   "date": "08-06",
+   "name": "Transfiguration of Our Lord",
+   "reason": "Duplicate of the calendar's Transfiguration of the Lord (6 August).",
+   "basis": "calendar"
+  },
+  {
+   "date": "08-11",
+   "name": "Philomena",
+   "reason": "Not in the 2004 Martyrology's index of names; her Wikipedia article says she was \"never formally canonized in the Catholic Church\". Removed at Craig's decision (18 November 2026).",
+   "basis": "Martyrologium Romanum (2004)"
+  },
+  {
+   "date": "08-13",
+   "name": "The Dormition of Mary",
+   "reason": "NOT SOURCED (from memory; Codex's web check found no source either): Eastern title; the Assumption is on the calendar on 15 August.",
+   "basis": "memory"
+  },
+  {
+   "date": "08-17",
+   "name": "Liberatus",
+   "reason": "The entry describes Liberatus, abbot, martyred with six companions under Huneric (it linked the historian Liberatus of Carthage). The Vatican's martyr list (https://www.vatican.va/roman_curia/pontifical_academies/cult-martyrum/martiri/009.html) has them on 2 July, not 17 August: \"A Cartagine, ricordo dei SS. martiri Liberato, abate, Bonifacio, diacono...\". Left out: no Wikipedia article to describe them.",
+   "basis": "Vatican martyr list"
+  },
+  {
+   "date": "08-22",
+   "name": "The Immaculate Heart of Mary",
+   "reason": "Former fixed date; now the Saturday after the Sacred Heart, named from the liturgical day. 22 August is the Queenship (on the calendar).",
+   "basis": "calendar"
+  },
+  {
+   "date": "08-29",
+   "name": "The Beheading of Saint John the Baptist",
+   "reason": "Duplicate of the calendar's Passion of Saint John the Baptist (29 August).",
+   "basis": "calendar"
+  },
+  {
+   "date": "09-20",
+   "name": "Maximin Giraud",
+   "reason": "NOT SOURCED (from memory; Codex's web check found no source either): A La Salette visionary; not a saint or blessed.",
+   "basis": "memory"
+  },
+  {
+   "date": "09-24",
+   "name": "Our Lady of Ransom",
+   "reason": "NOT SOURCED (from memory; Codex's web check found no source either): Former feast, not in the current General Roman or US calendar.",
+   "basis": "memory"
+  },
+  {
+   "date": "10-12",
+   "name": "Jeanne Leber",
+   "reason": "NOT SOURCED (from memory; Codex's web check found no source either): Not canonized or beatified.",
+   "basis": "memory"
+  },
+  {
+   "date": "10-23",
+   "name": "The Feast of the Holy Redeemer",
+   "reason": "NOT SOURCED (from memory; Codex's web check found no source either): A local (Redemptorist) feast, not in the General Roman or US calendar.",
+   "basis": "memory"
+  },
+  {
+   "date": "11-05",
+   "name": "The Feast of the Holy Relics",
+   "reason": "NOT SOURCED (from memory; Codex's web check found no source either): A local feast, not in the General Roman or US calendar.",
+   "basis": "memory"
+  },
+  {
+   "date": "11-18",
+   "name": "Peter",
+   "reason": "Duplicate of the calendar's Dedication of the Basilicas of Saints Peter and Paul (18 November).",
+   "basis": "calendar"
+  },
+  {
+   "date": "11-28",
+   "name": "Catherine Labouré",
+   "reason": "Duplicate: she is placed on 31 December, her Roman Martyrology date.",
+   "basis": "calendar"
+  },
+  {
+   "date": "12-14",
+   "name": "Melanie Calvat",
+   "reason": "NOT SOURCED (from memory; Codex's web check found no source either): A La Salette visionary; not a saint or blessed.",
+   "basis": "memory"
+  },
+  {
+   "date": "12-25",
+   "name": "The Nativity of Our Lord Jesus Christ",
+   "reason": "Duplicate of the Nativity of the Lord (on the calendar).",
+   "basis": "calendar"
+  }
+ ]
+}

@@ -1,7 +1,7 @@
 # DailyReadings — Project Status & TODOS
 
 **Last Updated:** 2026-11-18  
-**Current Version:** 1.0.0 (Build 21)  
+**Current Version:** 1.0.0 (Build 22)  
 **Bundle Identifier:** `com.ridepro.DailyReadings`  
 **Team ID:** `DT58WA8N32`  
 **Target Platform:** iOS 17.0+ | Swift 6.0 (`SWIFT_STRICT_CONCURRENCY = complete`) | SwiftUI | SwiftData  
@@ -15,6 +15,25 @@ DailyReadings is a contemplative Catholic daily Mass readings and liturgical cal
 - **Aesthetic:** Missal-inspired typography, New York serif, subtle gold liturgical accents, warm scripture paper backgrounds, and distraction-free layout.
 - **Offline Reliability:** Guaranteed offline liturgical Computus calendar algorithm and bundled WEB-C (default) and Douay-Rheims Bible SQLite databases, plus an online New American Bible (NAB) tier with SwiftData caching for personal testing only (not licensed for release; see `NAB_COPYRIGHT.md`).
 - **Audio Experience:** Reverent, contemplative audio recitation designed for personal prayer, morning commutes, and hands-free devotion.
+
+---
+
+## Build 22 (18 November 2026)
+
+### Saint of the Day: every fact sourced
+`saints.json` is now built by `Scripts/build_saints.py` (rerun: `python3 -I Scripts/build_saints.py`; add `--cache DIR` while iterating, Wikimedia rate-limits).
+- **Dates.** Every celebration of the General Roman Calendar and the US proper calendar (`Scripts/saint_calendar.json`, 236 celebrations, generated from Wikipedia's General Roman Calendar list, which cites the Roman Missal and the inscription decrees, and the USCCB proper calendar) sits on its current date, first in the day's list. Fixed: Thomas Aquinas (was 03-07, now 01-28), Francis de Sales (01-29 to 01-24), Polycarp (01-26 to 02-23), Ignatius of Antioch (02-01 to 10-17), John Vianney (08-09 to 08-04), Thérèse (10-03 to 10-01), Benedict (03-21 to 07-11), Thomas the Apostle (12-21 to 07-03), and others. Of the 236 celebrations, 105 were already on the right day, 81 were moved from another date, and 50 were added because the data lacked them (Basil and Gregory, Monica, Fisher and More, Cyril and Methodius, Padre Pio, John XXIII, John Paul II, Newman, ...).
+- **Other saints** (352 outside the calendar) keep their dates; none is moved automatically, because Wikidata's feast day is often an Eastern date (Macarius of Alexandria: 2 January in the Roman Martyrology, 19 January in Wikidata).
+- **Unconfirmed dates reviewed (18 Nov 2026).** The 116 saints whose date Wikidata did not confirm were checked against their Wikipedia infobox feast day (48 confirmed), then Claude and Codex reviewed the other 68; decisions and evidence are in `Scripts/saint_date_review.json`, applied by the build. 41 moved to their sourced date (mostly old pre-1969 dates, e.g. Peter Nolasco to 6 May, Catherine of Sweden to 24 March), 4 relinked from the wrong person's article (the entries described Julian and Basilissa, Canute IV, Pope Stephen I and Edmund of Abingdon but linked Julian the Hospitaller, Cnut the Great, Stephen of Armenia and Edmund the Martyr), 24 removed (old or duplicate feasts, people who are not saints or blessed, wrong-person links with no right article), 1 kept. Every saint shown now records what its date rests on (`date_source`). Strongest source used: the Vatican's martyr list (Pontifical Academy Cultorum Martyrum, https://www.vatican.va/roman_curia/pontifical_academies/cult-martyrum/martiri/009.html), which covers martyrs only; it also corrected Telesphorus (5 to 2 January) and Julian and Basilissa (to 6 January).
+- [ ] **12 removals rest on memory**, not a source (marked "NOT SOURCED" in the review file): the Eternal Father, St. John before the Latin Gate, Precious Blood on 1 July, Peter in Chains, the Dormition, Our Lady of Ransom, the Holy Redeemer, the Holy Relics, Jeanne Le Ber, Maximin Giraud, Mélanie Calvat, Joseph Chiwatenhwa. Removing them claims nothing in the app, but the reasons are unverified.
+- **Celebrated day vs Martyrology day (decided 18 Nov 2026).** The app shows each saint on the day they are celebrated (the calendar for calendar saints; otherwise the existing date where Wikidata or the Wikipedia infobox confirms it, or a review decision). The 2004 Martyrologium Romanum (editio typica altera, https://archive.org/details/MartRom2004) often lists a saint on another day, usually the day of death; the card then adds "MARTYROLOGY 15 August". It never moves a saint. Six earlier moves to Martyrology days were undone (John Nepomucene back to 16 May, Silverius 20 June, Theodore Tyro 9 November, Forty Martyrs 10 March, Telesphorus 5 January, Julian and Basilissa 9 January).
+- **`Scripts/martyrology_2004.json`** holds 275 saints' lines from the book's index of names (as OCR'd) with their day, keyed by Wikipedia article; matched by name and death year, by a Codex lookup in the index, or by hand, and each match read before it was kept. `Scripts/check_martyrology.py` downloads the book's text and confirms every line is in the index and carries its day (275 checked, 0 problems). The book's text is not in the repository.
+- **What the index settled:** four people removed as not saints or blessed (Joseph Chiwatenhwa, Jeanne Le Ber, Mélanie Calvat, Maximin Giraud) are not in it; Macarius of Alexandria is 19 January (with Macarius the Great), confirming that move; two more old duplicates removed (the Beheading of St. John on 29 August beside the calendar's Passion, the Commemoration of St. Paul on 30 June).
+- **Martyrology matching finished (18 Nov 2026).** 290 of the 324 saints outside the calendar now have their 2004 index line (`Scripts/martyrology_2004.json`, 333 lines, all passing `check_martyrology.py`), and 70 cards show a Martyrology day. A second Codex lookup round found most of the rest; every quote was checked against the index (12 were inexact and were replaced by the real line or dropped, e.g. Codex gave Hedwig's "depositio: 17 oct." where the index says "natalis: 15 oct."), and wrong-person matches were rejected (a "Britto" who died in 386 for John de Britto; a Carthaginian Saturninus for Saturninus of Toulouse).
+- **Found along the way:** the infobox check had accepted dates the infobox gives for other churches ("18 January: Confession of Saint Peter (Anglicanism, Lutheranism)"); it now ignores dates labelled only for Orthodox, Anglican, Lutheran, Coptic and other churches. That removed the old 18 January "Peter" and moved Tarasius (18 Feb), Leander (13 Mar) and Gall of Clermont (3 Jul) to their Catholic dates. Removed: **Simon of Trent** (24 March; a blood libel, cult abolished in 1965, not in the 2004 Martyrology; a test now fails if any description mentions a blood libel) and the duplicate **Anacletus** of 13 July (the same pope as Cletus, 26 April).
+- **Philomena (11 August) removed:** not in the 2004 Martyrology index, and her article says she was "never formally canonized."
+- [ ] **Still unmatched (35):** 5 are feasts, not people (Our Lady of Good Counsel, Help of Christians, Perpetual Help, La Salette, the Finding of the Holy Cross); the rest are names the OCR or Latin forms hid (e.g. Petronilla's date reads "34 mau", Marcella's "34 ian.", Hugh of Grenoble's line has no date, Germaine Cousin, Thecla and Zephyrinus were not found).
+- [ ] **Release prep (with NAB):** Wikipedia text is CC BY-SA 4.0 (credited on the card; mention it in the App Store/About text too). Some quotes are short excerpts of modern translations (Peers's Teresa, the Rule of St. Benedict).
 
 ---
 
@@ -379,6 +398,7 @@ Second audit round. There was no Build 15.
 - [ ] **Listen to a full day's readings**: does it continue past the First Reading (screen on, and screen locked); is the pace right; speed and voice changes mid-reading; a phone-call interruption. If it still stops, note whether the screen was locked and whether headphones or CarPlay were connected.
 - [ ] **Listen to a prayer and a Rosary decade**: the Stop button should reset when speech ends, and music from another app should resume.
 - [ ] **View every screen at the largest text sizes** (fonts now scale to 1.5x): calendar grid, category pills, mini player, Rosary bead row.
+- [ ] **Build 22 saints**: open Today on a few days (e.g. 28 Jan Thomas Aquinas, 13 Nov Cabrini, a day with an optional memorial) and check the card: right saint, LIVED/BORN IN/ORDER/MARTYROLOGY lines, the quote, the "From Wikipedia" link opens the article, and the long description is not cut off.
 - [ ] **Build 21 fixes**: pause a reading, take or place a call, hang up; it should stay paused. Play a reading, take a call, hang up; it should resume. Leave the app in memory overnight with the reminder on, open it the next day, and check the last pending reminder moved a day later.
 
 ### P1 — Lectionary data gaps
@@ -437,7 +457,7 @@ The order of prayers, the prayer texts and the mysteries were reviewed and are a
 - [ ] **Custom Phonetic Dictionary Expansion**:
   - Add user-requested biblical name pronunciations if any specific verses require tuning.
 - [ ] **Expanded Saint of the Day Database**:
-  - Expand biographies and patronage details for lesser-known regional memorials and optional feasts.
+  - Expand biographies and patronage details for lesser-known regional memorials and optional feasts. (Life years, birthplace, order, quotes and sourced descriptions added in Build 22.)
 - [ ] **Scripture Card Image Sharing**:
   - Generate shareable illuminated card images directly from bookmarked passages for Instagram / Messages / Camera Roll.
 

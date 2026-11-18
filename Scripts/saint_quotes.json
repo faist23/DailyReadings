@@ -1,0 +1,346 @@
+{
+  "_about": "Quotes for saints.json, keyed by the Wikipedia article of the saint or celebration. Every quote carries a 'verify' source, and Scripts/enrich_saints.py fetches it and checks the text appears there word for word (ignoring case and punctuation) before the quote reaches the app; a quote that fails is left out. Kinds: 'webc' = the app's bundled World English Bible; 'wikiquote' = the saint's English Wikiquote page; 'url' = a primary text (New Advent's Church Fathers and Summa); Catechism quotes are checked on the Vatican's online Catechism page that holds the paragraph.",
+  "Hilary of Poitiers": {
+    "text": "The Son of God is nailed to the cross; but on the cross God conquers human death.",
+    "source": "On the Trinity, Book III",
+    "verify": {
+      "wikiquote": "Hilary of Poitiers"
+    }
+  },
+  "Anthony the Great": {
+    "text": "If we would despise the enemy, our thoughts must always be of God and our souls always glad with hope.",
+    "source": "St. Athanasius, Life of St. Antony",
+    "verify": {
+      "wikiquote": "Anthony the Great"
+    }
+  },
+  "Chair of Saint Peter": {
+    "text": "You are the Christ, the Son of the living God.",
+    "source": "St. Peter, Matthew 16:16",
+    "verify": {
+      "webc": "Matthew 16:16"
+    }
+  },
+  "Feast of Saints Peter and Paul": {
+    "text": "Lord, to whom would we go? You have the words of eternal life.",
+    "source": "St. Peter, John 6:68",
+    "verify": {
+      "webc": "John 6:68"
+    }
+  },
+  "Conversion of Paul the Apostle": {
+    "text": "I have been crucified with Christ, and it is no longer I who live, but Christ lives in me.",
+    "source": "St. Paul, Galatians 2:20",
+    "verify": {
+      "webc": "Galatians 2:20"
+    }
+  },
+  "Polycarp": {
+    "text": "Eighty and six years have I served Him, and He never did me any injury: how then can I blaspheme my King and my Saviour?",
+    "source": "The Martyrdom of Polycarp, 9",
+    "verify": {
+      "url": "https://www.newadvent.org/fathers/0102.htm"
+    }
+  },
+  "John Chrysostom": {
+    "text": "Nothing does so much turn our life upside down, as delay and procrastination in the performance of our good works.",
+    "source": "Homily 16 on Matthew",
+    "verify": {
+      "wikiquote": "John Chrysostom"
+    }
+  },
+  "Francis de Sales": {
+    "text": "Have patience with every one, but especially with yourself.",
+    "source": "Quoted by Jean-Pierre Camus, The Spirit of St. Francis de Sales",
+    "verify": {
+      "wikiquote": "Francis de Sales"
+    }
+  },
+  "Ignatius of Antioch": {
+    "text": "I am the wheat of God, and let me be ground by the teeth of the wild beasts, that I may be found the pure bread of Christ.",
+    "source": "Letter to the Romans, 4",
+    "verify": {
+      "url": "https://www.newadvent.org/fathers/0107.htm"
+    }
+  },
+  "Gabriel of Our Lady of Sorrows": {
+    "text": "How well the Lord knows how to repay his servants.",
+    "source": "Letters",
+    "verify": {
+      "wikiquote": "Gabriel of Our Lady of Sorrows"
+    }
+  },
+  "Thomas Aquinas": {
+    "text": "Grace does not destroy nature but perfects it.",
+    "source": "Summa Theologiae, I, q. 1, a. 8",
+    "verify": {
+      "url": "https://www.newadvent.org/summa/1001.htm"
+    }
+  },
+  "Saint Patrick": {
+    "text": "Christ with me, Christ before me, Christ behind me, Christ in me, Christ beneath me, Christ above me.",
+    "source": "St. Patrick's Breastplate (attributed)",
+    "verify": {
+      "wikiquote": "Saint Patrick"
+    }
+  },
+  "Benedict of Nursia": {
+    "text": "Listen carefully, my child, to your master's precepts, and incline the ear of your heart.",
+    "source": "The Rule of St. Benedict, opening words",
+    "verify": {
+      "wikiquote": "Benedict of Nursia"
+    }
+  },
+  "Pope Leo I": {
+    "text": "Christian, acknowledge your dignity.",
+    "source": "Sermon 21, On the Feast of the Nativity",
+    "verify": {
+      "url": "https://www.newadvent.org/fathers/360321.htm"
+    }
+  },
+  "Catherine of Siena": {
+    "text": "If you are what you should be, you will set the whole world on fire.",
+    "source": "Letters",
+    "verify": {
+      "wikiquote": "Catherine of Siena"
+    }
+  },
+  "Athanasius of Alexandria": {
+    "text": "He was made man that we might be made God.",
+    "source": "On the Incarnation, 54",
+    "verify": {
+      "url": "https://www.newadvent.org/fathers/2802.htm"
+    }
+  },
+  "Saint Monica": {
+    "text": "Lay this body anywhere, let not the care for it trouble you at all. This only I ask, that you will remember me at the Lord's altar, wherever you be.",
+    "source": "Her last words, in St. Augustine's Confessions, Book IX",
+    "verify": {
+      "url": "https://www.newadvent.org/fathers/110109.htm"
+    }
+  },
+  "Dominic Savio": {
+    "text": "First I will confess very often and I will receive Communion whenever the confessor gives me permission. Second: I wish to sanctify feastdays. Third: my friends will be Jesus and Mary. Fourth: death but not sins.",
+    "source": "Resolutions on his First Communion, 1849; quoted by Pope John Paul II",
+    "verify": {
+      "wikiquote": "Dominic Savio"
+    }
+  },
+  "Pope Gregory VII": {
+    "text": "I have loved righteousness and hated iniquity, and therefore I die in exile.",
+    "source": "Last words, 1085",
+    "verify": {
+      "wikiquote": "Pope Gregory VII"
+    }
+  },
+  "Philip Neri": {
+    "text": "A man without prayer is an animal without the use of reason.",
+    "source": "Ricordi e Detti di San Filippo Neri",
+    "verify": {
+      "wikiquote": "Philip Neri"
+    }
+  },
+  "Joan of Arc": {
+    "text": "If I am not in the state of grace, may God put me there; and if I am, may God so keep me.",
+    "source": "Her trial, 1431",
+    "verify": {
+      "wikiquote": "Joan of Arc"
+    }
+  },
+  "Anthony of Padua": {
+    "text": "Just as the root feeds the tree, so humility feeds the soul.",
+    "source": "Sermon for the Eighth Sunday after Pentecost",
+    "verify": {
+      "wikiquote": "Anthony of Padua"
+    }
+  },
+  "Nativity of John the Baptist": {
+    "text": "He must increase, but I must decrease.",
+    "source": "John the Baptist, John 3:30",
+    "verify": {
+      "webc": "John 3:30"
+    }
+  },
+  "Beheading of John the Baptist": {
+    "text": "He must increase, but I must decrease.",
+    "source": "John the Baptist, John 3:30",
+    "verify": {
+      "webc": "John 3:30"
+    }
+  },
+  "Irenaeus": {
+    "text": "The glory of God is a living man; and the life of man consists in beholding God.",
+    "source": "Against Heresies, IV.20.7",
+    "verify": {
+      "url": "https://www.newadvent.org/fathers/0103420.htm"
+    }
+  },
+  "Thomas More": {
+    "text": "I die the king's faithful servant, and God's first.",
+    "source": "St. Thomas More, Words on the scaffold, 1535 (attributed)",
+    "verify": {
+      "wikiquote": "Thomas More"
+    }
+  },
+  "Vincent de Paul": {
+    "text": "The reason why God is so great a lover of humility is because He is the great lover of truth; and humility is nothing but truth.",
+    "source": "As quoted in The Groundwork of the Christian Virtues",
+    "verify": {
+      "wikiquote": "Vincent de Paul"
+    }
+  },
+  "Martha": {
+    "text": "Yes, Lord. I have come to believe that you are the Christ, God's Son, he who comes into the world.",
+    "source": "St. Martha, John 11:27",
+    "verify": {
+      "webc": "John 11:27"
+    }
+  },
+  "Ignatius of Loyola": {
+    "text": "Take, Lord, and receive all my liberty, my memory, my understanding, and my entire will.",
+    "source": "The Spiritual Exercises, the Suscipe",
+    "verify": {
+      "wikiquote": "Ignatius of Loyola"
+    }
+  },
+  "Jean Vianney": {
+    "text": "The priesthood is the love of the heart of Jesus.",
+    "source": "Quoted in the Catechism of the Catholic Church, 1589",
+    "verify": {
+      "url": "https://www.vatican.va/archive/ENG0015/__P4Y.HTM"
+    }
+  },
+  "Saint Lawrence": {
+    "text": "The flesh is roasted, turn it and eat.",
+    "source": "On the gridiron, as told by St. Ambrose, On the Duties of the Clergy, I.41",
+    "verify": {
+      "url": "https://www.newadvent.org/fathers/34011.htm"
+    }
+  },
+  "Maximilian Kolbe": {
+    "text": "Hate is not a creative force. Love is a creative force.",
+    "source": "Quoted in Saint Maximilian Kolbe: Knight of the Immaculate",
+    "verify": {
+      "wikiquote": "Maximilian Kolbe"
+    }
+  },
+  "Bernard of Clairvaux": {
+    "text": "Believe me, you will find more lessons in the woods than in books. Trees and stones will teach you what you cannot learn from masters.",
+    "source": "Letter 106",
+    "verify": {
+      "wikiquote": "Bernard of Clairvaux"
+    }
+  },
+  "Bartholomew the Apostle": {
+    "text": "Rabbi, you are the Son of God! You are King of Israel!",
+    "source": "Nathanael, John 1:49",
+    "verify": {
+      "webc": "John 1:49"
+    }
+  },
+  "Augustine of Hippo": {
+    "text": "You have made us for Yourself, and our hearts are restless until they rest in You.",
+    "source": "Confessions, Book I",
+    "verify": {
+      "url": "https://www.newadvent.org/fathers/110101.htm"
+    }
+  },
+  "Rose of Lima": {
+    "text": "Apart from the cross there is no other ladder by which we may get to heaven.",
+    "source": "Quoted in Hansen, Vita mirabilis (1664)",
+    "verify": {
+      "wikiquote": "Rose of Lima"
+    }
+  },
+  "Cyprian": {
+    "text": "He can no longer have God for his Father, who has not the Church for his mother.",
+    "source": "St. Cyprian, On the Unity of the Church, 6",
+    "verify": {
+      "url": "https://www.newadvent.org/fathers/050701.htm"
+    }
+  },
+  "Jerome": {
+    "text": "Ignorance of the Scriptures is ignorance of Christ.",
+    "source": "Commentary on Isaiah, Prologue",
+    "verify": {
+      "wikiquote": "Jerome"
+    }
+  },
+  "Saint Remigius": {
+    "text": "Gently bend your neck, Sigamber; worship what you burned; burn what you worshipped.",
+    "source": "At the baptism of Clovis, in Gregory of Tours, History of the Franks, II.31",
+    "verify": {
+      "wikiquote": "Saint Remigius"
+    }
+  },
+  "Thérèse of Lisieux": {
+    "text": "For me, prayer is a surge of the heart; it is a simple look turned toward heaven, it is a cry of recognition and of love, embracing both trial and joy.",
+    "source": "Story of a Soul; quoted in the Catechism of the Catholic Church, 2558",
+    "verify": {
+      "url": "https://www.vatican.va/archive/ENG0015/__P8Z.HTM"
+    }
+  },
+  "Francis of Assisi": {
+    "text": "Where there is charity and wisdom, there is neither fear nor ignorance.",
+    "source": "Admonitions, 27",
+    "verify": {
+      "wikiquote": "Francis of Assisi"
+    }
+  },
+  "Teresa of Ávila": {
+    "text": "Let nothing disturb thee; Let nothing dismay thee: All things pass; God never changes. Patience attains All that it strives for. He who has God Finds he lacks nothing: God alone suffices.",
+    "source": "Poem IX, tr. E. Allison Peers",
+    "verify": {
+      "wikiquote": "Teresa of Ávila"
+    }
+  },
+  "Elizabeth of Hungary": {
+    "text": "Here before my eyes is our sweet Saviour crowned with thorns. My crown would mock Him if I dared kneel at His feet bedecked with gold and jewels.",
+    "source": "Quoted in Schmidt-Pauli, Elizabeth, Saint of Hungary (1932)",
+    "verify": {
+      "wikiquote": "Elizabeth of Hungary"
+    }
+  },
+  "John of the Cross": {
+    "text": "At the evening of life, we shall be judged on our love.",
+    "source": "Sayings of Light and Love; quoted in the Catechism of the Catholic Church, 1022",
+    "verify": {
+      "url": "https://www.vatican.va/archive/ENG0015/__P2L.HTM"
+    }
+  },
+  "Andrew the Apostle": {
+    "text": "We have found the Messiah!",
+    "source": "John 1:41",
+    "verify": {
+      "webc": "John 1:41"
+    }
+  },
+  "Thomas the Apostle": {
+    "text": "My Lord and my God!",
+    "source": "John 20:28",
+    "verify": {
+      "webc": "John 20:28"
+    }
+  },
+  "Saint Stephen": {
+    "text": "Lord, don't hold this sin against them!",
+    "source": "Acts 7:60",
+    "verify": {
+      "webc": "Acts 7:60"
+    }
+  },
+  "Thomas Becket": {
+    "text": "For the name of Jesus and the protection of the Church I am ready to embrace death.",
+    "source": "As recorded by Edward Grim, who witnessed his murder",
+    "verify": {
+      "wikiquote": "Thomas Becket"
+    }
+  },
+  "Basil of Caesarea": {
+    "text": "The bread that surpasses you is the bread of the hungry; the tunic hanging in your closet is the tunic of the naked; the shoes you do not wear are the shoes of the barefoot.",
+    "source": "St. Basil, quoted by Pope Paul VI, Rinnovamento e Riconciliazione (1976)",
+    "verify": {
+      "wikiquote": "Basil of Caesarea"
+    }
+  }
+}

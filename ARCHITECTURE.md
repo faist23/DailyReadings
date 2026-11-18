@@ -26,7 +26,7 @@ This document provides a comprehensive technical overview of **DailyReadings**, 
 | **Persistence** | SwiftData (`@Model CachedReading`) + SQLite (`bible_webc.sqlite` default modern + `bible_drb.sqlite` traditional) + `UserDefaults` |
 | **Audio** | `AVFoundation` (`AVSpeechSynthesizer`, `AVAudioSession`), `MediaPlayer` (`MPNowPlayingInfoCenter`) |
 | **Project Spec** | [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`project.yml`) generating `DailyReadings.xcodeproj` |
-| **Test Suite** | `DailyReadingsTests` (89 unit tests: `LiturgicalCalendarTests`, `ScriptureEngineTests`, `LectionaryCoverageTests`, `AudioPlaybackTests`, `NotificationSchedulingTests`, `ReadingsReloadTests`) |
+| **Test Suite** | `DailyReadingsTests` (100 unit tests: `LiturgicalCalendarTests`, `ScriptureEngineTests`, `LectionaryCoverageTests`, `AudioPlaybackTests`, `NotificationSchedulingTests`, `ReadingsReloadTests`, `SaintLifeFactsTests`, `SaintCalendarTests`) |
 | **Bundle ID** | `com.ridepro.DailyReadings` |
 | **Team ID** | `DT58WA8N32` |
 | **Privacy** | Apple Privacy Manifest compliant (`DailyReadings/PrivacyInfo.xcprivacy`) |
@@ -246,8 +246,8 @@ DailyReadings/
         ├── lectionary.json           # Readings by liturgical cycle (generated; see Scripts/)
         ├── lectionary_dates.json     # Readings by calendar date, 2023-01-01 to 2027-05-31
         ├── versification.json        # Lectionary → Bible verse numbering (generated; see Scripts/)
-        └── saints.json               # Catholic hagiography database
-DailyReadingsTests/                   # Automated Unit Test Target (89 passing tests)
+        └── saints.json               # Saints by date, built by Scripts/build_saints.py from the calendar, Wikipedia and Wikidata
+DailyReadingsTests/                   # Automated Unit Test Target (100 passing tests)
 ├── LiturgicalCalendarTests.swift     # 22 tests: calendar edge cases, Advent bounds, Computus, Ascension, memorials, reminder content, Gospel Acclamation backfill (and when not to), translation labels, NAB cache clean-up, every obligatory memorial present, no crash when given no days to search for a Holy Day
 ├── ScriptureEngineTests.swift        # 22 tests: citation parsing (including "and"), Hebrew-Vulgate mapping (including Sirach 50), psalm stanza formatting & SQLite queries
 ├── LectionaryCoverageTests.swift     # 20 tests: the real lectionary through both Bibles, cycle coverage, memorial overrides, audio passages, Rosary schedule
@@ -421,5 +421,5 @@ When reviewing DailyReadings at this stage, Claude AI should focus on:
 3. **Audio Utterance Pacing**:
    * Fine-tuning speech synthesizer boundary pauses between readings, liturgical announcements, and psalm antiphons for maximum reverence.
 4. **Codebase Cleanliness & Invariant Verification**:
-   * Verify all 89 unit tests in `DailyReadingsTests` remain green under Swift 6 strict concurrency.
+   * Verify all 100 unit tests in `DailyReadingsTests` remain green under Swift 6 strict concurrency.
    * After any change to `lectionary_dates.json` or the seeds, rebuild `lectionary.json` and re-run `LectionaryCoverageTests`.
