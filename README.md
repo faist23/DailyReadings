@@ -49,6 +49,7 @@
   - The day's saints from the General Roman Calendar and the US proper calendar, each on its current date, with the calendar's title and rank.
   - Descriptions from each saint's or feast's Wikipedia article, credited on the card (CC BY-SA 4.0); patronages only where Wikipedia's infobox lists them.
   - Life facts from Wikidata where known: years lived, birthplace, religious order, canonization year.
+  - The day the 2004 Roman Martyrology lists the saint, when it differs from the celebrated day (74 saints).
   - A quote of the saint's own words for 49 saints and feasts, each checked word for word against its source (Scripture, Wikiquote, New Advent, the Catechism) when `Scripts/build_saints.py` builds the data.
 - **Reverent Audio Recitation**:
   - Continuous, sequential text-to-speech recitation of all Mass readings with proper liturgical announcements, responses, and acclamations (the Gospel Acclamation with its Alleluia, except in Lent).
@@ -145,4 +146,4 @@ The Xcode project is generated from `project.yml`; run `xcodegen generate` after
 
 ## Status
 
-Not released. Current build: 1.0.0 (23), which rebuilds the Saint of the Day data so every date, description and quote has a source (18 November 2026), on top of the fourth audit round. What was done and what is still open is in `TODOS.md` ("Build 22", "Build 21" and "Active & Upcoming TODOS") and `ARCHITECTURE.md` sections 7 and 8.
+Not released. Current build: 1.0.0 (23), which rebuilds the Saint of the Day data so every date, description and quote has a source (18 November 2026), on top of the fourth audit round. What was done and what is still open is in `TODOS.md` ("Build 23", "Build 22", "Build 21" and "Active & Upcoming TODOS") and `ARCHITECTURE.md` sections 7 and 8.

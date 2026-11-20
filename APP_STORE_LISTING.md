@@ -66,6 +66,11 @@ Never lose access to scripture in church basements, airplanes, or rural retreats
 - Unified morning prayer reminder featuring the Saint or Feast of the day and Verse of the Day.
 - Support for Ascension Thursday provinces (Boston, Hartford, New York, Newark, Omaha, Philadelphia).
 
+• SAINT OF THE DAY
+- The day's saints from the General Roman Calendar and the US proper calendar, each on the day the Church celebrates them.
+- Short biographies from Wikipedia (credited in the app, CC BY-SA 4.0), with when and where the saint lived, their religious order, and the day the Roman Martyrology lists them.
+- A quote of the saint's own words for nearly 50 saints and feasts, each checked against its source.
+
 • HOLY ROSARY & NOVICE COMPANION
 - Interactive bead-by-bead guided Rosary with 10-dot decade progress tracking and gentle haptics.
 - Automated day-of-week mystery detection (Joyful, Luminous, Sorrowful, Glorious).
