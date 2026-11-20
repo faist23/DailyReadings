@@ -3143,6 +3143,11 @@
         "died": "394",
         "birthplace": "Asyut",
         "date_source": "Wikidata feast day",
+        "martyrology": {
+          "date": "10-17",
+          "label": "17 October",
+          "entry": "lycopoli in 7eg$pto, sancti ioannis"
+        },
         "feast_day": "March 27"
       }
     ]
@@ -3397,7 +3402,7 @@
         "legacy": "Priest · Optional memorial",
         "rank": "optional memorial",
         "calendar": "General Roman Calendar",
-        "summary": "Vincent Ferrer, OP was a Valencian Dominican friar who gained acclaim as a preacher, missionary and logician. After supporting Antipope Benedict XIII during the Western Schism, Ferrer travelled to preach across Western Europe and the British Isles. His preaching has been credited in some sources as converting 25,000 Jews to Catholicism. Other sources indicate that it involved support for coercive means, such as the forcible conversion of synagogues into churches. He was canonized in 1962",
+        "summary": "Vincent Ferrer, OP was a Valencian Dominican friar who gained acclaim as a preacher, missionary and logician. After supporting Antipope Benedict XIII during the Western Schism, Ferrer travelled to preach across Western Europe and the British Isles. His preaching has been credited in some sources as converting 25,000 Jews to Catholicism, due to his zeal and holiness.",
         "born": "1350",
         "died": "1419",
         "birthplace": "Valencia",
@@ -9036,6 +9041,11 @@
         "died": "217",
         "birthplace": "Rome",
         "date_source": "Wikidata feast day",
+        "martyrology": {
+          "date": "12-20",
+          "label": "20 December",
+          "entry": "rom iuxta coemeterium callisti via appia, depositio sancti zephyrini, papae"
+        },
         "feast_day": "August 26"
       }
     ]
@@ -10032,7 +10042,7 @@
   "09-23": {
     "date": "09-23",
     "feast_day": "September 23",
-    "count": 3,
+    "count": 2,
     "saints": [
       {
         "name": "Saint Pius of Pietrelcina",
@@ -10070,22 +10080,6 @@
         "died": "79",
         "birthplace": "Tuscany",
         "date_source": "Wikidata feast day",
-        "feast_day": "September 23"
-      },
-      {
-        "name": "Thecla",
-        "legacy": "1st-century saint",
-        "summary": "Thecla was a saint of the early Christian Church, and a reported follower of Paul the Apostle. The earliest record of her life comes from the ancient apocryphal Acts of Paul and Thecla.",
-        "patronage": null,
-        "wikipedia": "https://en.wikipedia.org/wiki/Thecla",
-        "sources": [
-          {
-            "title": "Thecla",
-            "url": "https://en.wikipedia.org/wiki/Thecla"
-          }
-        ],
-        "birthplace": "Konya",
-        "date_source": "Wikipedia infobox feast day: {{ubl|September 23 (Catholic Roman Rite, Episcopal)|September 24 (Eastern Orthodox)|Thout 23 (Coptic) |Tuesday after fourth Sunday of the Exaltation of the Cross (Armenian)}}",
         "feast_day": "September 23"
       }
     ]
@@ -11184,7 +11178,7 @@
       {
         "name": "Ursula",
         "legacy": "Frankish saint",
-        "summary": "Ursula (Latin for 'little she-bear') was a Romano-British virgin and martyr possibly of royal origin. She is venerated as a saint in the Catholic Church, Eastern Orthodox Church and the Anglican Communion. Her feast day in the pre-1970 General Roman Calendar and in some regional calendars of the ordinary form of the Roman Rite is 21 October.",
+        "summary": "Ursula of Cologne (Ursula, from Latin \"little she-bear\") was a Romano-British virgin martyr possibly of royal origin. She is venerated as a saint in the Catholic Church, Eastern Orthodox Church and the Anglican Communion. Her feast day in the pre-1970 General Roman Calendar and in some regional calendars of the ordinary form of the Roman Rite is 21 October.",
         "patronage": [
           "students"
         ],
@@ -13197,6 +13191,11 @@
         "died": "619",
         "birthplace": "Auvergne",
         "date_source": "Wikidata feast day",
+        "martyrology": {
+          "date": "04-01",
+          "label": "1 April",
+          "entry": "lauconz prope ambianum in gallia, sancti valerici, presbyteri"
+        },
         "feast_day": "December 12"
       }
     ]
@@ -13380,6 +13379,11 @@
         ],
         "died": "250",
         "date_source": "Wikipedia infobox feast day: 19 December or 10 September",
+        "martyrology": {
+          "date": "09-10",
+          "label": "10 September",
+          "entry": "alexandriz in /egypto, sancti nemesii, martyris"
+        },
         "feast_day": "December 19"
       }
     ]
@@ -13761,7 +13765,7 @@
   },
   "index": {
     "days": 366,
-    "saints": 559,
+    "saints": 558,
     "dates": [
       "01-01",
       "01-02",

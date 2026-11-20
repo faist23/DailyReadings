@@ -1,6 +1,13 @@
 {
  "_about": "Days on which the 2004 Martyrologium Romanum (editio typica altera, https://archive.org/details/MartRom2004) lists saints, keyed by Wikipedia article. 'entry' is the saint's line in the book's index of names, as OCR'd (errors kept so it can be checked); Scripts/check_martyrology.py confirms every line is in the index and carries the date. The app shows saints on their celebrated day and adds this day on the card when it differs; it never moves a saint. Matched by name and death year, or looked up by Codex in the index and checked; each match was read before it was kept.",
  "saints": {
+  "Abdon and Sennen": {
+   "name": "Abdon and Sennen",
+   "entry": "romme in cemeterio pontiani via portuensi, sanctorum abdon et sennen, martyrum",
+   "date": "07-30",
+   "in": "text",
+   "matched_by": "found by hand in the body of the book"
+  },
   "Adrian of Batanea": {
    "name": "Adrian and Eubulus",
    "entry": "Hadrianus, m. in Palestina, 5 mar., 5 (309)",
@@ -355,6 +362,13 @@
    "date": "03-03",
    "matched_by": "Codex lookup (high), checked against the index"
   },
+  "Cyriacus": {
+   "name": "Cyriacus",
+   "entry": "rome via ostiensi miliario septimo, sanctorum cyriaci, largi",
+   "date": "08-08",
+   "in": "text",
+   "matched_by": "found by hand in the body of the book"
+  },
   "Cyricus and Julitta": {
    "name": "Julitta",
    "entry": "Quiricus et Iulitta, 16 1iun., 1 (s. inc.)",
@@ -468,6 +482,13 @@
    "entry": "Euphrasia, virgo in Thebaide, 24 iul., 5 (s. V)",
    "date": "07-24",
    "matched_by": "found by hand in the index"
+  },
+  "Eusebius of Rome": {
+   "name": "Eusebius of Rome",
+   "entry": "romse, sancti eusebii, tituli sui conditoris in exquiliis",
+   "date": "08-14",
+   "in": "text",
+   "matched_by": "found by hand in the body of the book"
   },
   "Father Damien": {
    "name": "Father Damien",
@@ -769,6 +790,13 @@
    "date": "05-30",
    "matched_by": "found by hand in the index (Codex's quote was inexact)"
   },
+  "Hugh of Châteauneuf": {
+   "name": "Hugh of Grenoble",
+   "entry": "gratianopoli in burgundia, sancti hugonis, episcopi",
+   "date": "04-01",
+   "in": "text",
+   "matched_by": "found by hand in the body of the book"
+  },
   "Hugh of Cluny": {
    "name": "Hugh of Cluny",
    "entry": "Hugo, abbas Cluniacen., 29 apr., 5 (1109)",
@@ -882,6 +910,20 @@
    "entry": "Ioannes et Paulus, titulares basilicee in Urbe, 26 iun., 1 (s. IV)",
    "date": "06-26",
    "matched_by": "Codex lookup (high), checked against the index"
+  },
+  "John de Britto": {
+   "name": "John de Britto",
+   "entry": "in loco oriur in regno maravensi in india, sancti ioannis de brito, presbyteri e societate iesu et martyris",
+   "date": "02-04",
+   "in": "text",
+   "matched_by": "found by hand in the body of the book"
+  },
+  "John of Egypt": {
+   "name": "John of Egypt",
+   "entry": "lycopoli in 7eg$pto, sancti ioannis",
+   "date": "10-17",
+   "in": "text",
+   "matched_by": "found by hand in the body of the book"
   },
   "John of Matha": {
    "name": "John of Matha",
@@ -1219,6 +1261,13 @@
    "date": "06-08",
    "matched_by": "name and death year"
   },
+  "Mellonius": {
+   "name": "Mello of Cardiff",
+   "entry": "rothomagi in gallia lugdunensi, sancti malloni, episcopi",
+   "date": "10-22",
+   "in": "text",
+   "matched_by": "found by hand in the body of the book"
+  },
   "Mesmin": {
    "name": "Maximin of Verdun",
    "entry": "Maximinus, presb., 15 dec., 2 (s. VI)",
@@ -1254,6 +1303,13 @@
    "entry": "Nazarius et Celsus, 28 iul., 5 (Inventio, 395)",
    "date": "07-28",
    "matched_by": "Codex lookup (medium), checked against the index"
+  },
+  "Nemesion": {
+   "name": "Nemesion",
+   "entry": "alexandriz in /egypto, sancti nemesii, martyris",
+   "date": "09-10",
+   "in": "text",
+   "matched_by": "found by hand in the body of the book"
   },
   "Nicasius of Rheims": {
    "name": "Nicasius",
@@ -1374,6 +1430,13 @@
    "entry": "Petrus González Telmi?*, 14 apr., 10 (1246)",
    "date": "04-14",
    "matched_by": "name and death year"
+  },
+  "Peter I of Alexandria": {
+   "name": "Peter of Alexandria",
+   "entry": "alexandriz in /egypto, sancti petri, episcopi et martyris",
+   "date": "11-25",
+   "in": "text",
+   "matched_by": "found by hand in the body of the book"
   },
   "Peter Nolasco": {
    "name": "Peter Nolasco",
@@ -1554,6 +1617,13 @@
    "entry": "Zacharias Pp, 15 mar., 2 (752)",
    "date": "03-15",
    "matched_by": "name and death year"
+  },
+  "Pope Zephyrinus": {
+   "name": "Zephyrinus",
+   "entry": "rom iuxta coemeterium callisti via appia, depositio sancti zephyrini, papae",
+   "date": "12-20",
+   "in": "text",
+   "matched_by": "found by hand in the body of the book"
   },
   "Praxedes": {
    "name": "Praxedes",
@@ -1837,6 +1907,13 @@
    "date": "06-15",
    "matched_by": "Codex lookup (high), checked against the index"
   },
+  "Saturnin": {
+   "name": "Saturninus",
+   "entry": "tolosse in gallha narbonensi, commemoratio sancti saturnini, episcopi et martyris",
+   "date": "11-29",
+   "in": "text",
+   "matched_by": "found by hand in the body of the book"
+  },
   "Serenus the Gardener": {
    "name": "Serenus",
    "entry": "Sirenus seu Sinerus, 23 feb., 2 (ca. 307)",
@@ -1878,6 +1955,13 @@
    "entry": "Stephana Quinzani*, 2 ian., 13 (1530)",
    "date": "01-02",
    "matched_by": "name and death year"
+  },
+  "Susanna of Rome": {
+   "name": "Susanna",
+   "entry": "ibidem, commemoratio sanctze susannz, sub cuius nomine",
+   "date": "08-11",
+   "in": "text",
+   "matched_by": "found by hand in the body of the book"
   },
   "Symphorian and Timotheus": {
    "name": "Symphorian",
@@ -1927,6 +2011,13 @@
    "date": "07-03",
    "matched_by": "Codex lookup (high), checked against the index"
   },
+  "Veronica of Milan": {
+   "name": "Veronica of Milan",
+   "entry": "mediolani in langobardia, beatze veronicze de binasco negroni, virginis",
+   "date": "01-13",
+   "in": "text",
+   "matched_by": "found by hand in the body of the book"
+  },
   "Vicente Liem de la Paz": {
    "name": "Vincent Liem de la Paz",
    "entry": "Vincentius Lé Quang Liém, memoria: 24 nov., 1; passio: cf. 7 nov., 13 (1773)",
@@ -1957,6 +2048,13 @@
    "date": "04-28",
    "matched_by": "found by hand in the index"
   },
+  "Walaric": {
+   "name": "Valery",
+   "entry": "lauconz prope ambianum in gallia, sancti valerici, presbyteri",
+   "date": "04-01",
+   "in": "text",
+   "matched_by": "found by hand in the body of the book"
+  },
   "Wenceslaus I, Duke of Bohemia": {
    "name": "Saint Wenceslaus",
    "entry": "Venceslaus, dux Bohemie, 28 sept., 1 (929/935)",
@@ -1968,6 +2066,13 @@
    "entry": "Wilfridus, 24 apr., 8 (709)",
    "date": "04-24",
    "matched_by": "name and death year"
+  },
+  "William of Montevergine": {
+   "name": "William of Vercelli",
+   "entry": "montis virginis condidit sociosque sibi ascivit, quos alta sua spiritali doctrina erudivit",
+   "date": "06-25",
+   "in": "text",
+   "matched_by": "found by hand in the body of the book"
   },
   "Willibrord": {
    "name": "Willibrord",
