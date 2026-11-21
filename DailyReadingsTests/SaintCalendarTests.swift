@@ -92,6 +92,25 @@ final class SaintCalendarTests: XCTestCase {
         XCTAssertNil(aquinas.martyrologyDay)
     }
 
+    func testDescriptionsHaveBalancedParentheses() throws {
+        // Some Wikipedia leads open or close a parenthesis they never match ("Vincenzo Strambi,
+        // religious name ...; 1 January 1745 — 1 January 1824) was"); the build mends them.
+        var texts = allSaints.map { ($0.name, $0.biography) }
+        for title in ["Pentecost Sunday", "Solemnity of All Saints", "The Nativity of the Lord (Christmas)"] {
+            let feast = try XCTUnwrap(LiturgicalCelebrationBlurbs.feast(forTitle: title, date: date(6, 1)))
+            texts.append((feast.name, feast.biography))
+        }
+        let unbalanced = texts.filter { _, text in
+            var depth = 0
+            for ch in text {
+                if ch == "(" { depth += 1 }
+                if ch == ")" { depth -= 1; if depth < 0 { return true } }
+            }
+            return depth != 0
+        }
+        XCTAssertEqual(unbalanced.map(\.0), [])
+    }
+
     func testNoSuppressedCultIsShownAsASaint() {
         // Simon of Trent was in the old data; his cult (a blood libel) was abolished in 1965.
         let shown = allSaints.filter { $0.biography.localizedCaseInsensitiveContains("blood libel") }

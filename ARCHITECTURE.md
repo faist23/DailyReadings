@@ -26,7 +26,7 @@ This document provides a comprehensive technical overview of **DailyReadings**, 
 | **Persistence** | SwiftData (`@Model CachedReading`) + SQLite (`bible_webc.sqlite` default modern + `bible_drb.sqlite` traditional) + `UserDefaults` |
 | **Audio** | `AVFoundation` (`AVSpeechSynthesizer`, `AVAudioSession`), `MediaPlayer` (`MPNowPlayingInfoCenter`) |
 | **Project Spec** | [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`project.yml`) generating `DailyReadings.xcodeproj` |
-| **Test Suite** | `DailyReadingsTests` (100 unit tests: `LiturgicalCalendarTests`, `ScriptureEngineTests`, `LectionaryCoverageTests`, `AudioPlaybackTests`, `NotificationSchedulingTests`, `ReadingsReloadTests`, `SaintLifeFactsTests`, `SaintCalendarTests`) |
+| **Test Suite** | `DailyReadingsTests` (101 unit tests: `LiturgicalCalendarTests`, `ScriptureEngineTests`, `LectionaryCoverageTests`, `AudioPlaybackTests`, `NotificationSchedulingTests`, `ReadingsReloadTests`, `SaintLifeFactsTests`, `SaintCalendarTests`) |
 | **Bundle ID** | `com.ridepro.DailyReadings` |
 | **Team ID** | `DT58WA8N32` |
 | **Privacy** | Apple Privacy Manifest compliant (`DailyReadings/PrivacyInfo.xcprivacy`) |
@@ -252,7 +252,7 @@ DailyReadings/
         ├── lectionary_dates.json     # Readings by calendar date, 2023-01-01 to 2027-05-31
         ├── versification.json        # Lectionary → Bible verse numbering (generated; see Scripts/)
         └── saints.json               # Saints by date, built by Scripts/build_saints.py from the calendar, Wikipedia and Wikidata
-DailyReadingsTests/                   # Automated Unit Test Target (100 passing tests)
+DailyReadingsTests/                   # Automated Unit Test Target (101 passing tests)
 ├── LiturgicalCalendarTests.swift     # 22 tests: calendar edge cases, Advent bounds, Computus, Ascension, memorials, reminder content, Gospel Acclamation backfill (and when not to), translation labels, NAB cache clean-up, every obligatory memorial present, no crash when given no days to search for a Holy Day
 ├── ScriptureEngineTests.swift        # 22 tests: citation parsing (including "and"), Hebrew-Vulgate mapping (including Sirach 50), psalm stanza formatting & SQLite queries
 ├── LectionaryCoverageTests.swift     # 20 tests: the real lectionary through both Bibles, cycle coverage, memorial overrides, audio passages, Rosary schedule
@@ -260,7 +260,7 @@ DailyReadingsTests/                   # Automated Unit Test Target (100 passing 
 ├── NotificationSchedulingTests.swift # 8 tests: which reminders and vigil alerts are pending after each settings change; a refresh in progress cannot outlive a later one; the reminder verse matches the Today screen; a return on a later day moves the 30 days forward
 ├── ReadingsReloadTests.swift        # 8 tests: reload after a translation or Ascension change, failed NAB refresh keeps the cache, the NAB-unavailable notice, a load that finishes late cannot replace the latest
 ├── SaintLifeFactsTests.swift         # 4 tests: life facts and quotes reach the model; the LIVED line
-└── SaintCalendarTests.swift          # 7 tests: current calendar dates, old dates gone, the day's saint is that day's (all of 2026), every description sourced, Martyrology day shown without moving the saint, no suppressed cult shown
+└── SaintCalendarTests.swift          # 8 tests: current calendar dates, old dates gone, the day's saint is that day's (all of 2026), every description sourced, Martyrology day shown without moving the saint, no suppressed cult shown, balanced parentheses in every description
 Scripts/                              # Data generators (not part of the app target)
 ├── build_versification.py            # Builds Resources/versification.json
 ├── BuildLectionaryIndex/main.swift   # Builds Resources/lectionary.json from the dated data
@@ -436,5 +436,5 @@ When reviewing DailyReadings at this stage, Claude AI should focus on:
 3. **Audio Utterance Pacing**:
    * Fine-tuning speech synthesizer boundary pauses between readings, liturgical announcements, and psalm antiphons for maximum reverence.
 4. **Codebase Cleanliness & Invariant Verification**:
-   * Verify all 100 unit tests in `DailyReadingsTests` remain green under Swift 6 strict concurrency.
+   * Verify all 101 unit tests in `DailyReadingsTests` remain green under Swift 6 strict concurrency.
    * After any change to `lectionary_dates.json` or the seeds, rebuild `lectionary.json` and re-run `LectionaryCoverageTests`.

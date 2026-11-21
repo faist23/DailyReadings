@@ -217,10 +217,69 @@ def drop_lead_parenthetical(paragraph):
         else:
             i += 1
     paragraph = re.sub(r",\s*Latin: [^)]*\)", "", paragraph)  # a parenthesis Wikipedia left unopened
+    paragraph = repair_parentheses(paragraph)
     return re.sub(r",\s*,", ",", re.sub(r"\s+([,.;])", r"\1", paragraph))
 
 
+VERB = re.compile(r"\s(?:was|is|are|were)\b")
+
+
+def repair_parentheses(paragraph):
+    """Mend a lead whose parentheses Wikipedia (or the removals above) left unbalanced.
+
+    An unclosed "(" is closed before the sentence's verb, or dropped with its text when that
+    text is a name in another language or a date ("Felix of Valois, OSsT (French: Félix de
+    Valois; was" -> "Felix of Valois, OSsT was"). A ")" with no "(" is dropped alone, or with
+    the clause it ends when that clause is dates or names ("Vincenzo Strambi, religious name
+    ...; 1 January 1745 — 1 January 1824) was" -> "Vincenzo Strambi was")."""
+    for _ in range(6):
+        depth, stray, opened = 0, None, []
+        for k, ch in enumerate(paragraph):
+            if ch == "(":
+                opened.append(k)
+            elif ch == ")":
+                if opened:
+                    opened.pop()
+                elif stray is None:
+                    stray = k
+        if stray is not None:
+            start = max(paragraph.rfind(",", 0, stray), paragraph.rfind(";", 0, stray))
+            first = min([x for x in (paragraph.find(","), paragraph.find(";")) if x >= 0] or [stray])
+            clause = paragraph[first:stray]
+            if NOISE.search(clause) and stray - first < 260:
+                paragraph = paragraph[:first] + paragraph[stray + 1:]
+            else:
+                paragraph = paragraph[:stray] + paragraph[stray + 1:]
+            continue
+        if opened:
+            i = opened[0]
+            verb = VERB.search(paragraph, i)
+            if not verb:
+                paragraph = paragraph[:i] + paragraph[i + 1:]
+            elif NOISE.search(paragraph[i + 1:verb.start()]):
+                paragraph = paragraph[:i].rstrip() + paragraph[verb.start():]
+            else:
+                paragraph = paragraph[:verb.start()].rstrip(" ;,") + ")" + paragraph[verb.start():]
+            continue
+        break
+    # A separator left in front of the verb by a removal: "or Æthelred; was" -> "or Æthelred, was".
+    return re.sub(r";\s+(?=(?:was|is|are|were)\b)", ", ", paragraph)
+
+
+def join_broken_lines(extract):
+    """Wikipedia sometimes breaks a line inside a parenthesis ("1499 – October\n18, 1562)");
+    keep such a line with the next one instead of starting a new paragraph."""
+    lines, out = extract.split("\n"), []
+    for line in lines:
+        if out and out[-1].count("(") > out[-1].count(")"):
+            out[-1] += " " + line
+        else:
+            out.append(line)
+    return "\n".join(out)
+
+
 def description(extract, target=650, limit=1100):
+    extract = join_broken_lines(extract)
     paras = [re.sub(r"\s+", " ", p).strip() for p in extract.split("\n") if p.strip()]
     paras = [p for p in paras if "." in p or len(p) > 60]  # section headings in a full-article extract
     if not paras:
@@ -245,7 +304,7 @@ def description(extract, target=650, limit=1100):
 
 
 def short_description(extract):
-    paras = [p for p in extract.split("\n") if p.strip()]
+    paras = [p for p in join_broken_lines(extract).split("\n") if p.strip()]
     if not paras:
         return ""
     s = sentences(drop_lead_parenthetical(re.sub(r"\s+", " ", paras[0]).strip()))
@@ -384,6 +443,10 @@ def main():
     titles = {w for c in calendar for w in c["wikipedia"]} | set(CELEBRATIONS.values()) | set(quotes)
     titles |= {wiki_title(s["wikipedia"]) for _, s in old if s.get("wikipedia")}
     review = {(d["date"], d["name"]): d for d in json.load(open(REVIEW))["decisions"]}
+    # A rerun reads saints already moved or renamed by a decision: find it there too.
+    for d in list(review.values()):
+        if d["action"] != "remove":
+            review.setdefault((d.get("to", d["date"]), d.get("new_name", d["name"])), d)
     martyrology = json.load(open(MARTYROLOGY))["saints"] if os.path.exists(MARTYROLOGY) else {}
     titles |= set(martyrology)
     titles |= {d["article"] for d in review.values() if d.get("article")}
@@ -422,8 +485,8 @@ def main():
     # Patronages from the current data, by canonical article; kept only when the infobox lists them.
     old_by_article = {}
     for _, s in old:
-        t = canon(wiki_title(s["wikipedia"])) if s.get("wikipedia") else None
-        if t:
+        arts = [x["title"] for x in s.get("sources", [])] or ([wiki_title(s["wikipedia"])] if s.get("wikipedia") else [])
+        for t in filter(None, map(canon, arts)):
             old_by_article.setdefault(t, s)
     infobox = infoboxes(set(old_by_article) | {canon(d["article"]) for d in review.values() if d.get("article")} - {None})
 
@@ -432,8 +495,8 @@ def main():
         text = infobox.get(article, {}).get("patronage", "")
         if not s or not s.get("patronage") or not text:
             return None
-        kept = [p for p in s["patronage"]
-                if p.lower() in text or all(w in text for w in re.findall(r"[a-z]{4,}", p.lower()))]
+        kept = [p.strip() for p in s["patronage"]
+                if p.strip().lower() in text or all(w in text for w in re.findall(r"[a-z]{4,}", p.lower()))]
         return kept or None
 
     def sources(articles):
@@ -548,6 +611,13 @@ def main():
     out["celebrations"] = celebrations
     with open(PATH, "w") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
+    # Saints removed or left out on an earlier run are no longer in the input; keep their record.
+    if os.path.exists(UNCONFIRMED):
+        before = json.load(open(UNCONFIRMED))
+        seen = {(u["date"], u["name"]) for u in unconfirmed}
+        unconfirmed += [u for u in before.get("saints", []) if not u.get("kept") and (u["date"], u["name"]) not in seen]
+        seen = {(r["date"], r["name"]) for r in removed}
+        removed += [r for r in before.get("removed", []) if (r["date"], r["name"]) not in seen]
     with open(UNCONFIRMED, "w") as f:
         json.dump({"_about": "Saints outside the calendar whose date neither Wikidata, the Wikipedia infobox nor a "
                              "review decision confirms. 'kept': true means the saint is still shown on that date; "

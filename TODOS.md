@@ -1,7 +1,7 @@
 # DailyReadings — Project Status & TODOS
 
-**Last Updated:** 2026-11-19  
-**Current Version:** 1.0.0 (Build 23)  
+**Last Updated:** 2026-11-21  
+**Current Version:** 1.0.0 (Build 24)  
 **Bundle Identifier:** `com.ridepro.DailyReadings`  
 **Team ID:** `DT58WA8N32`  
 **Target Platform:** iOS 17.0+ | Swift 6.0 (`SWIFT_STRICT_CONCURRENCY = complete`) | SwiftUI | SwiftData  
@@ -17,6 +17,11 @@ DailyReadings is a contemplative Catholic daily Mass readings and liturgical cal
 - **Audio Experience:** Reverent, contemplative audio recitation designed for personal prayer, morning commutes, and hands-free devotion.
 
 ---
+
+## Build 24 (21 November 2026)
+
+- **Broken parentheses in saint descriptions fixed (21 Nov 2026).** Eight Wikipedia introductions have unbalanced parentheses at the source (e.g. Vincent Strambi's ") was" with no "("), and removing pronunciations made some worse (Felix of Valois's text, hand-fixed in `saints.json` on 20 Nov, would have been overwritten by the next build). `build_saints.py` now mends unbalanced parentheses and joins a line break Wikipedia puts inside one (Peter of Alcántara). A test fails if any description is unbalanced; it failed on the Build 23 data. 101 tests.
+- **The build can be rerun on its own output:** review decisions are found where an earlier run moved or renamed a saint, patronages of shared feasts (Fisher and More, Cornelius and Cyprian, Timothy and Titus) are kept, and `saints_unconfirmed.json` keeps the record of removed saints. A rerun now changes only what changed at the source (a few Wikipedia edits; Wikidata now marks Edith Stein's death "c. 1942").
 
 ## Build 23 (19 November 2026)
 
