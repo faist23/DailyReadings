@@ -1,13 +1,13 @@
 {
- "_about": "Decisions from reviewing the saints whose date neither the calendar, Wikidata nor the Wikipedia infobox confirmed (18 November 2026), by Claude with a Codex second opinion (first from Codex's memory, then a Codex web search that confirmed one decision and found no source for most). The strongest source used is the Vatican's martyr list (Pontifical Academy Cultorum Martyrum), which covers martyrs only. Decisions with basis 'memory' are removals of entries that have no source for their date; their stated reasons are unverified. Every move or relink rests on the evidence quoted; where Codex's view rested only on its own memory, the sourced date was used and Codex's view is recorded. Applied by Scripts/build_saints.py. The app shows each saint's celebrated day; a Martyrology day that differs is shown on the card, never used to move the saint.",
+ "_about": "Decisions from reviewing the saints whose date neither the calendar, Wikidata nor the Wikipedia infobox confirmed (18 November 2026), by Claude with a Codex second opinion (first from Codex's memory, then a Codex web search that confirmed one decision and found no source for most). The strongest source used is the Vatican's martyr list (Pontifical Academy Cultorum Martyrum), which covers martyrs only. Every move or relink rests on the evidence quoted; where Codex's view rested only on its own memory, the sourced date was used and Codex's view is recorded. Applied by Scripts/build_saints.py. The app shows each saint's celebrated day; a Martyrology day that differs is shown on the card, never used to move the saint.",
  "decisions": [
   {
    "date": "01-01",
    "name": "The Eternal Father",
    "action": "remove",
-   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): A devotional title, not a liturgical feast.",
+   "evidence": "Not in the current General Roman or US proper calendar (Scripts/saint_calendar.json). Wikipedia: \"God the Father is a title given to God in Christianity\"; not a saint and not a liturgical feast in the calendar.",
    "codex": "agree",
-   "basis": "memory"
+   "basis": "calendar and Wikipedia"
   },
   {
    "date": "01-01",
@@ -211,9 +211,9 @@
    "date": "05-06",
    "name": "John",
    "action": "remove",
-   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): St. John before the Latin Gate, removed in 1960; St. John is celebrated on 27 December (on the calendar).",
+   "evidence": "Not in the current General Roman or US proper calendar (Scripts/saint_calendar.json). The pre-1969 English Roman Martyrology (https://www.ecatholic2000.com/roman-martyrology/05-may.shtml) has \"At Rome, the feast of St. John before the Latin Gate\" on 6 May. St. John is celebrated on 27 December.",
    "codex": "agree",
-   "basis": "memory"
+   "basis": "calendar and pre-1969 Martyrology"
   },
   {
    "date": "05-14",
@@ -281,9 +281,9 @@
    "date": "07-01",
    "name": "Most Precious Blood of Jesus",
    "action": "remove",
-   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): Feast removed from the calendar in 1969.",
+   "evidence": "Not in the current General Roman or US proper calendar (Scripts/saint_calendar.json). The pre-1969 English Roman Martyrology (https://www.ecatholic2000.com/roman-martyrology/07-jul.shtml) has \"Feast of the Most Precious Blood of Our Lord Jesus Christ\" on 1 July.",
    "codex": "agree",
-   "basis": "memory"
+   "basis": "calendar and pre-1969 Martyrology"
   },
   {
    "date": "07-10",
@@ -334,17 +334,17 @@
    "date": "08-01",
    "name": "Peter",
    "action": "remove",
-   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): St. Peter in Chains, removed in 1960; St. Peter is on the calendar on 22 February and 29 June.",
+   "evidence": "Not in the current General Roman or US proper calendar (Scripts/saint_calendar.json). The pre-1969 English Roman Martyrology (https://www.ecatholic2000.com/roman-martyrology/08-aug.shtml) has \"At Rome, on Mount Esquiline, the dedication of the church of St. Peter in Chains\" on 1 August. St. Peter is on the calendar on 22 February and 29 June.",
    "codex": "agree",
-   "basis": "memory"
+   "basis": "calendar and pre-1969 Martyrology"
   },
   {
    "date": "08-02",
    "name": "Joseph Chiwatenhwa",
    "action": "remove",
-   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): Wikipedia: an early Christian convert in Canada; not a saint or blessed.",
+   "evidence": "Not in the index of names of the 2004 Martyrologium Romanum (https://archive.org/details/MartRom2004), which lists the saints and blesseds whose cult is recognised. His Wikipedia article describes him as an \"Early Christian convert in Canada\".",
    "codex": "agree (unsure)",
-   "basis": "memory"
+   "basis": "2004 Martyrology and Wikipedia"
   },
   {
    "date": "08-02",
@@ -395,9 +395,9 @@
    "date": "08-13",
    "name": "The Dormition of Mary",
    "action": "remove",
-   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): Eastern title; the Assumption is on the calendar on 15 August.",
+   "evidence": "Wikipedia (Dormition of the Mother of God): a Great Feast of the Eastern Orthodox, Oriental Orthodox and Eastern Catholic Churches; \"In Western Churches the corresponding feast is known as the Assumption of Mary\", which the calendar celebrates on 15 August.",
    "codex": "agree",
-   "basis": "memory"
+   "basis": "calendar and Wikipedia"
   },
   {
    "date": "08-17",
@@ -446,17 +446,17 @@
    "date": "09-20",
    "name": "Maximin Giraud",
    "action": "remove",
-   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): A La Salette visionary; not a saint or blessed.",
+   "evidence": "Not in the index of names of the 2004 Martyrologium Romanum (https://archive.org/details/MartRom2004), which lists the saints and blesseds whose cult is recognised.",
    "codex": "agree",
-   "basis": "memory"
+   "basis": "2004 Martyrology"
   },
   {
    "date": "09-24",
    "name": "Our Lady of Ransom",
    "action": "remove",
-   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): Former feast, not in the current General Roman or US calendar.",
+   "evidence": "Not in the current General Roman or US proper calendar (Scripts/saint_calendar.json). The pre-1969 English Roman Martyrology (https://www.ecatholic2000.com/roman-martyrology/09-sep.shtml) has \"The feast of our Lady of Ransom\" on 24 September: a feast of the old calendar.",
    "codex": "agree",
-   "basis": "memory"
+   "basis": "calendar and pre-1969 Martyrology"
   },
   {
    "date": "09-25",
@@ -480,9 +480,9 @@
    "date": "10-12",
    "name": "Jeanne Leber",
    "action": "remove",
-   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): Not canonized or beatified.",
+   "evidence": "Not in the index of names of the 2004 Martyrologium Romanum (https://archive.org/details/MartRom2004), which lists the saints and blesseds whose cult is recognised.",
    "codex": "agree",
-   "basis": "memory"
+   "basis": "2004 Martyrology"
   },
   {
    "date": "10-22",
@@ -497,9 +497,9 @@
    "date": "10-23",
    "name": "The Feast of the Holy Redeemer",
    "action": "remove",
-   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): A local (Redemptorist) feast, not in the General Roman or US calendar.",
+   "evidence": "Not in the current General Roman or US proper calendar (Scripts/saint_calendar.json). Wikipedia (Feast of the Most Holy Redeemer): \"found only in the special calendar of some dioceses and religious orders\", on the third Sunday of July or 23 October.",
    "codex": "agree",
-   "basis": "memory"
+   "basis": "calendar and Wikipedia"
   },
   {
    "date": "11-02",
@@ -514,9 +514,9 @@
    "date": "11-05",
    "name": "The Feast of the Holy Relics",
    "action": "remove",
-   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): A local feast, not in the General Roman or US calendar.",
+   "evidence": "Not in the current General Roman or US proper calendar (Scripts/saint_calendar.json). Wikipedia (Relic): \"In the Extraordinary Form of the Catholic Church, the Feast of the Holy Relics is celebrated on 5 November\": the pre-1969 calendar, not the current one.",
    "codex": "agree",
-   "basis": "memory"
+   "basis": "calendar and Wikipedia"
   },
   {
    "date": "11-09",
@@ -576,9 +576,9 @@
    "date": "12-14",
    "name": "Melanie Calvat",
    "action": "remove",
-   "evidence": "NOT SOURCED (from memory; Codex's web check found no source either): A La Salette visionary; not a saint or blessed.",
+   "evidence": "Not in the index of names of the 2004 Martyrologium Romanum (https://archive.org/details/MartRom2004), which lists the saints and blesseds whose cult is recognised.",
    "codex": "agree",
-   "basis": "memory"
+   "basis": "2004 Martyrology"
   },
   {
    "date": "12-17",

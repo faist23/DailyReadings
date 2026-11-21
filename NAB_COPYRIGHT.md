@@ -1,6 +1,6 @@
 # NAB Copyright and Translation Options
 
-**Researched:** 2026-11-12 (codebase status updated 2026-11-14, Build 20; unchanged in Builds 21 to 24)
+**Researched:** 2026-11-12 (codebase status updated 2026-11-14, Build 20; unchanged in Builds 21 to 25)
 **Status:** research notes, not legal advice. Only a written answer from the rights holder settles this.
 
 ## Summary

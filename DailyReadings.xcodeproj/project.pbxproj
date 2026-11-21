@@ -57,6 +57,7 @@
 		A600D0CD620B8B2B9E909F34 /* Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597121C7FF29EA76AB4F3BBE /* Reading.swift */; };
 		AC62E1FAB65522A3EBF3982D /* LiturgicalCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F5D4C28B757B6634378F37 /* LiturgicalCalendar.swift */; };
 		AD16AB051ADE2C9DE524D963 /* lectionary_dates.json in Resources */ = {isa = PBXBuildFile; fileRef = 786F97E2A2318C15B9E9CC1E /* lectionary_dates.json */; };
+		B0B7B34EF93755E595E7AC17 /* ReminderRefreshTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802E172D4138A8068163FA23 /* ReminderRefreshTask.swift */; };
 		B1F97CA3741DA5D792D630FA /* PsalmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A360D90CC8A2612A7E1128E1 /* PsalmView.swift */; };
 		B390482D9DE73A0396296F77 /* GuidedRosaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73106A62665AECB6BE142392 /* GuidedRosaryView.swift */; };
 		B67A1B16092C192B7F968C20 /* AudioPlaybackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA38283FB3032691993728C /* AudioPlaybackTests.swift */; };
@@ -124,6 +125,7 @@
 		786F97E2A2318C15B9E9CC1E /* lectionary_dates.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lectionary_dates.json; sourceTree = "<group>"; };
 		78E5C23999DB16D6A8EE6BDF /* Prayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prayer.swift; sourceTree = "<group>"; };
 		7AED5A54CD66B2E2210F7F09 /* SaintCalendarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaintCalendarTests.swift; sourceTree = "<group>"; };
+		802E172D4138A8068163FA23 /* ReminderRefreshTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRefreshTask.swift; sourceTree = "<group>"; };
 		82795DFF5BFB79EADA889534 /* bible_drb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = bible_drb.sqlite; sourceTree = "<group>"; };
 		8736C5DDC352318513E4D4D9 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		98BEBB9872FC034837ED7288 /* AudioMiniPlayerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMiniPlayerBar.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				E1B3DC6245857C17DD40BB0C /* PrayersRepository.swift */,
 				167621EA59CD3CAA9DC214AB /* PsalmResponseProvider.swift */,
 				A63267A8300B10AABA379D16 /* ReadingsRepository.swift */,
+				802E172D4138A8068163FA23 /* ReminderRefreshTask.swift */,
 				542426414464C4B6036D9263 /* SaintsDatabase.swift */,
 				2D16BEEC6276787C11517E1D /* VerseOfTheDayProvider.swift */,
 			);
@@ -504,6 +507,7 @@
 				A54843ADCBAB63AB2F6217C3 /* ReadingCard.swift in Sources */,
 				33B97AA76FEFCAC6F214FFB0 /* ReadingDetailView.swift in Sources */,
 				04D4D8CD6C8C46A062078785 /* ReadingsRepository.swift in Sources */,
+				B0B7B34EF93755E595E7AC17 /* ReminderRefreshTask.swift in Sources */,
 				61C3C38BE65D002C7205800C /* RosaryDetailView.swift in Sources */,
 				FE7624388C3E0FA4D16B5A3C /* RosaryMystery.swift in Sources */,
 				65AD65474142F3C1D6D1DAA9 /* Saint.swift in Sources */,
@@ -635,7 +639,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = DT58WA8N32;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -727,7 +731,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = DT58WA8N32;
 				ENABLE_NS_ASSERTIONS = NO;

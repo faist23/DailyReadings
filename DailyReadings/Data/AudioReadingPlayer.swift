@@ -300,19 +300,29 @@ public final class AudioReadingPlayer: NSObject, AVSpeechSynthesizerDelegate {
         }
     }
     
+    /// Activating or deactivating the audio session can block for a while ("can lead to UI
+    /// unresponsiveness if called on the main thread"), so it happens on this serial queue. Serial
+    /// keeps the order: a stop's deactivation always reaches the system before the next start's
+    /// activation.
+    private static let sessionQueue = DispatchQueue(label: "DailyReadings.AudioSession", qos: .userInitiated)
+
     public func activateAudioSession() {
-        do {
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            print("Failed to activate audio session: \(error)")
+        Self.sessionQueue.async {
+            do {
+                try AVAudioSession.sharedInstance().setActive(true)
+            } catch {
+                print("Failed to activate audio session: \(error)")
+            }
         }
     }
-    
+
     public func deactivateAudioSession() {
-        do {
-            try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
-        } catch {
-            print("Failed to deactivate audio session: \(error)")
+        Self.sessionQueue.async {
+            do {
+                try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+            } catch {
+                print("Failed to deactivate audio session: \(error)")
+            }
         }
     }
     
@@ -478,9 +488,29 @@ public final class AudioReadingPlayer: NSObject, AVSpeechSynthesizerDelegate {
         enqueue(fromReading: currentReadingIndex, passage: 0)
     }
     
+    /// Whether these are the readings playing or paused now. Compared by type, citation and text:
+    /// a day loaded again (Today, then the same date in the calendar) has new reading IDs.
+    public func isActive(for readings: [Reading]) -> Bool {
+        (isPlaying || isPaused) && activeReadings.map(Self.identity) == readings.map(Self.identity)
+    }
+
+    private static func identity(_ reading: Reading) -> String {
+        "\(reading.type)|\(reading.citation.book) \(reading.citation.chapter):\(reading.citation.verses)|\(reading.text)"
+    }
+
+    /// The Listen button on Today and on a calendar date: pauses or resumes these readings when
+    /// they are the ones playing; otherwise starts them, replacing another day's readings.
+    public func toggle(readings: [Reading], liturgicalTitle: String, liturgicalColor: LiturgicalColor? = nil, liturgicalSeason: LiturgicalSeason? = nil) {
+        if isActive(for: readings) {
+            if isPlaying { pause() } else { resume() }
+        } else {
+            start(readings: readings, liturgicalTitle: liturgicalTitle, liturgicalColor: liturgicalColor, liturgicalSeason: liturgicalSeason)
+        }
+    }
+
     /// Plays or resumes recitation.
     public func play(readings: [Reading], liturgicalTitle: String, liturgicalColor: LiturgicalColor? = nil, liturgicalSeason: LiturgicalSeason? = nil) {
-        if isPaused && activeReadings == readings {
+        if isPaused && isActive(for: readings) {
             resume()
         } else {
             start(readings: readings, liturgicalTitle: liturgicalTitle, startIndex: 0, liturgicalColor: liturgicalColor, liturgicalSeason: liturgicalSeason)

@@ -63,27 +63,21 @@ public struct TodayView: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 if let readings = viewModel.dailyReadings?.readings, !readings.isEmpty {
+                    let playingThese = audioPlayer.isPlaying && audioPlayer.isActive(for: readings)
                     Button {
-                        if audioPlayer.isPlaying {
-                            audioPlayer.pause()
-                        } else if audioPlayer.isPaused {
-                            audioPlayer.resume()
-                        } else {
-                            let title = viewModel.liturgicalDay?.title ?? "Today's Mass Readings"
-                            audioPlayer.start(
-                                readings: readings,
-                                liturgicalTitle: title,
-                                liturgicalColor: viewModel.liturgicalDay?.color,
-                                liturgicalSeason: viewModel.liturgicalDay?.season
-                            )
-                        }
+                        audioPlayer.toggle(
+                            readings: readings,
+                            liturgicalTitle: viewModel.liturgicalDay?.title ?? "Today's Mass Readings",
+                            liturgicalColor: viewModel.liturgicalDay?.color,
+                            liturgicalSeason: viewModel.liturgicalDay?.season
+                        )
                     } label: {
                         HStack(spacing: 5) {
-                            Image(systemName: audioPlayer.isPlaying ? "waveform" : "headphones")
+                            Image(systemName: playingThese ? "waveform" : "headphones")
                                 .font(.scaled(size: 13, weight: .semibold))
-                                .symbolEffect(.variableColor.iterative, isActive: audioPlayer.isPlaying)
+                                .symbolEffect(.variableColor.iterative, isActive: playingThese)
                             
-                            Text(audioPlayer.isPlaying ? "Playing" : "Listen")
+                            Text(playingThese ? "Playing" : "Listen")
                                 .font(.scaled(size: 13, weight: .semibold, design: .serif))
                         }
                         .foregroundStyle(currentColor.uiAccentColor)
@@ -93,7 +87,7 @@ public struct TodayView: View {
                         .clipShape(Capsule())
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel(audioPlayer.isPlaying ? "Pause audio reading" : "Listen to readings")
+                    .accessibilityLabel(playingThese ? "Pause audio reading" : "Listen to readings")
                 }
             }
         }

@@ -47,6 +47,9 @@ struct DailyReadingsApp: App {
         // Configure the shared ReadingsRepository with the SwiftData model container
         ReadingsRepository.shared.configure(modelContainer: container)
         self.readingsRepository = .shared
+
+        // Background refresh keeps the 30 days of reminders moving forward without the app open.
+        ReminderRefreshTask.register()
     }
     
     // MARK: - Scene

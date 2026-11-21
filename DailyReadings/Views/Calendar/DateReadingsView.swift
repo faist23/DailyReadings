@@ -58,27 +58,22 @@ public struct DateReadingsView: View {
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 if let readings = viewModel.dailyReadings?.readings, !readings.isEmpty {
+                    let playingThese = audioPlayer.isPlaying && audioPlayer.isActive(for: readings)
                     Button {
-                        if audioPlayer.isPlaying {
-                            audioPlayer.pause()
-                        } else if audioPlayer.isPaused {
-                            audioPlayer.resume()
-                        } else {
-                            let title = viewModel.liturgicalDay?.title ?? formattedFullDateString(for: date)
-                            audioPlayer.start(
-                                readings: readings,
-                                liturgicalTitle: title,
-                                liturgicalColor: viewModel.liturgicalDay?.color,
-                                liturgicalSeason: viewModel.liturgicalDay?.season
-                            )
-                        }
+                        // Another day's readings playing from Today are replaced, not paused.
+                        audioPlayer.toggle(
+                            readings: readings,
+                            liturgicalTitle: viewModel.liturgicalDay?.title ?? formattedFullDateString(for: date),
+                            liturgicalColor: viewModel.liturgicalDay?.color,
+                            liturgicalSeason: viewModel.liturgicalDay?.season
+                        )
                     } label: {
-                        Image(systemName: audioPlayer.isPlaying ? "waveform" : "headphones")
+                        Image(systemName: playingThese ? "waveform" : "headphones")
                             .font(.scaled(size: 14, weight: .semibold))
-                            .symbolEffect(.variableColor.iterative, isActive: audioPlayer.isPlaying)
+                            .symbolEffect(.variableColor.iterative, isActive: playingThese)
                             .foregroundStyle(currentColor.uiAccentColor)
                     }
-                    .accessibilityLabel(audioPlayer.isPlaying ? "Pause audio reading" : "Listen to readings")
+                    .accessibilityLabel(playingThese ? "Pause audio reading" : "Listen to readings")
                 }
                 
                 Button {

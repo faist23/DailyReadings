@@ -137,6 +137,33 @@ final class AudioPlaybackTests: XCTestCase {
         XCTAssertEqual(player.queuedSpeechRates, [first.rawValue], "A change made while paused applies on resume")
     }
 
+    // MARK: - Listen button
+
+    func testListenOnAnotherDayStartsThatDayInsteadOfPausingToday() {
+        let player = AudioReadingPlayer.shared
+        defer { player.stop() }
+        let today = [reading(.firstReading, "Isaiah", "Comfort my people."), reading(.gospel, "Mark", "Prepare the way.")]
+        let otherDay = [reading(.firstReading, "Genesis", "In the beginning."), reading(.gospel, "John", "In the beginning was the Word.")]
+
+        player.toggle(readings: today, liturgicalTitle: "Today")
+        XCTAssertTrue(player.isPlaying)
+
+        // Listen on a calendar date while Today's readings play: that date's readings start.
+        player.toggle(readings: otherDay, liturgicalTitle: "Another day")
+        XCTAssertTrue(player.isPlaying, "the other day's readings should be playing, not paused")
+        XCTAssertEqual(player.currentReading?.citation.book, "Genesis")
+        XCTAssertEqual(player.liturgicalTitle, "Another day")
+
+        // The same day loaded again (new reading IDs) pauses and resumes what is playing.
+        let otherDayReloaded = [reading(.firstReading, "Genesis", "In the beginning."), reading(.gospel, "John", "In the beginning was the Word.")]
+        XCTAssertTrue(player.isActive(for: otherDayReloaded))
+        player.toggle(readings: otherDayReloaded, liturgicalTitle: "Another day")
+        XCTAssertTrue(player.isPaused)
+        player.toggle(readings: otherDayReloaded, liturgicalTitle: "Another day")
+        XCTAssertTrue(player.isPlaying)
+        XCTAssertFalse(player.isActive(for: today))
+    }
+
     // MARK: - Interruptions
 
     private let massReadings: [Reading] = [

@@ -618,6 +618,10 @@ def main():
         unconfirmed += [u for u in before.get("saints", []) if not u.get("kept") and (u["date"], u["name"]) not in seen]
         seen = {(r["date"], r["name"]) for r in removed}
         removed += [r for r in before.get("removed", []) if (r["date"], r["name"]) not in seen]
+    for r in removed:  # the reason as the review file now gives it
+        decision = review.get((r["date"], r["name"]))
+        if decision and decision["action"] == "remove":
+            r["reason"], r["basis"] = decision["evidence"], decision["basis"]
     with open(UNCONFIRMED, "w") as f:
         json.dump({"_about": "Saints outside the calendar whose date neither Wikidata, the Wikipedia infobox nor a "
                              "review decision confirms. 'kept': true means the saint is still shown on that date; "

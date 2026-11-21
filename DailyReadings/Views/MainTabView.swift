@@ -95,6 +95,11 @@ public struct MainTabView: View {
             await NotificationManager.shared.refreshScheduledNotifications().value
         }
         .onChange(of: scenePhase) { _, phase in
+            if phase == .background {
+                // Ask iOS to refresh the reminders while the app is away.
+                ReminderRefreshTask.schedule()
+                return
+            }
             guard phase == .active else { return }
             // Permission may have been granted or withdrawn in iOS Settings while the app was away,
             // and on a new day the 30 days of reminders move forward.

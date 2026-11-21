@@ -180,6 +180,15 @@ final class NotificationSchedulingTests: XCTestCase {
         XCTAssertEqual(center.reminders.count, 29)
     }
 
+    func testBackgroundRefreshIsPermittedInInfoPlist() {
+        // Registering a task identifier Info.plist does not list crashes the app at launch.
+        let info = Bundle.main.infoDictionary ?? [:]
+        let permitted = info["BGTaskSchedulerPermittedIdentifiers"] as? [String] ?? []
+        XCTAssertTrue(permitted.contains(ReminderRefreshTask.identifier), "\(permitted)")
+        let modes = info["UIBackgroundModes"] as? [String] ?? []
+        XCTAssertTrue(modes.contains("fetch"), "background refresh needs the fetch mode: \(modes)")
+    }
+
     func testFirstReturnRefreshesWhenNothingWasScheduledYet() async throws {
         defaults.set(true, forKey: NotificationManager.Preference.reminderEnabled)
         let refresh = try XCTUnwrap(manager.refreshIfStale())

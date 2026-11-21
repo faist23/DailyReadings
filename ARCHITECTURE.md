@@ -26,7 +26,7 @@ This document provides a comprehensive technical overview of **DailyReadings**, 
 | **Persistence** | SwiftData (`@Model CachedReading`) + SQLite (`bible_webc.sqlite` default modern + `bible_drb.sqlite` traditional) + `UserDefaults` |
 | **Audio** | `AVFoundation` (`AVSpeechSynthesizer`, `AVAudioSession`), `MediaPlayer` (`MPNowPlayingInfoCenter`) |
 | **Project Spec** | [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`project.yml`) generating `DailyReadings.xcodeproj` |
-| **Test Suite** | `DailyReadingsTests` (101 unit tests: `LiturgicalCalendarTests`, `ScriptureEngineTests`, `LectionaryCoverageTests`, `AudioPlaybackTests`, `NotificationSchedulingTests`, `ReadingsReloadTests`, `SaintLifeFactsTests`, `SaintCalendarTests`) |
+| **Test Suite** | `DailyReadingsTests` (103 unit tests: `LiturgicalCalendarTests`, `ScriptureEngineTests`, `LectionaryCoverageTests`, `AudioPlaybackTests`, `NotificationSchedulingTests`, `ReadingsReloadTests`, `SaintLifeFactsTests`, `SaintCalendarTests`) |
 | **Bundle ID** | `com.ridepro.DailyReadings` |
 | **Team ID** | `DT58WA8N32` |
 | **Privacy** | Apple Privacy Manifest compliant (`DailyReadings/PrivacyInfo.xcprivacy`) |
@@ -140,6 +140,8 @@ For Ascension Sunday, Pentecost and Holy Thursday the cycle index is used even w
 * **Interruptions**: a call or another app's audio pauses the reading; when it ends, playback resumes only if the interruption was what paused it (`handleInterruption`). A reading the listener had paused stays paused. Unplugging headphones pauses.
 * **Gospel Acclamation**: spoken between "Alleluia, alleluia." except in Lent and the Triduum. The screens pass the day's season to `start(...liturgicalSeason:)`; without it the verse is read alone.
 * **One synthesizer for everything**: Prayers and Rosary beads recite through `speakStandalone(_:rate:voice:)`. Views hold the returned identifier and compare it with `standaloneSpeechID` to know whether they are the one speaking. The audio session is released when a prayer or a voice preview ends.
+* **Audio session off the main thread**: `activateAudioSession()` and `deactivateAudioSession()` run on a serial queue, so they cannot stall the UI and keep their order (a stop's deactivation reaches the system before the next start's activation).
+* **Listen buttons**: Today and a calendar date call `toggle(readings:...)`: it pauses or resumes the readings when they are the ones playing (`isActive(for:)`, compared by type, citation and text since a reloaded day has new IDs), and otherwise starts them.
 * **Utterance identity**: Every delegate callback is matched against the utterance it belongs to (reading, preview or standalone). An utterance that was replaced cannot change the play state of its replacement.
 
 ### 4.4. Devotional Modules
@@ -159,6 +161,7 @@ For Ascension Sunday, Pentecost and Holy Thursday the cycle index is used even w
   * The two kinds are independent: turning off the daily reminder leaves the vigil alerts alone.
   * Vigil alerts are on by default. The setting is read as on when it has never been saved (`NotificationManager.Preference`), matching what Settings shows.
   * A Settings toggle shows on only when its alerts can arrive: turned on in the app and allowed in iOS Settings.
+  * `ReminderRefreshTask` registers a `BGAppRefreshTask` at launch and asks for one whenever the app goes to the background (earliest 12 hours later; iOS picks the time); each run calls `refreshScheduledNotifications()`, so the 30 days of reminders keep moving forward for someone who does not open the app. Info.plist lists the task identifier and the `fetch` mode.
   * `NotificationCenterClient` wraps `UNUserNotificationCenter` so `NotificationSchedulingTests` can drive the manager with a fake center and a fixed date.
 
 ---
@@ -252,12 +255,12 @@ DailyReadings/
         ├── lectionary_dates.json     # Readings by calendar date, 2023-01-01 to 2027-05-31
         ├── versification.json        # Lectionary → Bible verse numbering (generated; see Scripts/)
         └── saints.json               # Saints by date, built by Scripts/build_saints.py from the calendar, Wikipedia and Wikidata
-DailyReadingsTests/                   # Automated Unit Test Target (101 passing tests)
+DailyReadingsTests/                   # Automated Unit Test Target (103 passing tests)
 ├── LiturgicalCalendarTests.swift     # 22 tests: calendar edge cases, Advent bounds, Computus, Ascension, memorials, reminder content, Gospel Acclamation backfill (and when not to), translation labels, NAB cache clean-up, every obligatory memorial present, no crash when given no days to search for a Holy Day
 ├── ScriptureEngineTests.swift        # 22 tests: citation parsing (including "and"), Hebrew-Vulgate mapping (including Sirach 50), psalm stanza formatting & SQLite queries
 ├── LectionaryCoverageTests.swift     # 20 tests: the real lectionary through both Bibles, cycle coverage, memorial overrides, audio passages, Rosary schedule
-├── AudioPlaybackTests.swift          # 9 tests: real playback across readings, pacing, skip, speed (including from Settings and while paused), liturgical announcements, Alleluia by season, phone-call interruptions, speech callbacks from another thread
-├── NotificationSchedulingTests.swift # 8 tests: which reminders and vigil alerts are pending after each settings change; a refresh in progress cannot outlive a later one; the reminder verse matches the Today screen; a return on a later day moves the 30 days forward
+├── AudioPlaybackTests.swift          # 10 tests: real playback across readings, pacing, skip, speed (including from Settings and while paused), liturgical announcements, Alleluia by season, phone-call interruptions, speech callbacks from another thread, Listen on another day starts that day
+├── NotificationSchedulingTests.swift # 9 tests: which reminders and vigil alerts are pending after each settings change; a refresh in progress cannot outlive a later one; the reminder verse matches the Today screen; a return on a later day moves the 30 days forward; background refresh is permitted in Info.plist
 ├── ReadingsReloadTests.swift        # 8 tests: reload after a translation or Ascension change, failed NAB refresh keeps the cache, the NAB-unavailable notice, a load that finishes late cannot replace the latest
 ├── SaintLifeFactsTests.swift         # 4 tests: life facts and quotes reach the model; the LIVED line
 └── SaintCalendarTests.swift          # 8 tests: current calendar dates, old dates gone, the day's saint is that day's (all of 2026), every description sourced, Martyrology day shown without moving the saint, no suppressed cult shown, balanced parentheses in every description
@@ -436,5 +439,5 @@ When reviewing DailyReadings at this stage, Claude AI should focus on:
 3. **Audio Utterance Pacing**:
    * Fine-tuning speech synthesizer boundary pauses between readings, liturgical announcements, and psalm antiphons for maximum reverence.
 4. **Codebase Cleanliness & Invariant Verification**:
-   * Verify all 101 unit tests in `DailyReadingsTests` remain green under Swift 6 strict concurrency.
+   * Verify all 103 unit tests in `DailyReadingsTests` remain green under Swift 6 strict concurrency.
    * After any change to `lectionary_dates.json` or the seeds, rebuild `lectionary.json` and re-run `LectionaryCoverageTests`.
