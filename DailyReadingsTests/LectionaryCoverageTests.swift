@@ -235,6 +235,24 @@ final class LectionaryCoverageTests: XCTestCase {
         }
     }
 
+    func testSundayMysteriesFollowTheSeason() {
+        // USCCB: Joyful on the Sundays of Advent, Sorrowful on the Sundays of Lent, otherwise Glorious.
+        let sundays: [(Int, Int, Int, RosaryMysteryType)] = [
+            (2026, 11, 29, .joyful),     // First Sunday of Advent
+            (2026, 12, 20, .joyful),     // Fourth Sunday of Advent
+            (2027, 1, 3, .glorious),     // Epiphany (Christmas season)
+            (2027, 2, 14, .sorrowful),   // First Sunday of Lent
+            (2027, 3, 21, .sorrowful),   // Palm Sunday
+            (2027, 3, 28, .glorious),    // Easter Sunday
+            (2026, 11, 22, .glorious),   // Christ the King (Ordinary Time)
+        ]
+        for (y, m, d, mystery) in sundays {
+            let date = Calendar.current.date(from: DateComponents(year: y, month: m, day: d, hour: 12))!
+            XCTAssertEqual(Calendar.current.component(.weekday, from: date), 1, "\(y)-\(m)-\(d) is a Sunday")
+            XCTAssertEqual(RosaryMysteryType.forDate(date), mystery, "\(y)-\(m)-\(d)")
+        }
+    }
+
     // MARK: - Audio passages
 
     @MainActor

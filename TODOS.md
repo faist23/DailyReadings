@@ -1,7 +1,7 @@
 # DailyReadings — Project Status & TODOS
 
 **Last Updated:** 2026-11-21  
-**Current Version:** 1.0.0 (Build 25)  
+**Current Version:** 1.0.0 (Build 26)  
 **Bundle Identifier:** `com.ridepro.DailyReadings`  
 **Team ID:** `DT58WA8N32`  
 **Target Platform:** iOS 17.0+ | Swift 6.0 (`SWIFT_STRICT_CONCURRENCY = complete`) | SwiftUI | SwiftData  
@@ -17,6 +17,10 @@ DailyReadings is a contemplative Catholic daily Mass readings and liturgical cal
 - **Audio Experience:** Reverent, contemplative audio recitation designed for personal prayer, morning commutes, and hands-free devotion.
 
 ---
+
+## Build 26 (21 November 2026)
+
+The Rosary now follows the USCCB's "How to Pray the Rosary": the Fatima Prayer after each decade only (not after the opening Glory Be) and in its wording; Sunday mysteries by season (Joyful in Advent, Sorrowful in Lent, otherwise Glorious); all 20 mysteries' titles, Scripture references and fruits as USCCB gives them. 104 tests.
 
 ## Build 25 (21 November 2026)
 
@@ -416,6 +420,7 @@ Second audit round. There was no Build 15.
 - [ ] **Listen to a full day's readings**: does it continue past the First Reading (screen on, and screen locked); is the pace right; speed and voice changes mid-reading; a phone-call interruption. If it still stops, note whether the screen was locked and whether headphones or CarPlay were connected.
 - [ ] **Listen to a prayer and a Rosary decade**: the Stop button should reset when speech ends, and music from another app should resume.
 - [ ] **View every screen at the largest text sizes** (fonts now scale to 1.5x): calendar grid, category pills, mini player, Rosary bead row.
+- [ ] **Build 26 Rosary**: on the Rosary screen the day line under the title wraps cleanly ("Wednesdays & Sundays outside Advent and Lent"); the guided Rosary has only the Glory Be after the three Hail Marys and the Fatima Prayer after each decade; on an Advent Sunday (from 29 Nov 2026) the Joyful mysteries are today's.
 - [ ] **Build 22 saints**: open Today on a few days (e.g. 28 Jan Thomas Aquinas, 13 Nov Cabrini, a day with an optional memorial) and check the card: right saint, LIVED/BORN IN/ORDER/MARTYROLOGY lines, the quote, the "From Wikipedia" link opens the article, and the long description is not cut off.
 - [ ] **Build 21 fixes**: pause a reading, take or place a call, hang up; it should stay paused. Play a reading, take a call, hang up; it should resume. Leave the app in memory overnight with the reminder on, open it the next day, and check the last pending reminder moved a day later.
 
@@ -456,9 +461,9 @@ Claude and Codex audited Build 20; details in `ARCHITECTURE.md` section 7.
 
 ### P2 — Rosary guide
 The order of prayers, the prayer texts and the mysteries were reviewed and are accurate. Optional refinements:
-- [ ] **Fatima Prayer after the opening Glory Be**: the guide says it before the first decade. The usual practice says it only after each decade. Decide whether to keep it.
-- [ ] **Seasonal Sunday mysteries** as a setting: Joyful on the Sundays of Advent and Christmas, Sorrowful on the Sundays of Lent. The app always gives Glorious on Sunday.
-- [ ] **Read the Fourth and Fifth Glorious Mysteries entries** (Assumption, Coronation); they were not part of the review.
+- [x] **Fatima Prayer** (21 Nov 2026): said after each decade only, not after the opening Glory Be (USCCB, "How to Pray the Rosary" (https://www.usccb.org/how-to-pray-the-rosary): "After finishing each decade, some say the following prayer requested by the Blessed Virgin Mary at Fatima"), in the USCCB wording ("...save us from the fires of hell; lead all souls to Heaven, especially those who have most need of your mercy").
+- [x] **Seasonal Sunday mysteries** (21 Nov 2026): by default, as USCCB, "How to Pray the Rosary" (https://www.usccb.org/how-to-pray-the-rosary) gives them: Joyful on the Sundays of Advent, Sorrowful on the Sundays of Lent (Palm Sunday included), Glorious on the other Sundays (the earlier note here said "Advent and Christmas"; USCCB says Advent only). Rosarium Virginis Mariae 38 allows such adaptations. Test: `testSundayMysteriesFollowTheSeason`.
+- [x] **All 20 mysteries checked against USCCB, "How to Pray the Rosary" (https://www.usccb.org/how-to-pray-the-rosary)** (21 Nov 2026): titles, Scripture references and fruits now match it. Many fruits had been embellished ("Piety & Joy in Finding Jesus" for "Devotion to Jesus") and most references were wider passages; the Assumption and Coronation had their fruits misplaced (the Coronation's "Grace of a happy death" was on the Assumption). The meditations, which are the app's own short paraphrases, were kept.
 
 ### P1 — Calendar
 - [x] **Confirm the December 9 obligation rule** (Immaculate Conception transferred to Monday). Confirmed with Vatican Dicastery for Legislative Texts formal ruling (Prot. N. 16827/2024 to USCCB) that transferred solemnity retains the obligation; implementation in `LiturgicalCalendar.swift` aligns.

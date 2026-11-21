@@ -105,8 +105,8 @@ public struct HowToPrayRosaryView: View {
                 stepCard(
                     number: "4",
                     title: "On the Chain",
-                    prayer: "Glory Be & Fatima Prayer",
-                    explanation: "On the chain before the medal, pray the Glory Be in praise of the Holy Trinity, followed by the Fatima Prayer ('O my Jesus, forgive us our sins...')."
+                    prayer: "Glory Be",
+                    explanation: "On the chain before the medal, pray the Glory Be in praise of the Holy Trinity."
                 )
                 
                 stepCard(
@@ -131,10 +131,10 @@ public struct HowToPrayRosaryView: View {
                     .foregroundStyle(Color.primary)
                 
                 VStack(spacing: AppTheme.Spacing.small) {
-                    mysteryScheduleRow(day: "Mondays & Saturdays", mystery: "Joyful Mysteries", focus: "The Incarnation & Childhood of Jesus")
-                    mysteryScheduleRow(day: "Tuesdays & Fridays", mystery: "Sorrowful Mysteries", focus: "The Passion & Death of Our Lord")
-                    mysteryScheduleRow(day: "Wednesdays & Sundays", mystery: "Glorious Mysteries", focus: "The Resurrection & Triumph of Heaven")
-                    mysteryScheduleRow(day: "Thursdays", mystery: "Luminous Mysteries", focus: "The Public Ministry of Christ")
+                    mysteryScheduleRow(day: RosaryMysteryType.joyful.traditionalDays, mystery: "Joyful Mysteries", focus: "The Incarnation & Childhood of Jesus")
+                    mysteryScheduleRow(day: RosaryMysteryType.sorrowful.traditionalDays, mystery: "Sorrowful Mysteries", focus: "The Passion & Death of Our Lord")
+                    mysteryScheduleRow(day: RosaryMysteryType.glorious.traditionalDays, mystery: "Glorious Mysteries", focus: "The Resurrection & Triumph of Heaven")
+                    mysteryScheduleRow(day: RosaryMysteryType.luminous.traditionalDays, mystery: "Luminous Mysteries", focus: "The Public Ministry of Christ")
                 }
             }
             
@@ -207,19 +207,18 @@ public struct HowToPrayRosaryView: View {
     
     private func mysteryScheduleRow(day: String, mystery: String, focus: String) -> some View {
         VStack(alignment: .leading, spacing: 2) {
-            HStack {
-                Text(day)
-                    .font(.scaled(size: 12, weight: .bold))
-                    .foregroundStyle(liturgicalColor.uiAccentColor)
-                Spacer()
-                Text(mystery)
-                    .font(.scaled(size: 14, weight: .bold, design: .serif))
-                    .foregroundStyle(Color.primary)
-            }
+            Text(mystery)
+                .font(.scaled(size: 14, weight: .bold, design: .serif))
+                .foregroundStyle(Color.primary)
+            Text(day)
+                .font(.scaled(size: 12, weight: .bold))
+                .foregroundStyle(liturgicalColor.uiAccentColor)
+                .fixedSize(horizontal: false, vertical: true)
             Text(focus)
                 .font(.scaled(size: 12, weight: .regular, design: .serif).italic())
                 .foregroundStyle(Color.secondary)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(AppTheme.Spacing.small)
         .background(Color.secondary.opacity(0.05))
         .clipShape(RoundedRectangle(cornerRadius: AppTheme.CornerRadius.small, style: .continuous))

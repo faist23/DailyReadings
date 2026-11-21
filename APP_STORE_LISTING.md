@@ -2,7 +2,7 @@
 
 This document contains all verified text, metadata, keywords, URLs, and guidelines required for creating and submitting the App Store listing in App Store Connect.
 
-**Current build:** 1.0.0 (25).
+**Current build:** 1.0.0 (26).
 
 **Before submission:** the New American Bible line under "Trusted Catholic Translations" and the "Content Rights" answer both depend on the open P0 items in `TODOS.md` (NAB licensing, Lectionary psalm refrains). The NAB tier is for personal testing only and is not licensed for release; see `NAB_COPYRIGHT.md`.
 

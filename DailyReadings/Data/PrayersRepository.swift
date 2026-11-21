@@ -54,35 +54,35 @@ public final class PrayersRepository: Sendable {
                     number: "1st Decade",
                     title: "The Annunciation",
                     fruitOfMystery: "Humility",
-                    scriptureRef: "Luke 1:26-38",
+                    scriptureRef: "Luke 1:26-27",
                     meditation: "The Angel Gabriel announces to Mary that she will conceive the Son of God. Mary responds: 'Behold the handmaid of the Lord; be it done unto me according to thy word.'"
                 ),
                 RosaryDecade(
                     number: "2nd Decade",
                     title: "The Visitation",
                     fruitOfMystery: "Love of Neighbor",
-                    scriptureRef: "Luke 1:39-56",
+                    scriptureRef: "Luke 1:39-42",
                     meditation: "Mary visits her cousin Elizabeth. At Mary’s greeting, John the Baptist leaps in Elizabeth’s womb, and Elizabeth proclaims: 'Blessed are you among women!'"
                 ),
                 RosaryDecade(
                     number: "3rd Decade",
                     title: "The Nativity",
-                    fruitOfMystery: "Poverty of Spirit",
-                    scriptureRef: "Luke 2:1-20",
+                    fruitOfMystery: "Poverty",
+                    scriptureRef: "Luke 2:1-7",
                     meditation: "Jesus Christ is born in a humble stable in Bethlehem. Angels sing 'Glory to God in the highest,' and shepherds come in adoration."
                 ),
                 RosaryDecade(
                     number: "4th Decade",
-                    title: "The Presentation",
-                    fruitOfMystery: "Purity & Obedience",
-                    scriptureRef: "Luke 2:22-38",
+                    title: "The Presentation in the Temple",
+                    fruitOfMystery: "Purity of Heart and Body",
+                    scriptureRef: "Luke 2:21-24",
                     meditation: "Mary and Joseph present the child Jesus in the Temple. Simeon takes the Lord in his arms and proclaims Him 'a light for revelation to the Gentiles.'"
                 ),
                 RosaryDecade(
                     number: "5th Decade",
                     title: "The Finding in the Temple",
-                    fruitOfMystery: "Piety & Joy in Finding Jesus",
-                    scriptureRef: "Luke 2:41-52",
+                    fruitOfMystery: "Devotion to Jesus",
+                    scriptureRef: "Luke 2:41-47",
                     meditation: "After three days of sorrowful searching, Mary and Joseph find the boy Jesus in the Temple, seated among the teachers, listening and asking questions."
                 )
             ]
@@ -91,37 +91,37 @@ public final class PrayersRepository: Sendable {
             return [
                 RosaryDecade(
                     number: "1st Decade",
-                    title: "The Baptism in the Jordan",
+                    title: "The Baptism of Christ in the Jordan",
                     fruitOfMystery: "Openness to the Holy Spirit",
-                    scriptureRef: "Matthew 3:13-17",
+                    scriptureRef: "Matthew 3:16-17",
                     meditation: "Jesus is baptized by John. The heavens open, the Holy Spirit descends like a dove, and the Father proclaims: 'This is my beloved Son, with whom I am well pleased.'"
                 ),
                 RosaryDecade(
                     number: "2nd Decade",
-                    title: "The Wedding at Cana",
+                    title: "The Wedding Feast at Cana",
                     fruitOfMystery: "To Jesus through Mary",
-                    scriptureRef: "John 2:1-12",
+                    scriptureRef: "John 2:1-5",
                     meditation: "At Mary’s request ('Do whatever he tells you'), Christ performs His first sign, turning water into wine and revealing His glory."
                 ),
                 RosaryDecade(
                     number: "3rd Decade",
-                    title: "The Proclamation of the Kingdom",
-                    fruitOfMystery: "Repentance & Trust in God",
-                    scriptureRef: "Mark 1:14-15",
+                    title: "Jesus' Proclamation of the Coming of the Kingdom of God",
+                    fruitOfMystery: "Conversion",
+                    scriptureRef: "Mark 1:15",
                     meditation: "Jesus proclaims the Good News of God: 'The time is fulfilled, and the kingdom of God is at hand; repent, and believe in the Gospel.'"
                 ),
                 RosaryDecade(
                     number: "4th Decade",
                     title: "The Transfiguration",
-                    fruitOfMystery: "Desire for Holiness",
-                    scriptureRef: "Matthew 17:1-8",
+                    fruitOfMystery: "Desire for holiness",
+                    scriptureRef: "Matthew 17:1-2",
                     meditation: "On Mount Tabor, Jesus is transfigured before Peter, James, and John. His face shines like the sun, and the voice of the Father commands: 'Listen to him!'"
                 ),
                 RosaryDecade(
                     number: "5th Decade",
                     title: "The Institution of the Eucharist",
-                    fruitOfMystery: "Eucharistic Adoration",
-                    scriptureRef: "Luke 22:14-20",
+                    fruitOfMystery: "Adoration",
+                    scriptureRef: "Matthew 26:26",
                     meditation: "At the Last Supper, Christ offers His Body and Blood under the signs of bread and wine, instituting the Sacrament of the Holy Eucharist: 'Do this in memory of me.'"
                 )
             ]
@@ -131,35 +131,35 @@ public final class PrayersRepository: Sendable {
                 RosaryDecade(
                     number: "1st Decade",
                     title: "The Agony in the Garden",
-                    fruitOfMystery: "Sorrow for Sin & Conformity to God's Will",
-                    scriptureRef: "Luke 22:39-46",
+                    fruitOfMystery: "Obedience to God's Will",
+                    scriptureRef: "Matthew 26:36-39",
                     meditation: "In the Garden of Gethsemane, Jesus prays in anguish, His sweat falling like great drops of blood: 'Father, if you are willing, remove this chalice; yet not my will, but yours be done.'"
                 ),
                 RosaryDecade(
                     number: "2nd Decade",
                     title: "The Scourging at the Pillar",
-                    fruitOfMystery: "Mortification & Purity",
-                    scriptureRef: "John 19:1",
+                    fruitOfMystery: "Mortification",
+                    scriptureRef: "Matthew 27:26",
                     meditation: "Pilate orders Jesus to be scourged. The spotless Lamb of God endures the brutal lashes of the soldiers to atone for our sins of the flesh."
                 ),
                 RosaryDecade(
                     number: "3rd Decade",
                     title: "The Crowning with Thorns",
-                    fruitOfMystery: "Moral Courage & Humility",
-                    scriptureRef: "Matthew 27:27-31",
+                    fruitOfMystery: "Courage",
+                    scriptureRef: "Matthew 27:27-29",
                     meditation: "Soldiers twist a crown of sharp thorns and press it onto Christ's head, placing a reed in His hand and mocking Him: 'Hail, King of the Jews!'"
                 ),
                 RosaryDecade(
                     number: "4th Decade",
                     title: "The Carrying of the Cross",
-                    fruitOfMystery: "Patience in Bearing Crosses",
-                    scriptureRef: "John 19:16-17",
+                    fruitOfMystery: "Patience",
+                    scriptureRef: "Mark 15:21-22",
                     meditation: "Jesus takes up the heavy wood of the Cross and walks the sorrowful Way to Calvary, meeting His sorrowful Mother along the path."
                 ),
                 RosaryDecade(
                     number: "5th Decade",
                     title: "The Crucifixion and Death",
-                    fruitOfMystery: "Self-Giving Love & Forgiveness",
+                    fruitOfMystery: "Sorrow for our Sins",
                     scriptureRef: "Luke 23:33-46",
                     meditation: "Nailed to the Cross, Jesus forgives His executioners, gives Mary to us as our Mother, and breathes His last: 'Father, into your hands I commend my spirit.'"
                 )
@@ -170,35 +170,35 @@ public final class PrayersRepository: Sendable {
                 RosaryDecade(
                     number: "1st Decade",
                     title: "The Resurrection",
-                    fruitOfMystery: "Faith & Spiritual Joy",
-                    scriptureRef: "Mark 16:1-8",
+                    fruitOfMystery: "Faith",
+                    scriptureRef: "Luke 24:1-5",
                     meditation: "On the third day, Christ triumphs over sin and death, rising gloriously from the tomb as He promised. Alleluia!"
                 ),
                 RosaryDecade(
                     number: "2nd Decade",
                     title: "The Ascension",
-                    fruitOfMystery: "Hope & Desire for Heaven",
-                    scriptureRef: "Acts 1:6-11",
+                    fruitOfMystery: "Hope",
+                    scriptureRef: "Mark 16:19",
                     meditation: "Forty days after Easter, in the presence of the Apostles, Jesus ascends into Heaven and is seated at the right hand of the Father."
                 ),
                 RosaryDecade(
                     number: "3rd Decade",
                     title: "The Descent of the Holy Spirit",
-                    fruitOfMystery: "Zeal for the Gospel & Wisdom",
-                    scriptureRef: "Acts 2:1-13",
+                    fruitOfMystery: "Wisdom",
+                    scriptureRef: "Acts 2:1-4",
                     meditation: "On Pentecost, the Holy Spirit descends upon the Apostles gathered with Mary in the Upper Room in tongues as of fire, filling them with courage to preach to the world."
                 ),
                 RosaryDecade(
                     number: "4th Decade",
-                    title: "The Assumption of Mary",
-                    fruitOfMystery: "Grace of a Happy Death",
-                    scriptureRef: "Revelation 12:1",
+                    title: "The Assumption",
+                    fruitOfMystery: "Devotion to Mary",
+                    scriptureRef: "Luke 1:48-49",
                     meditation: "At the end of her earthly life, the Blessed Virgin Mary is assumed body and soul into heavenly glory, anticipating the resurrection of all the faithful."
                 ),
                 RosaryDecade(
                     number: "5th Decade",
                     title: "The Coronation of Mary",
-                    fruitOfMystery: "Trust in Mary's Intercession",
+                    fruitOfMystery: "Grace of a happy death",
                     scriptureRef: "Revelation 12:1",
                     meditation: "Mary is crowned Queen of Heaven and Earth by her Divine Son, shining as the Queen of Angels and Saints, our merciful Advocate."
                 )
@@ -540,10 +540,10 @@ public final class PrayersRepository: Sendable {
                 The Holy Rosary is a Scripture-based contemplative prayer walking through the life, passion, and glory of Jesus Christ through the eyes of His Mother.
 
                 It is composed of twenty mysteries, divided into four sets of five decades:
-                • The Joyful Mysteries (Mondays & Saturdays)
+                • The Joyful Mysteries (Mondays, Saturdays & Sundays of Advent)
                 • The Luminous Mysteries (Thursdays)
-                • The Sorrowful Mysteries (Tuesdays & Fridays)
-                • The Glorious Mysteries (Wednesdays & Sundays)
+                • The Sorrowful Mysteries (Tuesdays, Fridays & Sundays of Lent)
+                • The Glorious Mysteries (Wednesdays & Sundays outside Advent and Lent)
 
                 Tap 'Explore Today's Mysteries' below to view scripture meditations and fruits for each decade.
                 """,

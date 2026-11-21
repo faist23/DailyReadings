@@ -125,6 +125,7 @@ public struct RosaryDetailView: View {
                     Text(selectedMystery.traditionalDays)
                         .font(.scaled(size: 13, weight: .medium, design: .serif))
                         .foregroundStyle(Color.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
                     
                     if selectedMystery == todayMystery {
                         Text("TODAY")
@@ -295,12 +296,12 @@ public struct RosaryDetailView: View {
     
     private var rosaryClosingSection: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.small) {
-            Text("THE FATIMA PRAYER")
+            Text("THE FATIMA PRAYER · AFTER EACH DECADE")
                 .font(.scaled(size: 11, weight: .bold))
                 .tracking(1.2)
                 .foregroundStyle(liturgicalColor.uiAccentColor)
             
-            Text("O my Jesus, forgive us our sins, save us from the fires of hell, lead all souls to Heaven, especially those most in need of Thy mercy.")
+            Text("O my Jesus, forgive us our sins, save us from the fires of hell; lead all souls to Heaven, especially those who have most need of your mercy.")
                 .font(.scaled(size: 14, weight: .regular, design: .serif).italic())
                 .foregroundStyle(Color.secondary)
                 .lineSpacing(4)

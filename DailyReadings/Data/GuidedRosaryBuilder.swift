@@ -41,8 +41,10 @@ public struct GuidedRosaryBuilder: Sendable {
         Amen.
         """
         
+        // USCCB, "How to Pray the Rosary": said after each decade ("After finishing each decade,
+        // some say the following prayer requested by the Blessed Virgin Mary at Fatima").
         let fatimaPrayerText = """
-        O my Jesus, forgive us our sins, save us from the fires of hell, lead all souls to Heaven, especially those most in need of Thy mercy.
+        O my Jesus, forgive us our sins, save us from the fires of hell; lead all souls to Heaven, especially those who have most need of your mercy.
 
         Amen.
         """
@@ -103,12 +105,12 @@ public struct GuidedRosaryBuilder: Sendable {
             stepId += 1
         }
         
-        // Step 7: Glory Be & Fatima Prayer
+        // Step 7: Glory Be (the Fatima Prayer belongs after each decade, not here)
         steps.append(GuidedRosaryStep(
             id: stepId,
             beadPosition: "On the Chain",
-            prayerName: "Glory Be & Fatima Prayer",
-            prayerText: "\(gloryBeText)\n\n\(fatimaPrayerText)"
+            prayerName: "Glory Be",
+            prayerText: gloryBeText
         ))
         stepId += 1
         

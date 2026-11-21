@@ -17,19 +17,39 @@ public enum RosaryMysteryType: String, CaseIterable, Identifiable, Sendable {
     
     public var id: String { rawValue }
     
-    /// Traditional days of the week assigned by the Church and Pope St. John Paul II.
+    /// The days each set is traditionally prayed, as the USCCB gives them ("How to Pray the
+    /// Rosary"): Joyful on Mondays, Saturdays and the Sundays of Advent; Sorrowful on Tuesdays,
+    /// Fridays and the Sundays of Lent; Glorious on Wednesdays and the other Sundays.
     public var traditionalDays: String {
         switch self {
-        case .joyful: return "Mondays & Saturdays"
-        case .sorrowful: return "Tuesdays & Fridays"
-        case .glorious: return "Wednesdays & Sundays"
+        case .joyful: return "Mondays, Saturdays & Sundays of Advent"
+        case .sorrowful: return "Tuesdays, Fridays & Sundays of Lent"
+        case .glorious: return "Wednesdays & Sundays outside Advent and Lent"
         case .luminous: return "Thursdays"
         }
     }
     
+    /// `traditionalDays` short enough for one line beside other text.
+    public var traditionalDaysShort: String {
+        switch self {
+        case .joyful: return "Mon, Sat & Advent Sundays"
+        case .sorrowful: return "Tue, Fri & Lent Sundays"
+        case .glorious: return "Wed & other Sundays"
+        case .luminous: return "Thursdays"
+        }
+    }
+
     /// Determines the appropriate mystery set for a given calendar date.
     public static func forDate(_ date: Date = .now) -> RosaryMysteryType {
         let weekday = Calendar.current.component(.weekday, from: date)
+        if weekday == 1 {
+            // Sundays follow the season (USCCB): Joyful in Advent, Sorrowful in Lent.
+            switch LiturgicalCalendar.day(for: date).season {
+            case .advent: return .joyful
+            case .lent: return .sorrowful
+            default: return .glorious
+            }
+        }
         // 1 = Sunday, 2 = Monday, 3 = Tuesday, 4 = Wednesday, 5 = Thursday, 6 = Friday, 7 = Saturday
         switch weekday {
         case 2, 7: // Monday, Saturday

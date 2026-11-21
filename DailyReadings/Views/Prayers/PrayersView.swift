@@ -120,7 +120,7 @@ public struct PrayersView: View {
                             .font(.scaled(size: 10))
                             .foregroundStyle(Color.secondary)
                         
-                        Text(todayMystery.traditionalDays)
+                        Text(todayMystery.traditionalDaysShort)
                             .font(.scaled(size: 11, weight: .regular))
                             .foregroundStyle(Color.secondary)
                     }
