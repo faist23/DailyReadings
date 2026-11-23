@@ -99,7 +99,7 @@
 		1C4E16A985859AA433596E6E /* VerseOfDayCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerseOfDayCard.swift; sourceTree = "<group>"; };
 		1D689436930180AC7D45074E /* EvangelizioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvangelizioService.swift; sourceTree = "<group>"; };
 		23F5D4C28B757B6634378F37 /* LiturgicalCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiturgicalCalendar.swift; sourceTree = "<group>"; };
-		25B2CECB644062D2B2D66AF5 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		25B2CECB644062D2B2D66AF5 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		2607539EE6170B10FDEF0042 /* AudioReadingPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioReadingPlayer.swift; sourceTree = "<group>"; };
 		27AD823DE0E7B0549135CF79 /* ScriptureEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureEngineTests.swift; sourceTree = "<group>"; };
 		29F1ACEDC3EB3504A23FF805 /* SaintLifeFactsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaintLifeFactsTests.swift; sourceTree = "<group>"; };
@@ -134,14 +134,14 @@
 		A4C528D26D305DF86F50FD3B /* LiturgicalSeason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiturgicalSeason.swift; sourceTree = "<group>"; };
 		A63267A8300B10AABA379D16 /* ReadingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingsRepository.swift; sourceTree = "<group>"; };
 		A7E9189985265926497006E0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		ABBB033C5AB974A39AE019BA /* DailyReadings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyReadings.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABBB033C5AB974A39AE019BA /* DailyReadings.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DailyReadings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B08616990FED60478EA75579 /* CachedReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedReading.swift; sourceTree = "<group>"; };
 		B3AB7EBF254A8BED5742B587 /* BibleDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleDatabase.swift; sourceTree = "<group>"; };
 		B929F2E491C1028F41AB4AB3 /* versification.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = versification.json; sourceTree = "<group>"; };
 		BA71552D1478FB0AFEDD6FFF /* ReadingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingDetailView.swift; sourceTree = "<group>"; };
 		BAA38283FB3032691993728C /* AudioPlaybackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlaybackTests.swift; sourceTree = "<group>"; };
 		BADD1A0409DD5B587A454955 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		C210E22EE8FE46AEF4177FE4 /* DailyReadingsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DailyReadingsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C210E22EE8FE46AEF4177FE4 /* DailyReadingsTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DailyReadingsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4B36DD67C1AB02217612FF7 /* ReadingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingCard.swift; sourceTree = "<group>"; };
 		C4EEF469B4C3D5FBB91DEC90 /* lectionary.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lectionary.json; sourceTree = "<group>"; };
 		C579F30F81C7EB40CF1A17E8 /* LiturgicalDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiturgicalDay.swift; sourceTree = "<group>"; };
